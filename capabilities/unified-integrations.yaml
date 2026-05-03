@@ -1,0 +1,323 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Truto Unified Integrations"
+  description: >-
+    Unified integration platform capability combining Truto Admin API, HRIS, ATS, and CRM
+    unified APIs. Used by B2B SaaS engineering teams and AI agents to manage connected
+    third-party accounts, access normalized HR/recruiting/CRM data across 250+ integrations,
+    and provision MCP servers for AI agent access without writing integration-specific code.
+  tags:
+    - Unified API
+    - Integration Platform
+    - HRIS
+    - ATS
+    - CRM
+    - MCP
+    - AI Agents
+    - Embedded Integrations
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TRUTO_API_TOKEN: TRUTO_API_TOKEN
+
+capability:
+  consumes:
+    - import: truto-admin
+      location: ./shared/admin.yaml
+    - import: truto-hris
+      location: ./shared/unified-hris.yaml
+    - import: truto-ats
+      location: ./shared/unified-ats.yaml
+    - import: truto-crm
+      location: ./shared/unified-crm.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: truto-unified-api
+      description: "Unified REST API for managing integrations and accessing normalized HRIS, ATS, and CRM data."
+      resources:
+        - path: /v1/integrated-accounts
+          name: integrated-accounts
+          description: "Integrated accounts management"
+          operations:
+            - method: GET
+              name: list-integrated-accounts
+              description: "List integrated accounts."
+              call: "truto-admin.list-integrated-accounts"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-integrated-account
+              description: "Create integrated account."
+              call: "truto-admin.create-integrated-account"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/link-tokens
+          name: link-tokens
+          description: "Link token generation"
+          operations:
+            - method: POST
+              name: create-link-token
+              description: "Create link token for customer connection flow."
+              call: "truto-admin.create-link-token"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/hris/employees
+          name: hris-employees
+          description: "HRIS employees"
+          operations:
+            - method: GET
+              name: list-employees
+              description: "List employees from connected HRIS."
+              call: "truto-hris.list-employees"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/hris/groups
+          name: hris-groups
+          description: "HRIS groups and departments"
+          operations:
+            - method: GET
+              name: list-groups
+              description: "List HRIS groups."
+              call: "truto-hris.list-groups"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/ats/jobs
+          name: ats-jobs
+          description: "ATS job postings"
+          operations:
+            - method: GET
+              name: list-jobs
+              description: "List jobs from connected ATS."
+              call: "truto-ats.list-jobs"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/ats/candidates
+          name: ats-candidates
+          description: "ATS candidates"
+          operations:
+            - method: GET
+              name: list-candidates
+              description: "List candidates from connected ATS."
+              call: "truto-ats.list-candidates"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/ats/applications
+          name: ats-applications
+          description: "ATS applications"
+          operations:
+            - method: GET
+              name: list-applications
+              description: "List applications from connected ATS."
+              call: "truto-ats.list-applications"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/crm/contacts
+          name: crm-contacts
+          description: "CRM contacts"
+          operations:
+            - method: GET
+              name: list-contacts
+              description: "List contacts from connected CRM."
+              call: "truto-crm.list-contacts"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-contact
+              description: "Create contact in connected CRM."
+              call: "truto-crm.create-contact"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/crm/opportunities
+          name: crm-opportunities
+          description: "CRM opportunities"
+          operations:
+            - method: GET
+              name: list-opportunities
+              description: "List opportunities from connected CRM."
+              call: "truto-crm.list-opportunities"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9080
+      namespace: truto-unified-mcp
+      transport: http
+      description: "MCP server for AI-assisted management of integrations and access to normalized HRIS, ATS, and CRM data."
+      tools:
+        - name: list-integrated-accounts
+          description: "List all integrated accounts connected to your Truto tenant, showing which third-party apps each customer has connected."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "truto-admin.list-integrated-accounts"
+          with:
+            integration: "tools.integration"
+            status: "tools.status"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-link-token
+          description: "Generate a link token to initiate a customer-facing connection flow for a specific integration (e.g., BambooHR, Greenhouse, Salesforce)."
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "truto-admin.create-link-token"
+          with:
+            integration: "tools.integration"
+            externalId: "tools.externalId"
+            redirectUri: "tools.redirectUri"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-mcp-server
+          description: "Provision an MCP server for an integrated account so AI agents can directly access the integration's tools."
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "truto-admin.create-mcp-server"
+          with:
+            id: "tools.id"
+            allowedMethods: "tools.allowedMethods"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-employees
+          description: "List employees from a connected HRIS provider (BambooHR, Workday, Rippling, etc.) with status and department filtering."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "truto-hris.list-employees"
+          with:
+            integrated_account_id: "tools.integrated_account_id"
+            status: "tools.status"
+            department_id: "tools.department_id"
+            cursor: "tools.cursor"
+            limit: "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-employee
+          description: "Get a single employee record by ID from a connected HRIS provider."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "truto-hris.get-employee"
+          with:
+            integrated_account_id: "tools.integrated_account_id"
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-timeoff-requests
+          description: "List time off requests from a connected HRIS provider with employee and status filtering."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "truto-hris.list-timeoff-requests"
+          with:
+            integrated_account_id: "tools.integrated_account_id"
+            employee_id: "tools.employee_id"
+            status: "tools.status"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-jobs
+          description: "List job postings from a connected ATS (Greenhouse, Lever, Workable, etc.) with status and department filtering."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "truto-ats.list-jobs"
+          with:
+            integrated_account_id: "tools.integrated_account_id"
+            status: "tools.status"
+            department_id: "tools.department_id"
+            cursor: "tools.cursor"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-candidates
+          description: "List candidate profiles from a connected ATS provider."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "truto-ats.list-candidates"
+          with:
+            integrated_account_id: "tools.integrated_account_id"
+            cursor: "tools.cursor"
+            limit: "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-applications
+          description: "List job applications from a connected ATS with job, candidate, and status filtering."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "truto-ats.list-applications"
+          with:
+            integrated_account_id: "tools.integrated_account_id"
+            job_id: "tools.job_id"
+            candidate_id: "tools.candidate_id"
+            status: "tools.status"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-contacts
+          description: "List CRM contacts from a connected provider (Salesforce, HubSpot, Pipedrive, etc.)."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "truto-crm.list-contacts"
+          with:
+            integrated_account_id: "tools.integrated_account_id"
+            account_id: "tools.account_id"
+            cursor: "tools.cursor"
+            limit: "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-contact
+          description: "Create a new contact in the connected CRM provider."
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "truto-crm.create-contact"
+          with:
+            integrated_account_id: "tools.integrated_account_id"
+            firstName: "tools.firstName"
+            lastName: "tools.lastName"
+            email: "tools.email"
+            accountId: "tools.accountId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-opportunities
+          description: "List sales opportunities from a connected CRM with account, stage, and status filtering."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "truto-crm.list-opportunities"
+          with:
+            integrated_account_id: "tools.integrated_account_id"
+            account_id: "tools.account_id"
+            status: "tools.status"
+          outputParameters:
+            - type: object
+              mapping: "$."

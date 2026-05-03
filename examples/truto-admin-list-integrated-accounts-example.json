@@ -1,0 +1,46 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.truto.one/integrated-accounts?integration=bamboohr&status=active&limit=20",
+    "headers": {
+      "Authorization": "Bearer YOUR_TRUTO_API_TOKEN",
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "data": [
+        {
+          "id": "ia_abc123",
+          "integration": "bamboohr",
+          "name": "Acme Corp - BambooHR",
+          "status": "active",
+          "context": {
+            "subdomain": "acmecorp",
+            "tenantId": "tenant_acme"
+          },
+          "createdAt": "2026-03-15T09:00:00Z",
+          "updatedAt": "2026-04-20T14:22:00Z"
+        },
+        {
+          "id": "ia_def456",
+          "integration": "bamboohr",
+          "name": "Widget Co - BambooHR",
+          "status": "active",
+          "context": {
+            "subdomain": "widgetco"
+          },
+          "createdAt": "2026-04-01T11:00:00Z",
+          "updatedAt": "2026-04-15T08:30:00Z"
+        }
+      ],
+      "total": 2,
+      "page": 1,
+      "limit": 20
+    }
+  }
+}

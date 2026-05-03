@@ -1,0 +1,31 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.truto.one/link-tokens",
+    "headers": {
+      "Authorization": "Bearer YOUR_TRUTO_API_TOKEN",
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    "body": {
+      "integration": "greenhouse",
+      "externalId": "customer_org_789",
+      "redirectUri": "https://app.yourcompany.com/integrations/callback",
+      "metadata": {
+        "customerId": "cust_789",
+        "plan": "enterprise"
+      }
+    }
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "token": "lt_eyJhbGciOiJIUzI1NiJ9...",
+      "linkUrl": "https://link.truto.one/connect?token=lt_eyJhbGciOiJIUzI1NiJ9...",
+      "expiresAt": "2026-05-03T11:30:00Z"
+    }
+  }
+}

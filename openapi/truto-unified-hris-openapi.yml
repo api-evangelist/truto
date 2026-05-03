@@ -1,0 +1,603 @@
+openapi: 3.0.3
+info:
+  title: Truto Unified HRIS API
+  description: >-
+    The Truto Unified HRIS API provides a single normalized interface for reading and writing
+    HR data across 41 HRIS providers including BambooHR, Workday, Rippling, Gusto, HiBob,
+    Personio, Oracle Fusion Cloud HCM, and more. All data is accessed in real-time with no
+    caching. Includes 20 unified resources. Schema can be extended using JSONata mappings.
+  version: 1.0.0
+  contact:
+    url: https://truto.one/docs/api-reference/unified-hris-api
+
+servers:
+  - url: https://api.truto.one/unified/hris
+    description: Truto Unified HRIS API
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Employees
+    description: Employee records and personal details
+  - name: Employments
+    description: Employment terms, positions, and job history
+  - name: Companies
+    description: Company and organization records
+  - name: Groups
+    description: Departments, teams, and organizational units
+  - name: Timeoff
+    description: Time off requests and leave management
+
+paths:
+  /employees:
+    get:
+      operationId: listEmployees
+      summary: List employees
+      description: >-
+        List employee records from the connected HRIS provider. Returns normalized
+        employee data including personal details, employment status, department,
+        compensation, and contact information.
+      tags:
+        - Employees
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IntegratedAccountId'
+        - name: status
+          in: query
+          description: Filter employees by employment status.
+          required: false
+          schema:
+            type: string
+            enum:
+              - active
+              - inactive
+              - terminated
+        - name: department_id
+          in: query
+          description: Filter employees by department ID.
+          required: false
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          description: Cursor for pagination (from previous response next_cursor).
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Number of results per page (max 100).
+          required: false
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+      responses:
+        '200':
+          description: List of employees.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /employees/{id}:
+    get:
+      operationId: getEmployee
+      summary: Get employee
+      description: Retrieve a single employee record by ID from the connected HRIS provider.
+      tags:
+        - Employees
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IntegratedAccountId'
+        - name: id
+          in: path
+          required: true
+          description: Employee identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Employee record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /employments:
+    get:
+      operationId: listEmployments
+      summary: List employments
+      description: >-
+        List employment records including job titles, pay rates, pay periods,
+        and employment type from the connected HRIS provider.
+      tags:
+        - Employments
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IntegratedAccountId'
+        - name: employee_id
+          in: query
+          description: Filter employments by employee ID.
+          required: false
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          description: Cursor for pagination.
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Number of results per page.
+          required: false
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: List of employment records.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /companies:
+    get:
+      operationId: listCompanies
+      summary: List companies
+      description: List company records from the connected HRIS provider.
+      tags:
+        - Companies
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IntegratedAccountId'
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: List of companies.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /groups:
+    get:
+      operationId: listGroups
+      summary: List groups
+      description: >-
+        List groups (departments, teams, cost centers) from the connected HRIS provider.
+      tags:
+        - Groups
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IntegratedAccountId'
+        - name: type
+          in: query
+          description: Filter groups by type (department, team, cost_center).
+          required: false
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: List of groups.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /timeoff-requests:
+    get:
+      operationId: listTimeoffRequests
+      summary: List time off requests
+      description: List time off requests from the connected HRIS provider.
+      tags:
+        - Timeoff
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IntegratedAccountId'
+        - name: employee_id
+          in: query
+          description: Filter time off requests by employee ID.
+          required: false
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Filter by request status.
+          required: false
+          schema:
+            type: string
+            enum:
+              - pending
+              - approved
+              - rejected
+              - cancelled
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: List of time off requests.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeoffRequestListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Tenant Bearer token from the Truto dashboard.
+
+  parameters:
+    IntegratedAccountId:
+      name: integrated_account_id
+      in: query
+      required: true
+      description: >-
+        The ID of the integrated account (connected HRIS provider instance) to query.
+        Required for all Unified API requests.
+      schema:
+        type: string
+
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+    Employee:
+      type: object
+      description: A normalized employee record from the connected HRIS provider.
+      properties:
+        id:
+          type: string
+          description: Unified employee identifier.
+        remoteId:
+          type: string
+          description: Employee identifier in the source HRIS system.
+        firstName:
+          type: string
+          description: Employee first name.
+        lastName:
+          type: string
+          description: Employee last name.
+        displayName:
+          type: string
+          description: Employee display or preferred name.
+        email:
+          type: string
+          format: email
+          description: Work email address.
+        personalEmail:
+          type: string
+          format: email
+          description: Personal email address.
+        phone:
+          type: string
+          description: Work phone number.
+        status:
+          type: string
+          enum:
+            - active
+            - inactive
+            - terminated
+          description: Current employment status.
+        employmentType:
+          type: string
+          enum:
+            - full_time
+            - part_time
+            - contractor
+            - intern
+            - other
+          description: Type of employment.
+        jobTitle:
+          type: string
+          description: Current job title.
+        departmentId:
+          type: string
+          description: Identifier of the employee's department.
+        managerId:
+          type: string
+          description: Identifier of the employee's manager.
+        hireDate:
+          type: string
+          format: date
+          description: Date the employee was hired.
+        terminationDate:
+          type: string
+          format: date
+          description: Date of termination, if applicable.
+        location:
+          type: string
+          description: Work location.
+        avatar:
+          type: string
+          format: uri
+          description: URL to employee avatar/photo.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    EmployeeListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employee'
+        nextCursor:
+          type: string
+          description: Cursor for fetching the next page of results.
+
+    Employment:
+      type: object
+      description: An employment record representing a job position and compensation details.
+      properties:
+        id:
+          type: string
+          description: Unified employment identifier.
+        remoteId:
+          type: string
+          description: Employment identifier in the source system.
+        employeeId:
+          type: string
+          description: Identifier of the associated employee.
+        jobTitle:
+          type: string
+          description: Job title for this employment.
+        payRate:
+          type: number
+          description: Pay rate amount.
+        payPeriod:
+          type: string
+          enum:
+            - hourly
+            - weekly
+            - biweekly
+            - semimonthly
+            - monthly
+            - annual
+          description: Pay period frequency.
+        payCurrency:
+          type: string
+          description: ISO 4217 currency code for pay rate.
+        employmentType:
+          type: string
+          enum:
+            - full_time
+            - part_time
+            - contractor
+            - intern
+            - other
+          description: Employment type.
+        effectiveDate:
+          type: string
+          format: date
+          description: Date this employment record took effect.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    EmploymentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employment'
+        nextCursor:
+          type: string
+
+    Company:
+      type: object
+      description: A company record from the connected HRIS provider.
+      properties:
+        id:
+          type: string
+        remoteId:
+          type: string
+        name:
+          type: string
+          description: Company name.
+        legalName:
+          type: string
+          description: Legal business name.
+        taxId:
+          type: string
+          description: Tax identification number.
+        primaryPhone:
+          type: string
+        industry:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    CompanyListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company'
+        nextCursor:
+          type: string
+
+    Group:
+      type: object
+      description: A group (department, team, or cost center) from the HRIS provider.
+      properties:
+        id:
+          type: string
+        remoteId:
+          type: string
+        name:
+          type: string
+          description: Group name.
+        type:
+          type: string
+          enum:
+            - department
+            - team
+            - cost_center
+            - division
+          description: Group type.
+        parentId:
+          type: string
+          description: Identifier of the parent group for hierarchical structures.
+        managerId:
+          type: string
+          description: Identifier of the group manager.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    GroupListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        nextCursor:
+          type: string
+
+    TimeoffRequest:
+      type: object
+      description: A time off request from the HRIS provider.
+      properties:
+        id:
+          type: string
+        remoteId:
+          type: string
+        employeeId:
+          type: string
+          description: Identifier of the requesting employee.
+        leaveType:
+          type: string
+          description: Type of leave (e.g., vacation, sick, personal, parental).
+        status:
+          type: string
+          enum:
+            - pending
+            - approved
+            - rejected
+            - cancelled
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        units:
+          type: string
+          enum:
+            - days
+            - hours
+          description: Unit of leave measurement.
+        amount:
+          type: number
+          description: Amount of leave taken in specified units.
+        requestedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    TimeoffRequestListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeoffRequest'
+        nextCursor:
+          type: string
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string

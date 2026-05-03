@@ -1,0 +1,55 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.truto.one/unified/hris/employees?integrated_account_id=ia_abc123&status=active&limit=20",
+    "headers": {
+      "Authorization": "Bearer YOUR_TRUTO_API_TOKEN",
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "data": [
+        {
+          "id": "emp_unified_001",
+          "remoteId": "12345",
+          "firstName": "Alice",
+          "lastName": "Johnson",
+          "displayName": "Alice Johnson",
+          "email": "alice.johnson@acmecorp.com",
+          "phone": "+1-555-234-5678",
+          "status": "active",
+          "employmentType": "full_time",
+          "jobTitle": "Senior Software Engineer",
+          "departmentId": "dept_engineering",
+          "managerId": "emp_unified_mgr_05",
+          "hireDate": "2022-06-01",
+          "location": "San Francisco, CA",
+          "createdAt": "2022-06-01T08:00:00Z",
+          "updatedAt": "2026-04-15T09:00:00Z"
+        },
+        {
+          "id": "emp_unified_002",
+          "remoteId": "12346",
+          "firstName": "Bob",
+          "lastName": "Smith",
+          "displayName": "Bob Smith",
+          "email": "bob.smith@acmecorp.com",
+          "status": "active",
+          "employmentType": "full_time",
+          "jobTitle": "Product Manager",
+          "departmentId": "dept_product",
+          "hireDate": "2021-03-15",
+          "location": "Remote",
+          "createdAt": "2021-03-15T08:00:00Z",
+          "updatedAt": "2026-04-10T10:30:00Z"
+        }
+      ],
+      "nextCursor": "cursor_abc789xyz"
+    }
+  }
+}

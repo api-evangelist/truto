@@ -1,0 +1,314 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Truto Unified CRM API"
+  description: "Normalized CRM data access across 27 providers including Salesforce, HubSpot, Pipedrive, and Attio via a single unified interface."
+  tags:
+    - CRM
+    - Customer Relationship Management
+    - Contacts
+    - Opportunities
+    - Unified API
+    - Integration Platform
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TRUTO_API_TOKEN: TRUTO_API_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: truto-crm
+      baseUri: https://api.truto.one/unified/crm
+      description: "Truto Unified CRM API for normalized customer relationship data."
+      authentication:
+        type: bearer
+        value: "{{TRUTO_API_TOKEN}}"
+      resources:
+        - name: contacts
+          path: /contacts
+          description: "Contact records"
+          operations:
+            - name: list-contacts
+              method: GET
+              description: "List contacts from the connected CRM provider."
+              inputParameters:
+                - name: integrated_account_id
+                  in: query
+                  type: string
+                  required: true
+                - name: account_id
+                  in: query
+                  type: string
+                  required: false
+                - name: cursor
+                  in: query
+                  type: string
+                  required: false
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-contact
+              method: POST
+              description: "Create a new contact."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  firstName: "{{tools.firstName}}"
+                  lastName: "{{tools.lastName}}"
+                  email: "{{tools.email}}"
+                  phone: "{{tools.phone}}"
+                  accountId: "{{tools.accountId}}"
+        - name: accounts
+          path: /accounts
+          description: "Account (company) records"
+          operations:
+            - name: list-accounts
+              method: GET
+              description: "List accounts from the connected CRM provider."
+              inputParameters:
+                - name: integrated_account_id
+                  in: query
+                  type: string
+                  required: true
+                - name: cursor
+                  in: query
+                  type: string
+                  required: false
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-account
+              method: POST
+              description: "Create a new account."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  domain: "{{tools.domain}}"
+                  industry: "{{tools.industry}}"
+        - name: opportunities
+          path: /opportunities
+          description: "Sales opportunities"
+          operations:
+            - name: list-opportunities
+              method: GET
+              description: "List opportunities from the connected CRM provider."
+              inputParameters:
+                - name: integrated_account_id
+                  in: query
+                  type: string
+                  required: true
+                - name: account_id
+                  in: query
+                  type: string
+                  required: false
+                - name: status
+                  in: query
+                  type: string
+                  required: false
+                - name: cursor
+                  in: query
+                  type: string
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-opportunity
+              method: POST
+              description: "Create a new opportunity."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  accountId: "{{tools.accountId}}"
+                  amount: "{{tools.amount}}"
+                  closeDate: "{{tools.closeDate}}"
+        - name: stages
+          path: /stages
+          description: "Pipeline stages"
+          operations:
+            - name: list-stages
+              method: GET
+              description: "List pipeline stages."
+              inputParameters:
+                - name: integrated_account_id
+                  in: query
+                  type: string
+                  required: true
+                - name: cursor
+                  in: query
+                  type: string
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8103
+      namespace: truto-crm-api
+      resources:
+        - path: /v1/crm/contacts
+          name: contacts
+          description: "CRM contacts"
+          operations:
+            - method: GET
+              name: list-contacts
+              description: "List contacts"
+              call: "truto-crm.list-contacts"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-contact
+              description: "Create contact"
+              call: "truto-crm.create-contact"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/crm/accounts
+          name: accounts
+          description: "CRM accounts"
+          operations:
+            - method: GET
+              name: list-accounts
+              description: "List accounts"
+              call: "truto-crm.list-accounts"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/crm/opportunities
+          name: opportunities
+          description: "CRM opportunities"
+          operations:
+            - method: GET
+              name: list-opportunities
+              description: "List opportunities"
+              call: "truto-crm.list-opportunities"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9103
+      namespace: truto-crm-mcp
+      transport: http
+      tools:
+        - name: list-contacts
+          description: "List CRM contacts from a connected provider with optional account filtering."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "truto-crm.list-contacts"
+          with:
+            integrated_account_id: "tools.integrated_account_id"
+            account_id: "tools.account_id"
+            cursor: "tools.cursor"
+            limit: "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-contact
+          description: "Create a new contact in the connected CRM provider."
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "truto-crm.create-contact"
+          with:
+            integrated_account_id: "tools.integrated_account_id"
+            firstName: "tools.firstName"
+            lastName: "tools.lastName"
+            email: "tools.email"
+            phone: "tools.phone"
+            accountId: "tools.accountId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-accounts
+          description: "List CRM account (company) records from a connected provider."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "truto-crm.list-accounts"
+          with:
+            integrated_account_id: "tools.integrated_account_id"
+            cursor: "tools.cursor"
+            limit: "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-opportunities
+          description: "List sales opportunities from a connected CRM with account, stage, and status filtering."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "truto-crm.list-opportunities"
+          with:
+            integrated_account_id: "tools.integrated_account_id"
+            account_id: "tools.account_id"
+            status: "tools.status"
+            cursor: "tools.cursor"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-opportunity
+          description: "Create a new sales opportunity in the connected CRM provider."
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "truto-crm.create-opportunity"
+          with:
+            integrated_account_id: "tools.integrated_account_id"
+            name: "tools.name"
+            accountId: "tools.accountId"
+            amount: "tools.amount"
+            closeDate: "tools.closeDate"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-stages
+          description: "List CRM pipeline stages from a connected provider."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "truto-crm.list-stages"
+          with:
+            integrated_account_id: "tools.integrated_account_id"
+          outputParameters:
+            - type: object
+              mapping: "$."

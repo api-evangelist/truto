@@ -1,0 +1,14 @@
+{
+  "name": "IntegratedAccount",
+  "description": "A connected third-party account in the Truto integration platform.",
+  "fields": [
+    { "name": "id", "type": "string", "required": true, "description": "Unique Truto identifier" },
+    { "name": "integration", "type": "string", "required": true, "description": "Integration name (e.g., bamboohr, greenhouse, salesforce)" },
+    { "name": "name", "type": "string", "required": false, "description": "Human-readable display name" },
+    { "name": "status", "type": "enum[active,inactive,error]", "required": true, "description": "Connection status" },
+    { "name": "context", "type": "object", "required": false, "description": "Post-install metadata (tenant ID, subdomain, region)" },
+    { "name": "externalId", "type": "string", "required": false, "description": "Your internal customer identifier" },
+    { "name": "createdAt", "type": "string(date-time)", "required": false, "description": "Connection timestamp" },
+    { "name": "updatedAt", "type": "string(date-time)", "required": false, "description": "Last update timestamp" }
+  ]
+}

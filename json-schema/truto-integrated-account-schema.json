@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.truto.one/schemas/integrated-account",
+  "title": "IntegratedAccount",
+  "description": "An integrated account representing a connection between a Truto tenant and a customer's connected third-party application.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the integrated account."
+    },
+    "integration": {
+      "type": "string",
+      "description": "Integration name identifying the connected application (e.g., bamboohr, greenhouse, salesforce)."
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable display name for this integrated account."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "inactive", "error"],
+      "description": "Connection status of the integrated account."
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Metadata stored from post-install actions, such as tenant ID, subdomain, region, or base URL from the underlying API."
+    },
+    "externalId": {
+      "type": "string",
+      "description": "Your internal identifier for the end user or organization that owns this connection."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the account was connected."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the account was last updated."
+    }
+  },
+  "required": ["id", "integration", "status"]
+}

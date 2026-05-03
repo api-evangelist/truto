@@ -1,0 +1,48 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.truto.one/unified/crm/contacts?integrated_account_id=ia_crm_sf001&limit=20",
+    "headers": {
+      "Authorization": "Bearer YOUR_TRUTO_API_TOKEN",
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "data": [
+        {
+          "id": "contact_unified_001",
+          "remoteId": "0031000000abcdef",
+          "firstName": "Maria",
+          "lastName": "Garcia",
+          "email": "maria.garcia@example.com",
+          "phone": "+1-555-876-5432",
+          "title": "VP of Operations",
+          "accountId": "acct_unified_100",
+          "ownerId": "user_unified_sf_01",
+          "leadSource": "Web",
+          "createdAt": "2025-11-15T14:00:00Z",
+          "updatedAt": "2026-04-22T09:15:00Z"
+        },
+        {
+          "id": "contact_unified_002",
+          "remoteId": "0031000000ghijkl",
+          "firstName": "James",
+          "lastName": "Park",
+          "email": "james.park@example.com",
+          "title": "Director of Engineering",
+          "accountId": "acct_unified_101",
+          "ownerId": "user_unified_sf_02",
+          "leadSource": "Referral",
+          "createdAt": "2026-01-08T10:00:00Z",
+          "updatedAt": "2026-04-18T16:45:00Z"
+        }
+      ],
+      "nextCursor": null
+    }
+  }
+}

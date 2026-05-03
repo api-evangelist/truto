@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.truto.one/schemas/candidate",
+  "title": "Candidate",
+  "description": "A normalized candidate profile returned by the Truto Unified ATS API, representing a unified view of candidate data across 27 ATS providers.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unified candidate identifier assigned by Truto."
+    },
+    "remoteId": {
+      "type": "string",
+      "description": "Candidate identifier in the source ATS."
+    },
+    "firstName": {
+      "type": "string",
+      "description": "Candidate first name."
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Candidate last name."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Primary email address."
+    },
+    "phone": {
+      "type": "string",
+      "description": "Phone number."
+    },
+    "location": {
+      "type": "string",
+      "description": "Candidate location (city, state, or country)."
+    },
+    "source": {
+      "type": "string",
+      "description": "How the candidate was sourced (e.g., LinkedIn, referral, job board, direct)."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags or labels applied to the candidate by the recruiting team."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Record creation timestamp."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Record last updated timestamp."
+    }
+  },
+  "required": ["id", "remoteId"]
+}

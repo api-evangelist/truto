@@ -1,0 +1,134 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "hr": "https://www.w3.org/ns/org#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "IntegratedAccount": "schema:Service",
+    "Employee": "schema:Person",
+    "Employment": "schema:EmployeeRole",
+    "Company": "schema:Organization",
+    "Group": "hr:OrganizationalUnit",
+    "Candidate": "schema:Person",
+    "Job": "schema:JobPosting",
+    "Application": "schema:Demand",
+    "Contact": "schema:Person",
+    "Account": "schema:Organization",
+    "Opportunity": "schema:BusinessAudience",
+
+    "id": "@id",
+    "name": "schema:name",
+    "description": "schema:description",
+    "status": "schema:status",
+    "integration": "schema:identifier",
+    "externalId": "dcterms:identifier",
+    "createdAt": {
+      "@id": "dcterms:created",
+      "@type": "xsd:dateTime"
+    },
+    "updatedAt": {
+      "@id": "dcterms:modified",
+      "@type": "xsd:dateTime"
+    },
+
+    "remoteId": "schema:identifier",
+    "firstName": "schema:givenName",
+    "lastName": "schema:familyName",
+    "displayName": "schema:alternateName",
+    "email": "schema:email",
+    "personalEmail": "schema:email",
+    "phone": "schema:telephone",
+    "jobTitle": "schema:jobTitle",
+    "departmentId": {
+      "@id": "schema:department",
+      "@type": "@id"
+    },
+    "managerId": {
+      "@id": "schema:worksFor",
+      "@type": "@id"
+    },
+    "hireDate": {
+      "@id": "schema:startDate",
+      "@type": "xsd:date"
+    },
+    "terminationDate": {
+      "@id": "schema:endDate",
+      "@type": "xsd:date"
+    },
+    "location": "schema:workLocation",
+    "avatar": "schema:image",
+    "employmentType": "schema:employmentType",
+
+    "payRate": "schema:baseSalary",
+    "payCurrency": "schema:priceCurrency",
+    "payPeriod": "schema:paymentFrequency",
+    "effectiveDate": {
+      "@id": "schema:validFrom",
+      "@type": "xsd:date"
+    },
+
+    "source": "schema:source",
+    "tags": "schema:keywords",
+
+    "title": "schema:title",
+    "openedAt": {
+      "@id": "schema:datePosted",
+      "@type": "xsd:dateTime"
+    },
+    "closedAt": {
+      "@id": "schema:validThrough",
+      "@type": "xsd:dateTime"
+    },
+    "remoteAllowed": "schema:jobLocationType",
+    "jobType": "schema:employmentType",
+
+    "candidateId": {
+      "@id": "schema:candidate",
+      "@type": "@id"
+    },
+    "jobId": {
+      "@id": "schema:hiringOrganization",
+      "@type": "@id"
+    },
+    "appliedAt": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+
+    "accountId": {
+      "@id": "schema:worksFor",
+      "@type": "@id"
+    },
+    "ownerId": {
+      "@id": "schema:author",
+      "@type": "@id"
+    },
+    "leadSource": "schema:source",
+
+    "domain": "schema:url",
+    "industry": "schema:industry",
+    "employeeCount": "schema:numberOfEmployees",
+    "annualRevenue": "schema:revenue",
+    "website": "schema:url",
+
+    "amount": "schema:price",
+    "currency": "schema:priceCurrency",
+    "probability": "schema:estimatedSalary",
+    "closeDate": {
+      "@id": "schema:validThrough",
+      "@type": "xsd:date"
+    },
+
+    "context": "schema:additionalProperty",
+    "allowedMethods": "schema:option",
+    "mcpUrl": "schema:url",
+    "transport": "schema:encodingFormat",
+    "linkUrl": "schema:url",
+    "expiresAt": {
+      "@id": "schema:expires",
+      "@type": "xsd:dateTime"
+    }
+  }
+}

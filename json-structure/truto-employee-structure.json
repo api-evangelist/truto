@@ -1,0 +1,25 @@
+{
+  "name": "Employee",
+  "description": "A normalized employee record from the Truto Unified HRIS API.",
+  "fields": [
+    { "name": "id", "type": "string", "required": true, "description": "Unified Truto employee identifier" },
+    { "name": "remoteId", "type": "string", "required": true, "description": "Employee ID in source HRIS system" },
+    { "name": "firstName", "type": "string", "required": false, "description": "First name" },
+    { "name": "lastName", "type": "string", "required": false, "description": "Last name" },
+    { "name": "displayName", "type": "string", "required": false, "description": "Preferred display name" },
+    { "name": "email", "type": "string(email)", "required": false, "description": "Work email" },
+    { "name": "personalEmail", "type": "string(email)", "required": false, "description": "Personal email" },
+    { "name": "phone", "type": "string", "required": false, "description": "Work phone" },
+    { "name": "status", "type": "enum[active,inactive,terminated]", "required": true, "description": "Employment status" },
+    { "name": "employmentType", "type": "enum[full_time,part_time,contractor,intern,other]", "required": false, "description": "Employment type" },
+    { "name": "jobTitle", "type": "string", "required": false, "description": "Current job title" },
+    { "name": "departmentId", "type": "string", "required": false, "description": "Department group identifier" },
+    { "name": "managerId", "type": "string", "required": false, "description": "Manager employee identifier" },
+    { "name": "hireDate", "type": "string(date)", "required": false, "description": "Hire date" },
+    { "name": "terminationDate", "type": "string(date)", "required": false, "description": "Termination date" },
+    { "name": "location", "type": "string", "required": false, "description": "Work location" },
+    { "name": "avatar", "type": "string(uri)", "required": false, "description": "Profile photo URL" },
+    { "name": "createdAt", "type": "string(date-time)", "required": false, "description": "Record creation timestamp" },
+    { "name": "updatedAt", "type": "string(date-time)", "required": false, "description": "Record last updated timestamp" }
+  ]
+}

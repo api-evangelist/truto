@@ -1,0 +1,724 @@
+openapi: 3.0.3
+info:
+  title: Truto Unified CRM API
+  description: >-
+    The Truto Unified CRM API provides a single normalized interface for reading and writing
+    CRM data across 27 CRM providers including Salesforce, HubSpot, Pipedrive, Attio,
+    Outreach, Wealthbox, Teamleader, and more. Offers 17 unified resources covering the
+    full CRM data model. Data is accessed in real-time via pass-through. Schema can be
+    extended using JSONata mappings without code deploys.
+  version: 1.0.0
+  contact:
+    url: https://truto.one/docs/api-reference/unified-crm-api
+
+servers:
+  - url: https://api.truto.one/unified/crm
+    description: Truto Unified CRM API
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Contacts
+    description: Contact records representing individuals at companies
+  - name: Accounts
+    description: Account records representing companies or organizations
+  - name: Opportunities
+    description: Sales opportunities and deals
+  - name: Tasks
+    description: Tasks and follow-up actions
+  - name: Users
+    description: CRM users and team members
+  - name: Stages
+    description: Opportunity pipeline stages
+
+paths:
+  /contacts:
+    get:
+      operationId: listContacts
+      summary: List contacts
+      description: >-
+        List contact records from the connected CRM provider. Returns normalized contact
+        data including name, email, phone, company, and associated account information.
+      tags:
+        - Contacts
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IntegratedAccountId'
+        - name: account_id
+          in: query
+          description: Filter contacts by account ID.
+          required: false
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          description: Cursor for pagination.
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Number of results per page (max 100).
+          required: false
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+      responses:
+        '200':
+          description: List of contacts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+    post:
+      operationId: createContact
+      summary: Create contact
+      description: Create a new contact in the connected CRM provider.
+      tags:
+        - Contacts
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IntegratedAccountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateContactRequest'
+      responses:
+        '201':
+          description: Contact created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /contacts/{id}:
+    get:
+      operationId: getContact
+      summary: Get contact
+      description: Retrieve a single contact by ID.
+      tags:
+        - Contacts
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IntegratedAccountId'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Contact record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    patch:
+      operationId: updateContact
+      summary: Update contact
+      description: Update a contact record in the connected CRM provider.
+      tags:
+        - Contacts
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IntegratedAccountId'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateContactRequest'
+      responses:
+        '200':
+          description: Updated contact record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /accounts:
+    get:
+      operationId: listAccounts
+      summary: List accounts
+      description: List account (company) records from the connected CRM provider.
+      tags:
+        - Accounts
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IntegratedAccountId'
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: List of accounts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+    post:
+      operationId: createAccount
+      summary: Create account
+      description: Create a new account in the connected CRM provider.
+      tags:
+        - Accounts
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IntegratedAccountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccountRequest'
+      responses:
+        '201':
+          description: Account created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /opportunities:
+    get:
+      operationId: listOpportunities
+      summary: List opportunities
+      description: List sales opportunities from the connected CRM provider.
+      tags:
+        - Opportunities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IntegratedAccountId'
+        - name: account_id
+          in: query
+          description: Filter by account ID.
+          required: false
+          schema:
+            type: string
+        - name: stage_id
+          in: query
+          description: Filter by pipeline stage ID.
+          required: false
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Filter by opportunity status.
+          required: false
+          schema:
+            type: string
+            enum:
+              - open
+              - won
+              - lost
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: List of opportunities.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpportunityListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+    post:
+      operationId: createOpportunity
+      summary: Create opportunity
+      description: Create a new opportunity in the connected CRM provider.
+      tags:
+        - Opportunities
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IntegratedAccountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOpportunityRequest'
+      responses:
+        '201':
+          description: Opportunity created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Opportunity'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /stages:
+    get:
+      operationId: listStages
+      summary: List stages
+      description: List pipeline stages from the connected CRM provider.
+      tags:
+        - Stages
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IntegratedAccountId'
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: List of pipeline stages.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StageListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /tasks:
+    get:
+      operationId: listTasks
+      summary: List tasks
+      description: List tasks from the connected CRM provider.
+      tags:
+        - Tasks
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IntegratedAccountId'
+        - name: contact_id
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - open
+              - completed
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: List of tasks.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Tenant Bearer token from the Truto dashboard.
+
+  parameters:
+    IntegratedAccountId:
+      name: integrated_account_id
+      in: query
+      required: true
+      description: >-
+        The ID of the integrated account (connected CRM provider instance) to query.
+        Required for all Unified API requests.
+      schema:
+        type: string
+
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+    Contact:
+      type: object
+      description: A normalized contact record from the connected CRM provider.
+      properties:
+        id:
+          type: string
+          description: Unified contact identifier.
+        remoteId:
+          type: string
+          description: Contact identifier in the source CRM.
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        title:
+          type: string
+          description: Job title.
+        accountId:
+          type: string
+          description: Identifier of the associated account (company).
+        ownerId:
+          type: string
+          description: Identifier of the CRM user who owns this contact.
+        leadSource:
+          type: string
+          description: How this contact was acquired.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    ContactListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+        nextCursor:
+          type: string
+
+    CreateContactRequest:
+      type: object
+      required:
+        - firstName
+        - lastName
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        title:
+          type: string
+        accountId:
+          type: string
+
+    UpdateContactRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        title:
+          type: string
+        accountId:
+          type: string
+
+    Account:
+      type: object
+      description: A normalized account (company) record from the connected CRM provider.
+      properties:
+        id:
+          type: string
+        remoteId:
+          type: string
+        name:
+          type: string
+          description: Company name.
+        domain:
+          type: string
+          description: Company website domain.
+        industry:
+          type: string
+          description: Industry classification.
+        employeeCount:
+          type: integer
+          description: Number of employees.
+        annualRevenue:
+          type: number
+          description: Annual revenue figure.
+        phone:
+          type: string
+        website:
+          type: string
+          format: uri
+        ownerId:
+          type: string
+          description: CRM user who owns this account.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    AccountListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        nextCursor:
+          type: string
+
+    CreateAccountRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        domain:
+          type: string
+        industry:
+          type: string
+        phone:
+          type: string
+        website:
+          type: string
+          format: uri
+
+    Opportunity:
+      type: object
+      description: A sales opportunity or deal in the connected CRM.
+      properties:
+        id:
+          type: string
+        remoteId:
+          type: string
+        name:
+          type: string
+          description: Opportunity name or deal title.
+        status:
+          type: string
+          enum:
+            - open
+            - won
+            - lost
+        stageId:
+          type: string
+          description: Current pipeline stage identifier.
+        accountId:
+          type: string
+          description: Associated account identifier.
+        amount:
+          type: number
+          description: Deal value.
+        currency:
+          type: string
+          description: ISO 4217 currency code.
+        probability:
+          type: integer
+          description: Probability of closing (0-100).
+        closeDate:
+          type: string
+          format: date
+          description: Expected or actual close date.
+        ownerId:
+          type: string
+          description: CRM user responsible for this opportunity.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    OpportunityListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Opportunity'
+        nextCursor:
+          type: string
+
+    CreateOpportunityRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        accountId:
+          type: string
+        stageId:
+          type: string
+        amount:
+          type: number
+        currency:
+          type: string
+        closeDate:
+          type: string
+          format: date
+
+    Stage:
+      type: object
+      description: A pipeline stage in the connected CRM.
+      properties:
+        id:
+          type: string
+        remoteId:
+          type: string
+        name:
+          type: string
+        order:
+          type: integer
+          description: Ordinal position in the pipeline.
+        probability:
+          type: integer
+          description: Default win probability for this stage (0-100).
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    StageListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Stage'
+        nextCursor:
+          type: string
+
+    Task:
+      type: object
+      description: A task or follow-up action in the connected CRM.
+      properties:
+        id:
+          type: string
+        remoteId:
+          type: string
+        title:
+          type: string
+        status:
+          type: string
+          enum:
+            - open
+            - completed
+        dueDate:
+          type: string
+          format: date-time
+        contactId:
+          type: string
+        accountId:
+          type: string
+        opportunityId:
+          type: string
+        assigneeId:
+          type: string
+        completedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    TaskListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        nextCursor:
+          type: string
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string

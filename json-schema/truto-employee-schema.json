@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.truto.one/schemas/employee",
+  "title": "Employee",
+  "description": "A normalized employee record returned by the Truto Unified HRIS API, representing a unified view of employee data across 41 HRIS providers.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unified employee identifier assigned by Truto."
+    },
+    "remoteId": {
+      "type": "string",
+      "description": "Employee identifier in the source HRIS system."
+    },
+    "firstName": {
+      "type": "string",
+      "description": "Employee first name."
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Employee last name."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Preferred display name."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Work email address."
+    },
+    "personalEmail": {
+      "type": "string",
+      "format": "email",
+      "description": "Personal email address."
+    },
+    "phone": {
+      "type": "string",
+      "description": "Work phone number."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "inactive", "terminated"],
+      "description": "Current employment status."
+    },
+    "employmentType": {
+      "type": "string",
+      "enum": ["full_time", "part_time", "contractor", "intern", "other"],
+      "description": "Type of employment."
+    },
+    "jobTitle": {
+      "type": "string",
+      "description": "Current job title."
+    },
+    "departmentId": {
+      "type": "string",
+      "description": "Identifier of the employee's department group."
+    },
+    "managerId": {
+      "type": "string",
+      "description": "Identifier of the employee's manager."
+    },
+    "hireDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the employee was hired."
+    },
+    "terminationDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of termination, if applicable."
+    },
+    "location": {
+      "type": "string",
+      "description": "Work location (office or remote)."
+    },
+    "avatar": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to employee profile photo."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Record creation timestamp."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Record last updated timestamp."
+    }
+  },
+  "required": ["id", "remoteId", "status"]
+}

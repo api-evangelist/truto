@@ -1,0 +1,96 @@
+extends: spectral:oas
+rules:
+  truto-operation-ids-camel-case:
+    description: Truto operation IDs must use camelCase format.
+    severity: warn
+    given: "$.paths.*[get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  truto-bearer-auth-security:
+    description: All Truto API endpoints must require Bearer token authentication.
+    severity: error
+    given: "$.paths.*[get,post,put,patch,delete]"
+    then:
+      field: security
+      function: truthy
+
+  truto-versioned-paths:
+    description: Truto API paths should not require version prefixes (versioning handled by server URL).
+    severity: info
+    given: "$.paths"
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        match: "^/"
+
+  truto-operations-tagged:
+    description: All Truto API operations must have tags for grouping.
+    severity: warn
+    given: "$.paths.*[get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: truthy
+
+  truto-response-200-json:
+    description: GET operations must include a 200 response with JSON content.
+    severity: warn
+    given: "$.paths.*[get].responses.200"
+    then:
+      field: content.application/json
+      function: truthy
+
+  truto-post-201-response:
+    description: POST creation operations should return 201 status.
+    severity: info
+    given: "$.paths.*[post]"
+    then:
+      field: responses.201
+      function: truthy
+
+  truto-id-string-type:
+    description: Identifier fields (id, remoteId) must be string type.
+    severity: warn
+    given: "$.components.schemas.*.properties[id,remoteId,candidateId,accountId,contactId,opportunityId,employeeId,applicationId,integratedAccountId]"
+    then:
+      field: type
+      function: enumeration
+      functionOptions:
+        values:
+          - string
+
+  truto-date-time-format:
+    description: Date/time fields must use date-time format.
+    severity: warn
+    given: "$.components.schemas.*.properties[createdAt,updatedAt,appliedAt,openedAt,closedAt,completedAt,requestedAt]"
+    then:
+      field: format
+      function: enumeration
+      functionOptions:
+        values:
+          - date-time
+
+  truto-pagination-cursor:
+    description: List endpoints should support cursor-based pagination.
+    severity: info
+    given: "$.paths.*[get]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          properties:
+            parameters:
+              type: array
+
+  truto-integrated-account-param:
+    description: >-
+      Unified API list/get endpoints should include integrated_account_id parameter
+      to specify the connected provider instance.
+    severity: warn
+    given: "$.paths./unified/*/[get,post]"
+    then:
+      function: truthy
