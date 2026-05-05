@@ -1,0 +1,13 @@
+{
+  "repo": "truto",
+  "feeds": [
+    {
+      "source": "https://truto.one/blog/",
+      "feed_url": "https://truto.one/blog/feed.xml",
+      "saved": 10,
+      "title": "Truto Blog"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:37:47Z"
+}
