@@ -4,105 +4,42 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Truto
 providerId: truto
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Unified API
-  - Integration Platform
-  - HRIS
-  - ATS
-  - CRM
-  - Embedded Integrations
-  - MCP
-  - AI Agents
-  - SaaS
+  - Integrations
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Truto API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
-responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+description: Truto markets "unlimited API calls" as part of both Expansion and Enterprise plans, but does
+  not publish a public per-second / per-minute throttling number on its pricing or documentation pages.
+  In practice, downstream rate limits flow from the third-party SaaS being integrated, and Truto's gateway
+  acts as a passthrough subject to those upstream limits.
+sources:
+  - https://truto.one/pricing
+  - https://truto.one/docs
+notes: No public per-second or per-minute platform rate-limit numbers documented. Plans market unlimited
+  API calls at the Truto layer; effective rate limits depend on the upstream connector (e.g. HubSpot,
+  Salesforce) being unified.
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Truto Admin API
-      - Truto Unified HRIS API
-      - Truto Unified ATS API
-      - Truto Unified CRM API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Truto Admin API
-      - Truto Unified HRIS API
-      - Truto Unified ATS API
-      - Truto Unified CRM API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Truto Admin API
-      - Truto Unified HRIS API
-      - Truto Unified ATS API
-      - Truto Unified CRM API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Truto Admin API
-      - Truto Unified HRIS API
-      - Truto Unified ATS API
-      - Truto Unified CRM API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Truto Admin API
-      - Truto Unified HRIS API
-      - Truto Unified ATS API
-      - Truto Unified CRM API
+  - name: Truto Platform API Calls
+    scope: account
+    metric: requests_per_year
+    limit: -1
+    timeFrame: year
+    notes: Marketed as unlimited across both Expansion and Enterprise tiers.
+  - name: Upstream Connector Limits
+    scope: connector
+    metric: varies
+    limit: see upstream provider
+    notes: Effective ceiling is set by the SaaS being unified (e.g. CRM, ATS, accounting); Truto inherits
+      and surfaces those limits.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Upstream Passthrough
+    description: Because Truto unifies third-party SaaS APIs, throttling behavior is largely defined by
+      each upstream provider; Truto returns the upstream 429 / Retry-After signaling where available.
+  - name: Active-Account Billing
+    description: Billing is based on active accounts, not API call volume; this means rate-limit pressure
+      is a connector-by-connector concern rather than a platform quota concern.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
