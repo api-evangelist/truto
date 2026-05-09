@@ -4,10 +4,10 @@
     {
       "source": "https://truto.one/blog/",
       "feed_url": "https://truto.one/blog/feed.xml",
-      "saved": 10,
-      "title": "Truto Blog"
+      "title": "Truto Blog",
+      "saved": 16
     }
   ],
-  "post_count": 10,
-  "fetched": "2026-05-03T23:37:47Z"
+  "post_count": 26,
+  "fetched": "2026-05-09T20:17:51Z"
 }
