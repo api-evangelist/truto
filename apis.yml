@@ -160,6 +160,17 @@ common:
   - url: https://raw.githubusercontent.com/api-evangelist/truto/refs/heads/main/rules/truto-rules.yml
     name: Spectral Rules
     type: SpectralRules
+integrations:
+  - name: Truto
+  - name: SOC 2 Type II
+  - name: ISO 27001
+  - name: GDPR
+  - name: HIPAA
+  - name: ChatGPT
+  - name: Perplexity
+  - name: Claude
+  - name: Gemini
+  - name: Grok
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
