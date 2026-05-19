@@ -26,7 +26,7 @@ tags:
   - SaaS
 access: 3rd-Party
 created: '2026-03-16'
-modified: '2026-05-03'
+modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
   - aid: truto:truto-admin-api
@@ -160,6 +160,12 @@ common:
   - url: https://raw.githubusercontent.com/api-evangelist/truto/refs/heads/main/rules/truto-rules.yml
     name: Spectral Rules
     type: SpectralRules
+  - name: MCP Server
+    url: https://truto.one/blog/announcing-truto-docs-mcp-stop-ai-hallucinations-in-api-integrations/
+    type: MCPServer
+  - name: Agent Skills
+    url: https://truto.one/blog/truto-agent-skills-stop-ai-hallucinations-when-building-integrations/
+    type: AgentSkill
 integrations:
   - name: Truto
   - name: SOC 2 Type II
