@@ -1,0 +1,83 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Truto Unified ATS API — Departments
+  description: 'Truto Unified ATS API — Departments. 1 operations. Lead operation: List departments. Self-contained Naftiko
+    capability covering one Truto business surface.'
+  tags:
+  - Truto
+  - Departments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRUTO_API_KEY: TRUTO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: unified-ats-departments
+    baseUri: https://api.truto.one/unified/ats
+    description: Truto Unified ATS API — Departments business capability. Self-contained, no shared references.
+    resources:
+    - name: departments
+      path: /departments
+      operations:
+      - name: listdepartments
+        method: GET
+        description: List departments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+    authentication:
+      type: bearer
+      token: '{{env.TRUTO_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: unified-ats-departments-rest
+    port: 8080
+    description: REST adapter for Truto Unified ATS API — Departments. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/departments
+      name: departments
+      description: REST surface for departments.
+      operations:
+      - method: GET
+        name: listdepartments
+        description: List departments
+        call: unified-ats-departments.listdepartments
+        with:
+          cursor: rest.cursor
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: unified-ats-departments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Truto Unified ATS API — Departments. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-departments
+      description: List departments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: unified-ats-departments.listdepartments
+      with:
+        cursor: tools.cursor
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.

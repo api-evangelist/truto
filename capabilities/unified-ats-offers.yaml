@@ -1,0 +1,95 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Truto Unified ATS API — Offers
+  description: 'Truto Unified ATS API — Offers. 1 operations. Lead operation: List offers. Self-contained Naftiko capability
+    covering one Truto business surface.'
+  tags:
+  - Truto
+  - Offers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRUTO_API_KEY: TRUTO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: unified-ats-offers
+    baseUri: https://api.truto.one/unified/ats
+    description: Truto Unified ATS API — Offers business capability. Self-contained, no shared references.
+    resources:
+    - name: offers
+      path: /offers
+      operations:
+      - name: listoffers
+        method: GET
+        description: List offers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: application_id
+          in: query
+          type: string
+          description: Filter offers by application ID.
+        - name: status
+          in: query
+          type: string
+          description: Filter offers by status.
+        - name: cursor
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+    authentication:
+      type: bearer
+      token: '{{env.TRUTO_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: unified-ats-offers-rest
+    port: 8080
+    description: REST adapter for Truto Unified ATS API — Offers. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/offers
+      name: offers
+      description: REST surface for offers.
+      operations:
+      - method: GET
+        name: listoffers
+        description: List offers
+        call: unified-ats-offers.listoffers
+        with:
+          application_id: rest.application_id
+          status: rest.status
+          cursor: rest.cursor
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: unified-ats-offers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Truto Unified ATS API — Offers. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-offers
+      description: List offers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: unified-ats-offers.listoffers
+      with:
+        application_id: tools.application_id
+        status: tools.status
+        cursor: tools.cursor
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.

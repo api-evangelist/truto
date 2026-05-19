@@ -1,0 +1,95 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Truto Unified HRIS API — Timeoff
+  description: 'Truto Unified HRIS API — Timeoff. 1 operations. Lead operation: List time off requests. Self-contained Naftiko
+    capability covering one Truto business surface.'
+  tags:
+  - Truto
+  - Timeoff
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRUTO_API_KEY: TRUTO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: unified-hris-timeoff
+    baseUri: https://api.truto.one/unified/hris
+    description: Truto Unified HRIS API — Timeoff business capability. Self-contained, no shared references.
+    resources:
+    - name: timeoff-requests
+      path: /timeoff-requests
+      operations:
+      - name: listtimeoffrequests
+        method: GET
+        description: List time off requests
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: employee_id
+          in: query
+          type: string
+          description: Filter time off requests by employee ID.
+        - name: status
+          in: query
+          type: string
+          description: Filter by request status.
+        - name: cursor
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+    authentication:
+      type: bearer
+      token: '{{env.TRUTO_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: unified-hris-timeoff-rest
+    port: 8080
+    description: REST adapter for Truto Unified HRIS API — Timeoff. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/timeoff-requests
+      name: timeoff-requests
+      description: REST surface for timeoff-requests.
+      operations:
+      - method: GET
+        name: listtimeoffrequests
+        description: List time off requests
+        call: unified-hris-timeoff.listtimeoffrequests
+        with:
+          employee_id: rest.employee_id
+          status: rest.status
+          cursor: rest.cursor
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: unified-hris-timeoff-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Truto Unified HRIS API — Timeoff. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-time-off-requests
+      description: List time off requests
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: unified-hris-timeoff.listtimeoffrequests
+      with:
+        employee_id: tools.employee_id
+        status: tools.status
+        cursor: tools.cursor
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.

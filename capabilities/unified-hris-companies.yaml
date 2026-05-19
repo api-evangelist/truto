@@ -1,0 +1,83 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Truto Unified HRIS API — Companies
+  description: 'Truto Unified HRIS API — Companies. 1 operations. Lead operation: List companies. Self-contained Naftiko capability
+    covering one Truto business surface.'
+  tags:
+  - Truto
+  - Companies
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRUTO_API_KEY: TRUTO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: unified-hris-companies
+    baseUri: https://api.truto.one/unified/hris
+    description: Truto Unified HRIS API — Companies business capability. Self-contained, no shared references.
+    resources:
+    - name: companies
+      path: /companies
+      operations:
+      - name: listcompanies
+        method: GET
+        description: List companies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+    authentication:
+      type: bearer
+      token: '{{env.TRUTO_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: unified-hris-companies-rest
+    port: 8080
+    description: REST adapter for Truto Unified HRIS API — Companies. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/companies
+      name: companies
+      description: REST surface for companies.
+      operations:
+      - method: GET
+        name: listcompanies
+        description: List companies
+        call: unified-hris-companies.listcompanies
+        with:
+          cursor: rest.cursor
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: unified-hris-companies-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Truto Unified HRIS API — Companies. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-companies
+      description: List companies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: unified-hris-companies.listcompanies
+      with:
+        cursor: tools.cursor
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.

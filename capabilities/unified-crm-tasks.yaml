@@ -1,0 +1,93 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Truto Unified CRM API — Tasks
+  description: 'Truto Unified CRM API — Tasks. 1 operations. Lead operation: List tasks. Self-contained Naftiko capability
+    covering one Truto business surface.'
+  tags:
+  - Truto
+  - Tasks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRUTO_API_KEY: TRUTO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: unified-crm-tasks
+    baseUri: https://api.truto.one/unified/crm
+    description: Truto Unified CRM API — Tasks business capability. Self-contained, no shared references.
+    resources:
+    - name: tasks
+      path: /tasks
+      operations:
+      - name: listtasks
+        method: GET
+        description: List tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: contact_id
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+        - name: cursor
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+    authentication:
+      type: bearer
+      token: '{{env.TRUTO_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: unified-crm-tasks-rest
+    port: 8080
+    description: REST adapter for Truto Unified CRM API — Tasks. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/tasks
+      name: tasks
+      description: REST surface for tasks.
+      operations:
+      - method: GET
+        name: listtasks
+        description: List tasks
+        call: unified-crm-tasks.listtasks
+        with:
+          contact_id: rest.contact_id
+          status: rest.status
+          cursor: rest.cursor
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: unified-crm-tasks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Truto Unified CRM API — Tasks. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-tasks
+      description: List tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: unified-crm-tasks.listtasks
+      with:
+        contact_id: tools.contact_id
+        status: tools.status
+        cursor: tools.cursor
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.

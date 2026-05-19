@@ -1,0 +1,118 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Truto Unified CRM API — Accounts
+  description: 'Truto Unified CRM API — Accounts. 2 operations. Lead operation: List accounts. Self-contained Naftiko capability
+    covering one Truto business surface.'
+  tags:
+  - Truto
+  - Accounts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRUTO_API_KEY: TRUTO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: unified-crm-accounts
+    baseUri: https://api.truto.one/unified/crm
+    description: Truto Unified CRM API — Accounts business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts
+      path: /accounts
+      operations:
+      - name: listaccounts
+        method: GET
+        description: List accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+      - name: createaccount
+        method: POST
+        description: Create account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.TRUTO_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: unified-crm-accounts-rest
+    port: 8080
+    description: REST adapter for Truto Unified CRM API — Accounts. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/accounts
+      name: accounts
+      description: REST surface for accounts.
+      operations:
+      - method: GET
+        name: listaccounts
+        description: List accounts
+        call: unified-crm-accounts.listaccounts
+        with:
+          cursor: rest.cursor
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createaccount
+        description: Create account
+        call: unified-crm-accounts.createaccount
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: unified-crm-accounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Truto Unified CRM API — Accounts. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-accounts
+      description: List accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: unified-crm-accounts.listaccounts
+      with:
+        cursor: tools.cursor
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-account
+      description: Create account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: unified-crm-accounts.createaccount
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,124 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Truto Unified ATS API — Candidates
+  description: 'Truto Unified ATS API — Candidates. 2 operations. Lead operation: List candidates. Self-contained Naftiko
+    capability covering one Truto business surface.'
+  tags:
+  - Truto
+  - Candidates
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRUTO_API_KEY: TRUTO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: unified-ats-candidates
+    baseUri: https://api.truto.one/unified/ats
+    description: Truto Unified ATS API — Candidates business capability. Self-contained, no shared references.
+    resources:
+    - name: candidates
+      path: /candidates
+      operations:
+      - name: listcandidates
+        method: GET
+        description: List candidates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+    - name: candidates-id
+      path: /candidates/{id}
+      operations:
+      - name: getcandidate
+        method: GET
+        description: Get candidate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.TRUTO_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: unified-ats-candidates-rest
+    port: 8080
+    description: REST adapter for Truto Unified ATS API — Candidates. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/candidates
+      name: candidates
+      description: REST surface for candidates.
+      operations:
+      - method: GET
+        name: listcandidates
+        description: List candidates
+        call: unified-ats-candidates.listcandidates
+        with:
+          cursor: rest.cursor
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/candidates/{id}
+      name: candidates-id
+      description: REST surface for candidates-id.
+      operations:
+      - method: GET
+        name: getcandidate
+        description: Get candidate
+        call: unified-ats-candidates.getcandidate
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: unified-ats-candidates-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Truto Unified ATS API — Candidates. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-candidates
+      description: List candidates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: unified-ats-candidates.listcandidates
+      with:
+        cursor: tools.cursor
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-candidate
+      description: Get candidate
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: unified-ats-candidates.getcandidate
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

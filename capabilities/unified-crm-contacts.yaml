@@ -1,0 +1,208 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Truto Unified CRM API — Contacts
+  description: 'Truto Unified CRM API — Contacts. 4 operations. Lead operation: List contacts. Self-contained Naftiko capability
+    covering one Truto business surface.'
+  tags:
+  - Truto
+  - Contacts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRUTO_API_KEY: TRUTO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: unified-crm-contacts
+    baseUri: https://api.truto.one/unified/crm
+    description: Truto Unified CRM API — Contacts business capability. Self-contained, no shared references.
+    resources:
+    - name: contacts
+      path: /contacts
+      operations:
+      - name: listcontacts
+        method: GET
+        description: List contacts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: account_id
+          in: query
+          type: string
+          description: Filter contacts by account ID.
+        - name: cursor
+          in: query
+          type: string
+          description: Cursor for pagination.
+        - name: limit
+          in: query
+          type: integer
+          description: Number of results per page (max 100).
+      - name: createcontact
+        method: POST
+        description: Create contact
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: contacts-id
+      path: /contacts/{id}
+      operations:
+      - name: getcontact
+        method: GET
+        description: Get contact
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+      - name: updatecontact
+        method: PATCH
+        description: Update contact
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.TRUTO_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: unified-crm-contacts-rest
+    port: 8080
+    description: REST adapter for Truto Unified CRM API — Contacts. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/contacts
+      name: contacts
+      description: REST surface for contacts.
+      operations:
+      - method: GET
+        name: listcontacts
+        description: List contacts
+        call: unified-crm-contacts.listcontacts
+        with:
+          account_id: rest.account_id
+          cursor: rest.cursor
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcontact
+        description: Create contact
+        call: unified-crm-contacts.createcontact
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/contacts/{id}
+      name: contacts-id
+      description: REST surface for contacts-id.
+      operations:
+      - method: GET
+        name: getcontact
+        description: Get contact
+        call: unified-crm-contacts.getcontact
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatecontact
+        description: Update contact
+        call: unified-crm-contacts.updatecontact
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: unified-crm-contacts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Truto Unified CRM API — Contacts. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-contacts
+      description: List contacts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: unified-crm-contacts.listcontacts
+      with:
+        account_id: tools.account_id
+        cursor: tools.cursor
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-contact
+      description: Create contact
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: unified-crm-contacts.createcontact
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-contact
+      description: Get contact
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: unified-crm-contacts.getcontact
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-contact
+      description: Update contact
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: unified-crm-contacts.updatecontact
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
