@@ -1,0 +1,215 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Truto Admin API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integrated Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List integrated accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.truto.one/integrated-accounts",
+            "params": [
+              {
+                "name": "integration",
+                "value": "",
+                "type": "query",
+                "description": "Filter by integration name (e.g., bamboohr, greenhouse, salesforce)."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by account status."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all integrated accounts in the tenant. Integrated accounts represent connections between your Truto tenant and a customer's connected third-party app."
+        },
+        {
+          "info": {
+            "name": "Create integrated account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.truto.one/integrated-accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Programmatically create an integrated account. Typically used when you already have credentials (e.g., API keys) for the integration and want to register them directly without a link token flow."
+        },
+        {
+          "info": {
+            "name": "Get integrated account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.truto.one/integrated-accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integrated account identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a single integrated account by ID."
+        },
+        {
+          "info": {
+            "name": "Delete integrated account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.truto.one/integrated-accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integrated account identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an integrated account and revoke all associated credentials."
+        },
+        {
+          "info": {
+            "name": "Run post-install actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.truto.one/integrated-accounts/:id/run-post-install-actions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integrated account identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Manually run post-install actions for an integrated account. Post-install actions are configured per integration and typically fetch metadata from the underlying API to store in the integrated account context (e.g., tenant ID, region, base URL). These run automatically on connection but can be re-run manually if needed."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "MCP Servers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create MCP server for integrated account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.truto.one/integrated-accounts/:id/mcp",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integrated account identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Provision a Model Context Protocol (MCP) server for an integrated account. Returns a secure tokenized URL that AI agents (Claude, ChatGPT, custom LLM frameworks) can use to invoke the integration's tools. The URL itself serves as the auth token. Optionally filter which methods are exposed or require additional API token authentication for enterprise security."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Link Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create link token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.truto.one/link-tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Generate a link token to initiate a Truto account connection flow from within your application. The link token is a short-lived credential passed to the Truto Link SDK or redirect URL to guide the end user through connecting their third-party account. At the end of the flow, an integrated account is created."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
