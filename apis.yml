@@ -11,7 +11,7 @@ description: >-
   via JSONata, and one-API-call MCP server generation for AI agent access. Authentication uses Bearer tokens. Truto
   supports over 250 integrations and is available as Truto Cloud or on-premise.
 type: Index
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Unified API
   - Integration Platform
@@ -34,7 +34,7 @@ apis:
       - Integrated Accounts
       - Link Tokens
       - MCP
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.truto.one
     humanURL: https://truto.one/docs/api-reference/admin
     properties:
@@ -56,7 +56,7 @@ apis:
       - Employees
       - Payroll
       - Unified API
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.truto.one/unified/hris
     humanURL: https://truto.one/docs/api-reference/unified-hris-api
     properties:
@@ -81,7 +81,7 @@ apis:
       - Jobs
       - Candidates
       - Unified API
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.truto.one/unified/ats
     humanURL: https://truto.one/docs/api-reference/unified-ats-api
     properties:
@@ -105,7 +105,7 @@ apis:
       - Contacts
       - Opportunities
       - Unified API
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.truto.one/unified/crm
     humanURL: https://truto.one/docs/api-reference/unified-crm-api
     properties:
