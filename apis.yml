@@ -159,8 +159,8 @@ common:
     type: MCPServer
   - name: Agent Skills
     url: https://truto.one/blog/truto-agent-skills-stop-ai-hallucinations-when-building-integrations/
-    type: AgentSkill
-  - type: LLMsTxt
+    type: AgentSkills
+  - type: LlmsText
     url: https://truto.one/llms.txt
 integrations:
   - name: Truto
