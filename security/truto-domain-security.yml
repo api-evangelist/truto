@@ -1,0 +1,22 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: truto.one
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct  5 22:00:49 2026 GMT
+  hsts: true
+  hsts_max_age: 15552000
+- host: api.truto.one
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 18 12:16:56 2026 GMT
+  hsts: null
+domains:
+- domain: truto.one
+  dnssec: true
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none

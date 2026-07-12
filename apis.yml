@@ -122,6 +122,12 @@ apis:
       is accessed in real-time via pass-through to underlying CRM APIs. Authentication uses Bearer token with
       integrated_account_id query parameter.
 common:
+  - type: TrustCenter
+    url: security/truto-trust-center.yml
+  - type: DomainSecurity
+    url: security/truto-domain-security.yml
+  - type: Authentication
+    url: authentication/truto-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/gettruto
   - url: https://truto.one/

@@ -1,0 +1,20 @@
+generated: '2026-07-11'
+method: searched
+probe: true
+source: https://trust.truto.one/
+url: https://trust.truto.one/
+certifications:
+- SOC 2
+- ISO 27001
+- HIPAA
+- GDPR
+evidence:
+- source: https://trust.truto.one/
+  keywords:
+  - soc 2
+  - soc2
+  - iso 27001
+  - iso/iec 27001
+  - hipaa
+  - trust center
+  - gdpr

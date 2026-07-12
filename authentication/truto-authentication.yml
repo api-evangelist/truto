@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/truto-admin-openapi.yml, openapi/truto-unified-ats-openapi.yml, openapi/truto-unified-crm-openapi.yml,
+  openapi/truto-unified-hris-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Tenant Bearer token from the Truto dashboard.
+  sources:
+  - openapi/truto-admin-openapi.yml
+  - openapi/truto-unified-ats-openapi.yml
+  - openapi/truto-unified-crm-openapi.yml
+  - openapi/truto-unified-hris-openapi.yml
