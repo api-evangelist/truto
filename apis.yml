@@ -122,6 +122,8 @@ apis:
       is accessed in real-time via pass-through to underlying CRM APIs. Authentication uses Bearer token with
       integrated_account_id query parameter.
 common:
+  - type: AgenticAccess
+    url: agentic-access/truto-agentic-access.yml
   - type: TrustCenter
     url: security/truto-trust-center.yml
   - type: DomainSecurity
