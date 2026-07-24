@@ -1,0 +1,112 @@
+openapi: 3.0.3
+info:
+  title: Truto Admin Accounts MCP Servers API
+  description: The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.
+  version: 1.0.0
+  contact:
+    url: https://truto.one/docs/api-reference/admin
+servers:
+- url: https://api.truto.one
+  description: Truto API
+security:
+- bearerAuth: []
+tags:
+- name: MCP Servers
+  description: Provision Model Context Protocol servers for AI agent access
+paths:
+  /integrated-accounts/{id}/mcp:
+    post:
+      operationId: createMcpServer
+      summary: Create MCP server for integrated account
+      description: Provision a Model Context Protocol (MCP) server for an integrated account. Returns a secure tokenized URL that AI agents (Claude, ChatGPT, custom LLM frameworks) can use to invoke the integration's tools. The URL itself serves as the auth token. Optionally filter which methods are exposed or require additional API token authentication for enterprise security.
+      tags:
+      - MCP Servers
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Integrated account identifier.
+        schema:
+          type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMcpServerRequest'
+      responses:
+        '201':
+          description: MCP server provisioned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/McpServer'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    McpServer:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the MCP server.
+        mcpUrl:
+          type: string
+          format: uri
+          description: Secure tokenized URL for connecting AI agents to this MCP server.
+        transport:
+          type: string
+          enum:
+          - http
+          - stdio
+          description: MCP transport protocol.
+        integratedAccountId:
+          type: string
+          description: Identifier of the integrated account this MCP server is scoped to.
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the MCP server was provisioned.
+    CreateMcpServerRequest:
+      type: object
+      properties:
+        allowedMethods:
+          type: array
+          items:
+            type: string
+          description: Limit the MCP server to only expose specific tool methods.
+        requireAdditionalAuth:
+          type: boolean
+          description: Whether to require an additional API token for MCP server access.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code.
+        message:
+          type: string
+          description: Human-readable error description.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Tenant Bearer token from the Truto dashboard.

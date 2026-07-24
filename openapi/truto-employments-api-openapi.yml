@@ -1,0 +1,144 @@
+openapi: 3.0.3
+info:
+  title: Truto Admin Accounts Employments API
+  description: The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.
+  version: 1.0.0
+  contact:
+    url: https://truto.one/docs/api-reference/admin
+servers:
+- url: https://api.truto.one
+  description: Truto API
+security:
+- bearerAuth: []
+tags:
+- name: Employments
+  description: Employment terms, positions, and job history
+paths:
+  /employments:
+    get:
+      operationId: listEmployments
+      summary: List employments
+      description: List employment records including job titles, pay rates, pay periods, and employment type from the connected HRIS provider.
+      tags:
+      - Employments
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/IntegratedAccountId'
+      - name: employee_id
+        in: query
+        description: Filter employments by employee ID.
+        required: false
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results per page.
+        required: false
+        schema:
+          type: integer
+          default: 20
+      responses:
+        '200':
+          description: List of employment records.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Employment:
+      type: object
+      description: An employment record representing a job position and compensation details.
+      properties:
+        id:
+          type: string
+          description: Unified employment identifier.
+        remoteId:
+          type: string
+          description: Employment identifier in the source system.
+        employeeId:
+          type: string
+          description: Identifier of the associated employee.
+        jobTitle:
+          type: string
+          description: Job title for this employment.
+        payRate:
+          type: number
+          description: Pay rate amount.
+        payPeriod:
+          type: string
+          enum:
+          - hourly
+          - weekly
+          - biweekly
+          - semimonthly
+          - monthly
+          - annual
+          description: Pay period frequency.
+        payCurrency:
+          type: string
+          description: ISO 4217 currency code for pay rate.
+        employmentType:
+          type: string
+          enum:
+          - full_time
+          - part_time
+          - contractor
+          - intern
+          - other
+          description: Employment type.
+        effectiveDate:
+          type: string
+          format: date
+          description: Date this employment record took effect.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    EmploymentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employment'
+        nextCursor:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+  parameters:
+    IntegratedAccountId:
+      name: integrated_account_id
+      in: query
+      required: true
+      description: The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Tenant Bearer token from the Truto dashboard.

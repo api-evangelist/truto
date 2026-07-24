@@ -1,0 +1,215 @@
+openapi: 3.0.3
+info:
+  title: Truto Admin Accounts Employees API
+  description: The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.
+  version: 1.0.0
+  contact:
+    url: https://truto.one/docs/api-reference/admin
+servers:
+- url: https://api.truto.one
+  description: Truto API
+security:
+- bearerAuth: []
+tags:
+- name: Employees
+  description: Employee records and personal details
+paths:
+  /employees:
+    get:
+      operationId: listEmployees
+      summary: List employees
+      description: List employee records from the connected HRIS provider. Returns normalized employee data including personal details, employment status, department, compensation, and contact information.
+      tags:
+      - Employees
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/IntegratedAccountId'
+      - name: status
+        in: query
+        description: Filter employees by employment status.
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+          - terminated
+      - name: department_id
+        in: query
+        description: Filter employees by department ID.
+        required: false
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        description: Cursor for pagination (from previous response next_cursor).
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of results per page (max 100).
+        required: false
+        schema:
+          type: integer
+          default: 20
+          maximum: 100
+      responses:
+        '200':
+          description: List of employees.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /employees/{id}:
+    get:
+      operationId: getEmployee
+      summary: Get employee
+      description: Retrieve a single employee record by ID from the connected HRIS provider.
+      tags:
+      - Employees
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/IntegratedAccountId'
+      - name: id
+        in: path
+        required: true
+        description: Employee identifier.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Employee record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    EmployeeListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employee'
+        nextCursor:
+          type: string
+          description: Cursor for fetching the next page of results.
+    Employee:
+      type: object
+      description: A normalized employee record from the connected HRIS provider.
+      properties:
+        id:
+          type: string
+          description: Unified employee identifier.
+        remoteId:
+          type: string
+          description: Employee identifier in the source HRIS system.
+        firstName:
+          type: string
+          description: Employee first name.
+        lastName:
+          type: string
+          description: Employee last name.
+        displayName:
+          type: string
+          description: Employee display or preferred name.
+        email:
+          type: string
+          format: email
+          description: Work email address.
+        personalEmail:
+          type: string
+          format: email
+          description: Personal email address.
+        phone:
+          type: string
+          description: Work phone number.
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+          - terminated
+          description: Current employment status.
+        employmentType:
+          type: string
+          enum:
+          - full_time
+          - part_time
+          - contractor
+          - intern
+          - other
+          description: Type of employment.
+        jobTitle:
+          type: string
+          description: Current job title.
+        departmentId:
+          type: string
+          description: Identifier of the employee's department.
+        managerId:
+          type: string
+          description: Identifier of the employee's manager.
+        hireDate:
+          type: string
+          format: date
+          description: Date the employee was hired.
+        terminationDate:
+          type: string
+          format: date
+          description: Date of termination, if applicable.
+        location:
+          type: string
+          description: Work location.
+        avatar:
+          type: string
+          format: uri
+          description: URL to employee avatar/photo.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+  parameters:
+    IntegratedAccountId:
+      name: integrated_account_id
+      in: query
+      required: true
+      description: The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Tenant Bearer token from the Truto dashboard.

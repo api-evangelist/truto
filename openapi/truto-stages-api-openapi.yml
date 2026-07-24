@@ -1,0 +1,107 @@
+openapi: 3.0.3
+info:
+  title: Truto Admin Accounts Stages API
+  description: The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.
+  version: 1.0.0
+  contact:
+    url: https://truto.one/docs/api-reference/admin
+servers:
+- url: https://api.truto.one
+  description: Truto API
+security:
+- bearerAuth: []
+tags:
+- name: Stages
+  description: Opportunity pipeline stages
+paths:
+  /stages:
+    get:
+      operationId: listStages
+      summary: List stages
+      description: List pipeline stages from the connected CRM provider.
+      tags:
+      - Stages
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/IntegratedAccountId'
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+      responses:
+        '200':
+          description: List of pipeline stages.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StageListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    IntegratedAccountId:
+      name: integrated_account_id
+      in: query
+      required: true
+      description: The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    StageListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Stage'
+        nextCursor:
+          type: string
+    Stage:
+      type: object
+      description: A pipeline stage in the connected CRM.
+      properties:
+        id:
+          type: string
+        remoteId:
+          type: string
+        name:
+          type: string
+        order:
+          type: integer
+          description: Ordinal position in the pipeline.
+        probability:
+          type: integer
+          description: Default win probability for this stage (0-100).
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Tenant Bearer token from the Truto dashboard.

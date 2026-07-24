@@ -1,0 +1,101 @@
+openapi: 3.0.3
+info:
+  title: Truto Admin Accounts Link Tokens API
+  description: The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.
+  version: 1.0.0
+  contact:
+    url: https://truto.one/docs/api-reference/admin
+servers:
+- url: https://api.truto.one
+  description: Truto API
+security:
+- bearerAuth: []
+tags:
+- name: Link Tokens
+  description: Generate tokens for customer-initiated account connections
+paths:
+  /link-tokens:
+    post:
+      operationId: createLinkToken
+      summary: Create link token
+      description: Generate a link token to initiate a Truto account connection flow from within your application. The link token is a short-lived credential passed to the Truto Link SDK or redirect URL to guide the end user through connecting their third-party account. At the end of the flow, an integrated account is created.
+      tags:
+      - Link Tokens
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLinkTokenRequest'
+      responses:
+        '201':
+          description: Link token created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkToken'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    LinkToken:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Short-lived link token for initiating the connection flow.
+        linkUrl:
+          type: string
+          format: uri
+          description: Full URL to redirect the user to for the connection flow.
+        expiresAt:
+          type: string
+          format: date-time
+          description: Expiration timestamp for the link token.
+    CreateLinkTokenRequest:
+      type: object
+      required:
+      - integration
+      properties:
+        integration:
+          type: string
+          description: Integration name for the connection flow (e.g., bamboohr, greenhouse).
+        externalId:
+          type: string
+          description: Your internal identifier for the end user or organization initiating the connection.
+        redirectUri:
+          type: string
+          format: uri
+          description: URL to redirect the user to after completing the connection flow.
+        scopes:
+          type: array
+          items:
+            type: string
+          description: Specific OAuth scopes to request, if applicable.
+        metadata:
+          type: object
+          additionalProperties: true
+          description: Additional metadata to attach to the integrated account on creation.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code.
+        message:
+          type: string
+          description: Human-readable error description.
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Tenant Bearer token from the Truto dashboard.

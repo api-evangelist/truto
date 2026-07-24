@@ -1,0 +1,156 @@
+openapi: 3.0.3
+info:
+  title: Truto Admin Accounts Candidates API
+  description: The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.
+  version: 1.0.0
+  contact:
+    url: https://truto.one/docs/api-reference/admin
+servers:
+- url: https://api.truto.one
+  description: Truto API
+security:
+- bearerAuth: []
+tags:
+- name: Candidates
+  description: Candidate profiles and contact information
+paths:
+  /candidates:
+    get:
+      operationId: listCandidates
+      summary: List candidates
+      description: List candidate profiles from the connected ATS provider.
+      tags:
+      - Candidates
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/IntegratedAccountId'
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+      responses:
+        '200':
+          description: List of candidates.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CandidateListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /candidates/{id}:
+    get:
+      operationId: getCandidate
+      summary: Get candidate
+      description: Retrieve a single candidate by ID.
+      tags:
+      - Candidates
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/IntegratedAccountId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Candidate profile.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Candidate'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Candidate:
+      type: object
+      description: A normalized candidate profile from the connected ATS provider.
+      properties:
+        id:
+          type: string
+          description: Unified candidate identifier.
+        remoteId:
+          type: string
+          description: Candidate identifier in the source ATS.
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+          description: Primary email address.
+        phone:
+          type: string
+          description: Phone number.
+        location:
+          type: string
+          description: Candidate location.
+        source:
+          type: string
+          description: How the candidate was sourced (e.g., LinkedIn, referral, job board).
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags or labels applied to the candidate.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    CandidateListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Candidate'
+        nextCursor:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+  parameters:
+    IntegratedAccountId:
+      name: integrated_account_id
+      in: query
+      required: true
+      description: The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Tenant Bearer token from the Truto dashboard.

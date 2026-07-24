@@ -1,0 +1,122 @@
+openapi: 3.0.3
+info:
+  title: Truto Admin Accounts Groups API
+  description: The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.
+  version: 1.0.0
+  contact:
+    url: https://truto.one/docs/api-reference/admin
+servers:
+- url: https://api.truto.one
+  description: Truto API
+security:
+- bearerAuth: []
+tags:
+- name: Groups
+  description: Departments, teams, and organizational units
+paths:
+  /groups:
+    get:
+      operationId: listGroups
+      summary: List groups
+      description: List groups (departments, teams, cost centers) from the connected HRIS provider.
+      tags:
+      - Groups
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/IntegratedAccountId'
+      - name: type
+        in: query
+        description: Filter groups by type (department, team, cost_center).
+        required: false
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+      responses:
+        '200':
+          description: List of groups.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    GroupListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        nextCursor:
+          type: string
+    Group:
+      type: object
+      description: A group (department, team, or cost center) from the HRIS provider.
+      properties:
+        id:
+          type: string
+        remoteId:
+          type: string
+        name:
+          type: string
+          description: Group name.
+        type:
+          type: string
+          enum:
+          - department
+          - team
+          - cost_center
+          - division
+          description: Group type.
+        parentId:
+          type: string
+          description: Identifier of the parent group for hierarchical structures.
+        managerId:
+          type: string
+          description: Identifier of the group manager.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    IntegratedAccountId:
+      name: integrated_account_id
+      in: query
+      required: true
+      description: The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Tenant Bearer token from the Truto dashboard.
