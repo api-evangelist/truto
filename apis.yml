@@ -11,7 +11,20 @@ description: >-
   via JSONata, and one-API-call MCP server generation for AI agent access. Authentication uses Bearer tokens. Truto
   supports over 250 integrations and is available as Truto Cloud or on-premise.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: true
+  try_now: true
+  public: false
+  label: Paid (free trial) · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/truto.png
 tags:
   - Unified API
   - Integration Platform
@@ -27,100 +40,438 @@ created: '2026-03-16'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: truto:truto-admin-api
-    name: Truto Admin API
-    tags:
-      - Administration
-      - Integrated Accounts
-      - Link Tokens
-      - MCP
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.truto.one
-    humanURL: https://truto.one/docs/api-reference/admin
-    properties:
-      - url: https://truto.one/docs/api-reference/admin
-        type: Documentation
-      - url: https://raw.githubusercontent.com/api-evangelist/truto/refs/heads/main/openapi/truto-admin-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Truto Admin API enables programmatic management of the Truto platform, including creating and managing
-      integrated accounts, generating link tokens for customer-initiated OAuth flows, running post-install actions, and
-      provisioning MCP servers. Integrated accounts represent a connection between your Truto account and a customer's
-      connected app. Link tokens initiate the Truto linking process from within your application. The Admin API uses
-      Bearer token authentication with the tenant API token.
-  - aid: truto:truto-unified-hris-api
-    name: Truto Unified HRIS API
-    tags:
-      - HRIS
-      - Human Resources
-      - Employees
-      - Payroll
-      - Unified API
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.truto.one/unified/hris
-    humanURL: https://truto.one/docs/api-reference/unified-hris-api
-    properties:
-      - url: https://truto.one/docs/api-reference/unified-hris-api
-        type: Documentation
-      - url: https://truto.one/unified-apis/hris/
-        type: Documentation
-      - url: https://raw.githubusercontent.com/api-evangelist/truto/refs/heads/main/openapi/truto-unified-hris-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Truto Unified HRIS API provides a single normalized interface for accessing HR data across 41 HRIS providers
-      including BambooHR, Workday, Rippling, Gusto, HiBob, Personio, and more. Offers 20 unified resources including
-      employees, employments, companies, groups (departments and roles), timeoff requests, and more. Data is accessed in
-      real-time with no caching. Schema can be extended using JSONata mappings. Authentication uses Bearer token with
-      integrated_account_id query parameter to specify the target connected account.
-  - aid: truto:truto-unified-ats-api
-    name: Truto Unified ATS API
-    tags:
-      - ATS
-      - Applicant Tracking
-      - Recruiting
-      - Jobs
-      - Candidates
-      - Unified API
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.truto.one/unified/ats
-    humanURL: https://truto.one/docs/api-reference/unified-ats-api
-    properties:
-      - url: https://truto.one/docs/api-reference/unified-ats-api
-        type: Documentation
-      - url: https://truto.one/unified-apis/ats/
-        type: Documentation
-      - url: https://raw.githubusercontent.com/api-evangelist/truto/refs/heads/main/openapi/truto-unified-ats-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Truto Unified ATS API provides a single normalized interface for accessing applicant tracking system data
-      across 27 ATS providers including Greenhouse, Lever, Workable, SmartRecruiters, Ashby, Teamtailor, and more.
-      Offers 17 unified resources covering the full recruiting lifecycle: jobs, candidates, applications, interview
-      stages, interviews, scorecards, offers, EEOC data, departments, offices, reject reasons, activities, attachments,
-      tags, and users. Authentication uses Bearer token with integrated_account_id query parameter.
-  - aid: truto:truto-unified-crm-api
-    name: Truto Unified CRM API
-    tags:
-      - CRM
-      - Customer Relationship Management
-      - Contacts
-      - Opportunities
-      - Unified API
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.truto.one/unified/crm
-    humanURL: https://truto.one/docs/api-reference/unified-crm-api
-    properties:
-      - url: https://truto.one/docs/api-reference/unified-crm-api
-        type: Documentation
-      - url: https://truto.one/unified-apis/crm/
-        type: Documentation
-      - url: https://raw.githubusercontent.com/api-evangelist/truto/refs/heads/main/openapi/truto-unified-crm-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Truto Unified CRM API provides a single normalized interface for accessing CRM data across 27 CRM providers
-      including Salesforce, HubSpot, Pipedrive, Attio, Outreach, and more. Offers 17 unified resources including
-      accounts, contacts, opportunities, tasks, users, stages, engagements, notes, fields, associations, and more. Data
-      is accessed in real-time via pass-through to underlying CRM APIs. Authentication uses Bearer token with
-      integrated_account_id query parameter.
+- aid: truto:truto-accounts-api
+  name: Truto Accounts API
+  description: Account records representing companies or organizations
+  humanURL: https://truto.one/docs/api-reference/admin
+  baseURL: https://api.truto.one
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/truto-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/admin
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-hris-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/hris/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-ats-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/ats/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-crm-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/crm/
+- aid: truto:truto-applications-api
+  name: Truto Applications API
+  description: Job applications linking candidates to jobs
+  humanURL: https://truto.one/docs/api-reference/admin
+  baseURL: https://api.truto.one
+  tags:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/truto-applications-api-openapi.yml
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/admin
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-hris-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/hris/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-ats-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/ats/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-crm-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/crm/
+- aid: truto:truto-candidates-api
+  name: Truto Candidates API
+  description: Candidate profiles and contact information
+  humanURL: https://truto.one/docs/api-reference/admin
+  baseURL: https://api.truto.one
+  tags:
+  - Candidates
+  properties:
+  - type: OpenAPI
+    url: openapi/truto-candidates-api-openapi.yml
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/admin
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-hris-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/hris/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-ats-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/ats/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-crm-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/crm/
+- aid: truto:truto-companies-api
+  name: Truto Companies API
+  description: Company and organization records
+  humanURL: https://truto.one/docs/api-reference/admin
+  baseURL: https://api.truto.one
+  tags:
+  - Companies
+  properties:
+  - type: OpenAPI
+    url: openapi/truto-companies-api-openapi.yml
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/admin
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-hris-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/hris/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-ats-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/ats/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-crm-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/crm/
+- aid: truto:truto-contacts-api
+  name: Truto Contacts API
+  description: Contact records representing individuals at companies
+  humanURL: https://truto.one/docs/api-reference/admin
+  baseURL: https://api.truto.one
+  tags:
+  - Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/truto-contacts-api-openapi.yml
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/admin
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-hris-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/hris/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-ats-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/ats/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-crm-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/crm/
+- aid: truto:truto-departments-api
+  name: Truto Departments API
+  description: Organizational departments
+  humanURL: https://truto.one/docs/api-reference/admin
+  baseURL: https://api.truto.one
+  tags:
+  - Departments
+  properties:
+  - type: OpenAPI
+    url: openapi/truto-departments-api-openapi.yml
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/admin
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-hris-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/hris/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-ats-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/ats/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-crm-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/crm/
+- aid: truto:truto-employees-api
+  name: Truto Employees API
+  description: Employee records and personal details
+  humanURL: https://truto.one/docs/api-reference/admin
+  baseURL: https://api.truto.one
+  tags:
+  - Employees
+  properties:
+  - type: OpenAPI
+    url: openapi/truto-employees-api-openapi.yml
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/admin
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-hris-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/hris/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-ats-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/ats/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-crm-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/crm/
+- aid: truto:truto-employments-api
+  name: Truto Employments API
+  description: Employment terms, positions, and job history
+  humanURL: https://truto.one/docs/api-reference/admin
+  baseURL: https://api.truto.one
+  tags:
+  - Employments
+  properties:
+  - type: OpenAPI
+    url: openapi/truto-employments-api-openapi.yml
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/admin
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-hris-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/hris/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-ats-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/ats/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-crm-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/crm/
+- aid: truto:truto-groups-api
+  name: Truto Groups API
+  description: Departments, teams, and organizational units
+  humanURL: https://truto.one/docs/api-reference/admin
+  baseURL: https://api.truto.one
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/truto-groups-api-openapi.yml
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/admin
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-hris-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/hris/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-ats-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/ats/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-crm-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/crm/
+- aid: truto:truto-integrated-accounts-api
+  name: Truto Integrated Accounts API
+  description: Manage connected third-party accounts
+  humanURL: https://truto.one/docs/api-reference/admin
+  baseURL: https://api.truto.one
+  tags:
+  - Integrated Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/truto-integrated-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/admin
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-hris-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/hris/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-ats-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/ats/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-crm-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/crm/
+- aid: truto:truto-jobs-api
+  name: Truto Jobs API
+  description: Job postings and open positions
+  humanURL: https://truto.one/docs/api-reference/admin
+  baseURL: https://api.truto.one
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/truto-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/admin
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-hris-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/hris/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-ats-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/ats/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-crm-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/crm/
+- aid: truto:truto-link-tokens-api
+  name: Truto Link Tokens API
+  description: Generate tokens for customer-initiated account connections
+  humanURL: https://truto.one/docs/api-reference/admin
+  baseURL: https://api.truto.one
+  tags:
+  - Link Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/truto-link-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/admin
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-hris-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/hris/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-ats-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/ats/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-crm-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/crm/
+- aid: truto:truto-mcp-servers-api
+  name: Truto MCP Servers API
+  description: Provision Model Context Protocol servers for AI agent access
+  humanURL: https://truto.one/docs/api-reference/admin
+  baseURL: https://api.truto.one
+  tags:
+  - MCP Servers
+  properties:
+  - type: OpenAPI
+    url: openapi/truto-mcp-servers-api-openapi.yml
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/admin
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-hris-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/hris/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-ats-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/ats/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-crm-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/crm/
+- aid: truto:truto-offers-api
+  name: Truto Offers API
+  description: Job offers extended to candidates
+  humanURL: https://truto.one/docs/api-reference/admin
+  baseURL: https://api.truto.one
+  tags:
+  - Offers
+  properties:
+  - type: OpenAPI
+    url: openapi/truto-offers-api-openapi.yml
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/admin
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-hris-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/hris/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-ats-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/ats/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-crm-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/crm/
+- aid: truto:truto-opportunities-api
+  name: Truto Opportunities API
+  description: Sales opportunities and deals
+  humanURL: https://truto.one/docs/api-reference/admin
+  baseURL: https://api.truto.one
+  tags:
+  - Opportunities
+  properties:
+  - type: OpenAPI
+    url: openapi/truto-opportunities-api-openapi.yml
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/admin
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-hris-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/hris/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-ats-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/ats/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-crm-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/crm/
+- aid: truto:truto-stages-api
+  name: Truto Stages API
+  description: Opportunity pipeline stages
+  humanURL: https://truto.one/docs/api-reference/admin
+  baseURL: https://api.truto.one
+  tags:
+  - Stages
+  properties:
+  - type: OpenAPI
+    url: openapi/truto-stages-api-openapi.yml
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/admin
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-hris-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/hris/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-ats-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/ats/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-crm-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/crm/
+- aid: truto:truto-tasks-api
+  name: Truto Tasks API
+  description: Tasks and follow-up actions
+  humanURL: https://truto.one/docs/api-reference/admin
+  baseURL: https://api.truto.one
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/truto-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/admin
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-hris-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/hris/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-ats-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/ats/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-crm-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/crm/
+- aid: truto:truto-timeoff-api
+  name: Truto Timeoff API
+  description: Time off requests and leave management
+  humanURL: https://truto.one/docs/api-reference/admin
+  baseURL: https://api.truto.one
+  tags:
+  - Timeoff
+  properties:
+  - type: OpenAPI
+    url: openapi/truto-timeoff-api-openapi.yml
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/admin
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-hris-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/hris/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-ats-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/ats/
+  - type: Documentation
+    url: https://truto.one/docs/api-reference/unified-crm-api
+  - type: Documentation
+    url: https://truto.one/unified-apis/crm/
 common:
   - type: AgenticAccess
     url: agentic-access/truto-agentic-access.yml
