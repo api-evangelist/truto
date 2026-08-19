@@ -1,0 +1,388 @@
+{
+  "item": [
+    {
+      "id": "54a228c0-19a2-40f8-a39d-f94f4bb66536",
+      "name": "Accounts",
+      "description": {
+        "content": "Account records representing companies or organizations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bb19fe85-1827-425f-beee-9e3222cf076d",
+          "name": "List accounts",
+          "request": {
+            "name": "List accounts",
+            "description": {
+              "content": "List account (company) records from the connected CRM provider.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "integrated_account_id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cecd129a-ddf9-4597-b5ca-00fe8c5a6f14",
+              "name": "List of accounts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"remoteId\": \"string\",\n      \"name\": \"string\",\n      \"domain\": \"string\",\n      \"industry\": \"string\",\n      \"employeeCount\": 7477,\n      \"annualRevenue\": 4512.059609679138,\n      \"phone\": \"string\",\n      \"website\": \"https://YtltXlzzDavrfxYiunpFtgEIP.jvafYII.kEJV6DKSUqWGKP\",\n      \"ownerId\": \"string\",\n      \"createdAt\": \"1970-01-05T18:31:42.281Z\",\n      \"updatedAt\": \"1959-09-30T20:00:58.459Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"remoteId\": \"string\",\n      \"name\": \"string\",\n      \"domain\": \"string\",\n      \"industry\": \"string\",\n      \"employeeCount\": 7163,\n      \"annualRevenue\": 4370.476952630104,\n      \"phone\": \"string\",\n      \"website\": \"https://IYaSyUPGClhyOXxHA.dmF1T\",\n      \"ownerId\": \"string\",\n      \"createdAt\": \"1983-06-04T11:27:06.778Z\",\n      \"updatedAt\": \"2010-08-13T07:37:03.634Z\"\n    }\n  ],\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a4b3e59-4aa3-4b77-a50f-7099410b345b",
+              "name": "Authentication failed or token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0af0d8d7-3a0d-4b81-866a-0dd83e26189c",
+          "name": "Create account",
+          "request": {
+            "name": "Create account",
+            "description": {
+              "content": "Create a new account in the connected CRM provider.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "integrated_account_id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"industry\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"website\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "269855ed-97fb-48ab-b424-69ea8003bd71",
+              "name": "Account created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"industry\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"website\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"remoteId\": \"string\",\n  \"name\": \"string\",\n  \"domain\": \"string\",\n  \"industry\": \"string\",\n  \"employeeCount\": 1188,\n  \"annualRevenue\": 1424.9370612710254,\n  \"phone\": \"string\",\n  \"website\": \"http://kZnYSNmlcErtdTZqqcWEQqePGWJBDLs.lybfvOjc.-2JwQ\",\n  \"ownerId\": \"string\",\n  \"createdAt\": \"1992-11-13T11:03:37.448Z\",\n  \"updatedAt\": \"1982-03-26T03:30:34.803Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4622851f-181a-47c8-b8be-5878dee4bf3a",
+              "name": "Authentication failed or token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"industry\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"website\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.truto.one",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "75cf207c-4d68-458c-a847-905ede27bc2b",
+    "name": "Truto Admin Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Truto Admin Accounts Jobs API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.truto.one/jobs",
+            "params": [
+              {
+                "name": "integrated_account_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter jobs by status."
+              },
+              {
+                "name": "department_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter jobs by department ID."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List job postings from the connected ATS provider. Returns normalized job data including title, department, location, status, and associated stages."
+        },
+        {
+          "info": {
+            "name": "Get job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.truto.one/jobs/:id",
+            "params": [
+              {
+                "name": "integrated_account_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a single job posting by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

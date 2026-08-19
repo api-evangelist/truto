@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Truto Admin Accounts Stages API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List stages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.truto.one/stages",
+            "params": [
+              {
+                "name": "integrated_account_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List pipeline stages from the connected CRM provider."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

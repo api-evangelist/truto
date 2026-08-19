@@ -1,0 +1,255 @@
+{
+  "item": [
+    {
+      "id": "1eff9175-8623-4042-a655-841ac0bcf241",
+      "name": "Applications",
+      "description": {
+        "content": "Job applications linking candidates to jobs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b3c734ed-92bf-4ad1-b8c4-66fd249a9435",
+          "name": "List applications",
+          "request": {
+            "name": "List applications",
+            "description": {
+              "content": "List job applications from the connected ATS provider. Each application links a candidate to a specific job and tracks their progress through interview stages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "integrated_account_id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests."
+                },
+                {
+                  "disabled": false,
+                  "key": "job_id",
+                  "value": "<string>",
+                  "description": "Filter applications by job ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "candidate_id",
+                  "value": "<string>",
+                  "description": "Filter applications by candidate ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by application status."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "10ae06f5-9865-4212-9606-43f840760d29",
+              "name": "List of applications.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "job_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "candidate_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"remoteId\": \"string\",\n      \"candidateId\": \"string\",\n      \"jobId\": \"string\",\n      \"status\": \"active\",\n      \"currentStageId\": \"string\",\n      \"rejectReasonId\": \"string\",\n      \"source\": \"string\",\n      \"appliedAt\": \"1993-03-09T11:24:30.302Z\",\n      \"createdAt\": \"1988-08-01T22:59:09.184Z\",\n      \"updatedAt\": \"1981-07-12T05:06:28.986Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"remoteId\": \"string\",\n      \"candidateId\": \"string\",\n      \"jobId\": \"string\",\n      \"status\": \"hired\",\n      \"currentStageId\": \"string\",\n      \"rejectReasonId\": \"string\",\n      \"source\": \"string\",\n      \"appliedAt\": \"1988-06-07T09:00:19.268Z\",\n      \"createdAt\": \"1972-09-29T09:07:43.757Z\",\n      \"updatedAt\": \"1968-04-23T18:39:13.804Z\"\n    }\n  ],\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e66bc23-4de6-4b21-a1de-d02cc9bd8504",
+              "name": "Authentication failed or token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "job_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "candidate_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.truto.one",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "37a09bd7-a99a-4444-a755-5fce5c802a97",
+    "name": "Truto Admin Accounts Applications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.",
+      "type": "text/plain"
+    }
+  }
+}

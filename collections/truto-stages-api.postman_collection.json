@@ -1,0 +1,213 @@
+{
+  "item": [
+    {
+      "id": "321c6b0b-f4ea-4d50-b3f5-71138664e54e",
+      "name": "Stages",
+      "description": {
+        "content": "Opportunity pipeline stages",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "12db9772-1399-4aed-8697-6307d0b4b62d",
+          "name": "List stages",
+          "request": {
+            "name": "List stages",
+            "description": {
+              "content": "List pipeline stages from the connected CRM provider.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "integrated_account_id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7ae68950-710d-4250-b3c7-3d582377aeaf",
+              "name": "List of pipeline stages.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"remoteId\": \"string\",\n      \"name\": \"string\",\n      \"order\": 2348,\n      \"probability\": 4496,\n      \"createdAt\": \"2007-11-05T03:03:46.792Z\",\n      \"updatedAt\": \"1957-01-25T09:06:27.617Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"remoteId\": \"string\",\n      \"name\": \"string\",\n      \"order\": 8676,\n      \"probability\": 7798,\n      \"createdAt\": \"1984-12-19T08:22:48.571Z\",\n      \"updatedAt\": \"2013-03-16T17:21:45.664Z\"\n    }\n  ],\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30aa5028-b6fd-4e96-96ca-658b589337ba",
+              "name": "Authentication failed or token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.truto.one",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e595f737-2825-4667-a358-b0ff2555ed20",
+    "name": "Truto Admin Accounts Stages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.",
+      "type": "text/plain"
+    }
+  }
+}

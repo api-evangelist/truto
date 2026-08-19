@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Truto Admin Accounts Applications API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.truto.one/applications",
+            "params": [
+              {
+                "name": "integrated_account_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests."
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by job ID."
+              },
+              {
+                "name": "candidate_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by candidate ID."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by application status."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List job applications from the connected ATS provider. Each application links a candidate to a specific job and tracks their progress through interview stages."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

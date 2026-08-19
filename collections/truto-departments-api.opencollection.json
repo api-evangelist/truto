@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Truto Admin Accounts Departments API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Departments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List departments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.truto.one/departments",
+            "params": [
+              {
+                "name": "integrated_account_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List departments from the connected ATS provider."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

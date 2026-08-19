@@ -1,0 +1,229 @@
+{
+  "item": [
+    {
+      "id": "7b9a0cf2-b096-4cf7-adaf-8a2c0544e053",
+      "name": "Employments",
+      "description": {
+        "content": "Employment terms, positions, and job history",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "87f6dfcd-a87a-4086-8872-dd16c10cec2a",
+          "name": "List employments",
+          "request": {
+            "name": "List employments",
+            "description": {
+              "content": "List employment records including job titles, pay rates, pay periods, and employment type from the connected HRIS provider.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "integrated_account_id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests."
+                },
+                {
+                  "disabled": false,
+                  "key": "employee_id",
+                  "value": "<string>",
+                  "description": "Filter employments by employee ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Cursor for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of results per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6a9f6f45-29ff-4492-b2f0-5258a295fc2b",
+              "name": "List of employment records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "employee_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"remoteId\": \"string\",\n      \"employeeId\": \"string\",\n      \"jobTitle\": \"string\",\n      \"payRate\": 4751.504939472307,\n      \"payPeriod\": \"monthly\",\n      \"payCurrency\": \"string\",\n      \"employmentType\": \"intern\",\n      \"effectiveDate\": \"1978-01-14\",\n      \"createdAt\": \"2021-07-13T21:02:01.977Z\",\n      \"updatedAt\": \"1990-05-03T08:23:17.944Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"remoteId\": \"string\",\n      \"employeeId\": \"string\",\n      \"jobTitle\": \"string\",\n      \"payRate\": 9179.625044729575,\n      \"payPeriod\": \"semimonthly\",\n      \"payCurrency\": \"string\",\n      \"employmentType\": \"contractor\",\n      \"effectiveDate\": \"1968-01-19\",\n      \"createdAt\": \"1968-05-15T03:16:22.631Z\",\n      \"updatedAt\": \"1971-06-01T22:39:37.774Z\"\n    }\n  ],\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ffe7e818-0151-4824-8512-30f9b2d557d2",
+              "name": "Authentication failed or token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "employee_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.truto.one",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a50091de-eb63-421d-81db-74d26bb38db9",
+    "name": "Truto Admin Accounts Employments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.",
+      "type": "text/plain"
+    }
+  }
+}

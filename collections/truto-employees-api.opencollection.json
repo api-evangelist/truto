@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Truto Admin Accounts Employees API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Employees",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List employees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.truto.one/employees",
+            "params": [
+              {
+                "name": "integrated_account_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter employees by employment status."
+              },
+              {
+                "name": "department_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter employees by department ID."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination (from previous response next_cursor)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (max 100)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List employee records from the connected HRIS provider. Returns normalized employee data including personal details, employment status, department, compensation, and contact information."
+        },
+        {
+          "info": {
+            "name": "Get employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.truto.one/employees/:id",
+            "params": [
+              {
+                "name": "integrated_account_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Employee identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a single employee record by ID from the connected HRIS provider."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,199 @@
+{
+  "item": [
+    {
+      "id": "fb6460b5-473e-45b0-8323-995474c0c1bc",
+      "name": "Link Tokens",
+      "description": {
+        "content": "Generate tokens for customer-initiated account connections",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "49c23e94-99cc-40fc-b6c2-0629334740da",
+          "name": "Create link token",
+          "request": {
+            "name": "Create link token",
+            "description": {
+              "content": "Generate a link token to initiate a Truto account connection flow from within your application. The link token is a short-lived credential passed to the Truto Link SDK or redirect URL to guide the end user through connecting their third-party account. At the end of the flow, an integrated account is created.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "link-tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"integration\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"redirectUri\": \"<uri>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metadata\": {\n    \"key_0\": false,\n    \"key_1\": 698,\n    \"key_2\": \"string\",\n    \"key_3\": 4075\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "401feadb-9bfb-40a9-9690-2cd9b2e50a58",
+              "name": "Link token created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "link-tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integration\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"redirectUri\": \"<uri>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metadata\": {\n    \"key_0\": 453\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"linkUrl\": \"https://OgGGLHmzfChmvEz.dyryxK0bjrTsgorc9rbk+z0\",\n  \"expiresAt\": \"1990-02-13T12:50:20.590Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "420c9364-d533-461f-bdff-1118f3256ed8",
+              "name": "Authentication failed or token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "link-tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integration\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"redirectUri\": \"<uri>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metadata\": {\n    \"key_0\": 453\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.truto.one",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "accfe076-3f1f-446c-80c0-15f78913e2aa",
+    "name": "Truto Admin Accounts Link Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.",
+      "type": "text/plain"
+    }
+  }
+}

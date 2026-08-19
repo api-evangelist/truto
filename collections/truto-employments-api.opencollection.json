@@ -1,0 +1,65 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Truto Admin Accounts Employments API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Employments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List employments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.truto.one/employments",
+            "params": [
+              {
+                "name": "integrated_account_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests."
+              },
+              {
+                "name": "employee_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter employments by employee ID."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List employment records including job titles, pay rates, pay periods, and employment type from the connected HRIS provider."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

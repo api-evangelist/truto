@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Truto Admin Accounts Link Tokens API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Link Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create link token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.truto.one/link-tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Generate a link token to initiate a Truto account connection flow from within your application. The link token is a short-lived credential passed to the Truto Link SDK or redirect URL to guide the end user through connecting their third-party account. At the end of the flow, an integrated account is created."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

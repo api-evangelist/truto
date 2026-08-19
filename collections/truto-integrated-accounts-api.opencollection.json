@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Truto Admin Accounts Integrated Accounts API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integrated Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List integrated accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.truto.one/integrated-accounts",
+            "params": [
+              {
+                "name": "integration",
+                "value": "",
+                "type": "query",
+                "description": "Filter by integration name (e.g., bamboohr, greenhouse, salesforce)."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by account status."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all integrated accounts in the tenant. Integrated accounts represent connections between your Truto tenant and a customer's connected third-party app."
+        },
+        {
+          "info": {
+            "name": "Create integrated account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.truto.one/integrated-accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Programmatically create an integrated account. Typically used when you already have credentials (e.g., API keys) for the integration and want to register them directly without a link token flow."
+        },
+        {
+          "info": {
+            "name": "Get integrated account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.truto.one/integrated-accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integrated account identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a single integrated account by ID."
+        },
+        {
+          "info": {
+            "name": "Delete integrated account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.truto.one/integrated-accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integrated account identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an integrated account and revoke all associated credentials."
+        },
+        {
+          "info": {
+            "name": "Run post-install actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.truto.one/integrated-accounts/:id/run-post-install-actions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integrated account identifier."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Manually run post-install actions for an integrated account. Post-install actions are configured per integration and typically fetch metadata from the underlying API to store in the integrated account context (e.g., tenant ID, region, base URL). These run automatically on connection but can be re-run manually if needed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

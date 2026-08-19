@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Truto Admin Accounts MCP Servers API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MCP Servers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create MCP server for integrated account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.truto.one/integrated-accounts/:id/mcp",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Integrated account identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Provision a Model Context Protocol (MCP) server for an integrated account. Returns a secure tokenized URL that AI agents (Claude, ChatGPT, custom LLM frameworks) can use to invoke the integration's tools. The URL itself serves as the auth token. Optionally filter which methods are exposed or require additional API token authentication for enterprise security."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
