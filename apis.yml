@@ -26,6 +26,16 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/truto.png
 tags:
+  - Unified-API
+  - Integration Platform
+  - HRIS
+  - ATS
+  - CRM
+  - Embedded Integrations
+  - MCP
+  - AI Agents
+  - Software-as-a-Service
+tags_raw:
   - Unified API
   - Integration Platform
   - HRIS
@@ -46,6 +56,8 @@ apis:
   humanURL: https://truto.one/docs/api-reference/admin
   baseURL: https://api.truto.one
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -70,6 +82,8 @@ apis:
   humanURL: https://truto.one/docs/api-reference/admin
   baseURL: https://api.truto.one
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
@@ -238,6 +252,8 @@ apis:
   humanURL: https://truto.one/docs/api-reference/admin
   baseURL: https://api.truto.one
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -286,6 +302,8 @@ apis:
   humanURL: https://truto.one/docs/api-reference/admin
   baseURL: https://api.truto.one
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
@@ -430,6 +448,8 @@ apis:
   humanURL: https://truto.one/docs/api-reference/admin
   baseURL: https://api.truto.one
   tags:
+  - Task
+  tags_raw:
   - Tasks
   properties:
   - type: OpenAPI
@@ -454,6 +474,8 @@ apis:
   humanURL: https://truto.one/docs/api-reference/admin
   baseURL: https://api.truto.one
   tags:
+  - Time Off
+  tags_raw:
   - Timeoff
   properties:
   - type: OpenAPI
