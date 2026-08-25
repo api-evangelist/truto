@@ -5,7 +5,7 @@
       "source": "https://truto.one/blog/feed.xml",
       "feed_url": "https://truto.one/blog/feed.xml",
       "title": "",
-      "saved": 50,
+      "saved": 9,
       "method": "feed"
     },
     {
@@ -16,6 +16,6 @@
       "method": "discovered"
     }
   ],
-  "post_count": 483,
-  "fetched": "2026-08-15T12:11:08Z"
+  "post_count": 542,
+  "fetched": "2026-08-22T20:20:02Z"
 }
