@@ -11,6 +11,17 @@ description: >-
   via JSONata, and one-API-call MCP server generation for AI agent access. Authentication uses Bearer tokens. Truto
   supports over 250 integrations and is available as Truto Cloud or on-premise.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
