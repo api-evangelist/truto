@@ -485,7 +485,7 @@ apis:
   humanURL: https://truto.one/docs/api-reference/admin
   baseURL: https://api.truto.one
   tags:
-  - Timeoff
+  - Time Off
   tags_raw:
   - Timeoff
   properties:
