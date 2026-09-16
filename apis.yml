@@ -479,18 +479,16 @@ apis:
     url: https://truto.one/docs/api-reference/unified-crm-api
   - type: Documentation
     url: https://truto.one/unified-apis/crm/
-- aid: truto:truto-timeoff-api
-  name: Truto Timeoff API
+- aid: truto:truto-time-off-api
+  name: Truto Time Off API
   description: Time off requests and leave management
   humanURL: https://truto.one/docs/api-reference/admin
   baseURL: https://api.truto.one
   tags:
   - Time Off
-  tags_raw:
-  - Timeoff
   properties:
   - type: OpenAPI
-    url: openapi/truto-timeoff-api-openapi.yml
+    url: openapi/truto-time-off-api-openapi.yml
   - type: Documentation
     url: https://truto.one/docs/api-reference/admin
   - type: Documentation
