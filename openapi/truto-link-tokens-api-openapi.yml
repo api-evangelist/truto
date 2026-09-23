@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Truto Admin Accounts Link Tokens API
+  title: Truto Admin Link Tokens API
   description: The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.
   version: 1.0.0
   contact:
@@ -39,21 +39,23 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    LinkToken:
+    Error:
       type: object
       properties:
-        token:
+        error:
           type: string
-          description: Short-lived link token for initiating the connection flow.
-        linkUrl:
+          description: Error code.
+        message:
           type: string
-          format: uri
-          description: Full URL to redirect the user to for the connection flow.
-        expiresAt:
-          type: string
-          format: date-time
-          description: Expiration timestamp for the link token.
+          description: Human-readable error description.
     CreateLinkTokenRequest:
       type: object
       required:
@@ -78,22 +80,20 @@ components:
           type: object
           additionalProperties: true
           description: Additional metadata to attach to the integrated account on creation.
-    Error:
+    LinkToken:
       type: object
       properties:
-        error:
+        token:
           type: string
-          description: Error code.
-        message:
+          description: Short-lived link token for initiating the connection flow.
+        linkUrl:
           type: string
-          description: Human-readable error description.
-  responses:
-    Unauthorized:
-      description: Authentication failed or token is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+          format: uri
+          description: Full URL to redirect the user to for the connection flow.
+        expiresAt:
+          type: string
+          format: date-time
+          description: Expiration timestamp for the link token.
   securitySchemes:
     bearerAuth:
       type: http

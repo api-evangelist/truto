@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Truto Admin Accounts Integrated Accounts API
+  title: Truto Admin Integrated Accounts API
   description: The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.
   version: 1.0.0
   contact:
@@ -164,6 +164,15 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code.
+        message:
+          type: string
+          description: Human-readable error description.
     CreateIntegratedAccountRequest:
       type: object
       required:
@@ -179,22 +188,6 @@ components:
           type: object
           additionalProperties: true
           description: Authentication credentials for the integration (e.g., api_key, access_token).
-    IntegratedAccountListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/IntegratedAccount'
-        total:
-          type: integer
-          description: Total number of integrated accounts.
-        page:
-          type: integer
-          description: Current page number.
-        limit:
-          type: integer
-          description: Results per page.
     IntegratedAccount:
       type: object
       description: An integrated account representing a connection to a customer's third-party app.
@@ -227,24 +220,31 @@ components:
           type: string
           format: date-time
           description: Timestamp when the account was last updated.
-    Error:
+    IntegratedAccountListResponse:
       type: object
       properties:
-        error:
-          type: string
-          description: Error code.
-        message:
-          type: string
-          description: Human-readable error description.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntegratedAccount'
+        total:
+          type: integer
+          description: Total number of integrated accounts.
+        page:
+          type: integer
+          description: Current page number.
+        limit:
+          type: integer
+          description: Results per page.
   responses:
-    NotFound:
-      description: Resource not found.
+    Unauthorized:
+      description: Authentication failed or token is invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or token is invalid.
+    NotFound:
+      description: Resource not found.
       content:
         application/json:
           schema:

@@ -1,13 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Truto Admin Accounts Employments API
-  description: The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.
+  title: Truto Unified HRIS Employments API
+  description: The Truto Unified HRIS API provides a single normalized interface for reading and writing HR data across 41 HRIS providers including BambooHR, Workday, Rippling, Gusto, HiBob, Personio, Oracle Fusion Cloud HCM, and more. All data is accessed in real-time with no caching. Includes 20 unified resources. Schema can be extended using JSONata mappings.
   version: 1.0.0
   contact:
-    url: https://truto.one/docs/api-reference/admin
+    url: https://truto.one/docs/api-reference/unified-hris-api
 servers:
-- url: https://api.truto.one
-  description: Truto API
+- url: https://api.truto.one/unified/hris
+  description: Truto Unified HRIS API
 security:
 - bearerAuth: []
 tags:
@@ -54,14 +54,23 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed or token is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    EmploymentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employment'
+        nextCursor:
+          type: string
     Employment:
       type: object
       description: An employment record representing a job position and compensation details.
@@ -113,22 +122,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    EmploymentListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Employment'
-        nextCursor:
-          type: string
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
   parameters:
     IntegratedAccountId:
       name: integrated_account_id
@@ -137,6 +130,13 @@ components:
       description: The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests.
       schema:
         type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

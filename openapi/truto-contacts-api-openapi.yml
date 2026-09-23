@@ -1,13 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Truto Admin Accounts Contacts API
-  description: The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.
+  title: Truto Unified CRM Contacts API
+  description: The Truto Unified CRM API provides a single normalized interface for reading and writing CRM data across 27 CRM providers including Salesforce, HubSpot, Pipedrive, Attio, Outreach, Wealthbox, Teamleader, and more. Offers 17 unified resources covering the full CRM data model. Data is accessed in real-time via pass-through. Schema can be extended using JSONata mappings without code deploys.
   version: 1.0.0
   contact:
-    url: https://truto.one/docs/api-reference/admin
+    url: https://truto.one/docs/api-reference/unified-crm-api
 servers:
-- url: https://api.truto.one
-  description: Truto API
+- url: https://api.truto.one/unified/crm
+  description: Truto Unified CRM API
 security:
 - bearerAuth: []
 tags:
@@ -140,40 +140,21 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    UpdateContactRequest:
+    ContactListResponse:
       type: object
       properties:
-        firstName:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+        nextCursor:
           type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        title:
-          type: string
-        accountId:
-          type: string
-    CreateContactRequest:
+    Error:
       type: object
-      required:
-      - firstName
-      - lastName
       properties:
-        firstName:
+        error:
           type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        title:
-          type: string
-        accountId:
+        message:
           type: string
     Contact:
       type: object
@@ -212,35 +193,41 @@ components:
         updatedAt:
           type: string
           format: date-time
-    ContactListResponse:
+    CreateContactRequest:
+      type: object
+      required:
+      - firstName
+      - lastName
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        title:
+          type: string
+        accountId:
+          type: string
+    UpdateContactRequest:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contact'
-        nextCursor:
+        firstName:
           type: string
-    Error:
-      type: object
-      properties:
-        error:
+        lastName:
           type: string
-        message:
+        email:
           type: string
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or token is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+          format: email
+        phone:
+          type: string
+        title:
+          type: string
+        accountId:
+          type: string
   parameters:
     IntegratedAccountId:
       name: integrated_account_id
@@ -249,6 +236,19 @@ components:
       description: The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.
       schema:
         type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

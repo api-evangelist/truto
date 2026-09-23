@@ -1,13 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Truto Admin Accounts Departments API
-  description: The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.
+  title: Truto Unified ATS Departments API
+  description: The Truto Unified ATS API provides a single normalized interface for reading and writing applicant tracking system data across 27 ATS providers including Greenhouse, Lever, Workable, SmartRecruiters, Ashby, Teamtailor, BambooHR, Jobvite, and more. Covers the full recruiting lifecycle with 17 unified resources. All data is accessed in real-time via pass-through to the underlying ATS. Schema can be customized using JSONata mappings.
   version: 1.0.0
   contact:
-    url: https://truto.one/docs/api-reference/admin
+    url: https://truto.one/docs/api-reference/unified-ats-api
 servers:
-- url: https://api.truto.one
-  description: Truto API
+- url: https://api.truto.one/unified/ats
+  description: Truto Unified ATS API
 security:
 - bearerAuth: []
 tags:
@@ -46,14 +46,14 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed or token is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     DepartmentListResponse:
       type: object
       properties:
@@ -81,13 +81,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
   parameters:
     IntegratedAccountId:
       name: integrated_account_id
@@ -96,6 +89,13 @@ components:
       description: The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.
       schema:
         type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
