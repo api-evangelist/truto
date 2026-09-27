@@ -37,15 +37,16 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/truto.png
 tags:
-  - Unified-API
+  - Unified API
   - Integration Platform
   - HRIS
-  - ATS
+  - Applicant Tracking
   - CRM
   - Embedded Integrations
   - MCP
   - AI Agents
   - Software-as-a-Service
+  - Integration
 tags_raw:
   - Unified API
   - Integration Platform
@@ -56,6 +57,8 @@ tags_raw:
   - MCP
   - AI Agents
   - SaaS
+  - Unified-API
+  - Integration
 access: 3rd-Party
 created: '2026-03-16'
 modified: '2026-05-19'

@@ -73,14 +73,20 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
     CandidateListResponse:
       type: object
       properties:
@@ -89,6 +95,13 @@ components:
           items:
             $ref: '#/components/schemas/Candidate'
         nextCursor:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
           type: string
     Candidate:
       type: object
@@ -136,19 +149,6 @@ components:
       description: The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Authentication failed or token is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

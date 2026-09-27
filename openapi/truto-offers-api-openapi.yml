@@ -65,22 +65,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-    OfferListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Offer'
-        nextCursor:
-          type: string
     Offer:
       type: object
       description: A job offer extended to a candidate.
@@ -113,6 +97,29 @@ components:
         updatedAt:
           type: string
           format: date-time
+    OfferListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer'
+        nextCursor:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     IntegratedAccountId:
       name: integrated_account_id
@@ -121,13 +128,6 @@ components:
       description: The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Authentication failed or token is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

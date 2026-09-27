@@ -48,27 +48,20 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code.
-        message:
-          type: string
-          description: Human-readable error description.
-    CreateMcpServerRequest:
-      type: object
-      properties:
-        allowedMethods:
-          type: array
-          items:
-            type: string
-          description: Limit the MCP server to only expose specific tool methods.
-        requireAdditionalAuth:
-          type: boolean
-          description: Whether to require an additional API token for MCP server access.
     McpServer:
       type: object
       properties:
@@ -92,19 +85,26 @@ components:
           type: string
           format: date-time
           description: Timestamp when the MCP server was provisioned.
-  responses:
-    Unauthorized:
-      description: Authentication failed or token is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    CreateMcpServerRequest:
+      type: object
+      properties:
+        allowedMethods:
+          type: array
+          items:
+            type: string
+          description: Limit the MCP server to only expose specific tool methods.
+        requireAdditionalAuth:
+          type: boolean
+          description: Whether to require an additional API token for MCP server access.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code.
+        message:
+          type: string
+          description: Human-readable error description.
   securitySchemes:
     bearerAuth:
       type: http

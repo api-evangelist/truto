@@ -140,21 +140,24 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    ContactListResponse:
+    CreateContactRequest:
       type: object
+      required:
+      - firstName
+      - lastName
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contact'
-        nextCursor:
+        firstName:
           type: string
-    Error:
-      type: object
-      properties:
-        error:
+        lastName:
           type: string
-        message:
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        title:
+          type: string
+        accountId:
           type: string
     Contact:
       type: object
@@ -193,24 +196,14 @@ components:
         updatedAt:
           type: string
           format: date-time
-    CreateContactRequest:
+    ContactListResponse:
       type: object
-      required:
-      - firstName
-      - lastName
       properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        title:
-          type: string
-        accountId:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+        nextCursor:
           type: string
     UpdateContactRequest:
       type: object
@@ -228,6 +221,26 @@ components:
           type: string
         accountId:
           type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     IntegratedAccountId:
       name: integrated_account_id
@@ -236,19 +249,6 @@ components:
       description: The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Authentication failed or token is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

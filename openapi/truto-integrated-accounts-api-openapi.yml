@@ -163,16 +163,36 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
+    IntegratedAccountListResponse:
       type: object
       properties:
-        error:
-          type: string
-          description: Error code.
-        message:
-          type: string
-          description: Human-readable error description.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntegratedAccount'
+        total:
+          type: integer
+          description: Total number of integrated accounts.
+        page:
+          type: integer
+          description: Current page number.
+        limit:
+          type: integer
+          description: Results per page.
     CreateIntegratedAccountRequest:
       type: object
       required:
@@ -220,35 +240,15 @@ components:
           type: string
           format: date-time
           description: Timestamp when the account was last updated.
-    IntegratedAccountListResponse:
+    Error:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/IntegratedAccount'
-        total:
-          type: integer
-          description: Total number of integrated accounts.
-        page:
-          type: integer
-          description: Current page number.
-        limit:
-          type: integer
-          description: Results per page.
-  responses:
-    Unauthorized:
-      description: Authentication failed or token is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        error:
+          type: string
+          description: Error code.
+        message:
+          type: string
+          description: Human-readable error description.
   securitySchemes:
     bearerAuth:
       type: http

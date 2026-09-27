@@ -39,23 +39,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed or token is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code.
-        message:
-          type: string
-          description: Human-readable error description.
     CreateLinkTokenRequest:
       type: object
       required:
@@ -80,6 +64,15 @@ components:
           type: object
           additionalProperties: true
           description: Additional metadata to attach to the integrated account on creation.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code.
+        message:
+          type: string
+          description: Human-readable error description.
     LinkToken:
       type: object
       properties:
@@ -94,6 +87,13 @@ components:
           type: string
           format: date-time
           description: Expiration timestamp for the link token.
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

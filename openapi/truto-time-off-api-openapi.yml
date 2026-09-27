@@ -64,6 +64,15 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    TimeoffRequestListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeoffRequest'
+        nextCursor:
+          type: string
     Error:
       type: object
       properties:
@@ -116,15 +125,13 @@ components:
         updatedAt:
           type: string
           format: date-time
-    TimeoffRequestListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TimeoffRequest'
-        nextCursor:
-          type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     IntegratedAccountId:
       name: integrated_account_id
@@ -133,13 +140,6 @@ components:
       description: The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests.
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Authentication failed or token is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

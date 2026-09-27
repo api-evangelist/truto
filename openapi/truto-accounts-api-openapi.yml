@@ -72,29 +72,15 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
+    AccountListResponse:
       type: object
       properties:
-        error:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        nextCursor:
           type: string
-        message:
-          type: string
-    CreateAccountRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        domain:
-          type: string
-        industry:
-          type: string
-        phone:
-          type: string
-        website:
-          type: string
-          format: uri
     Account:
       type: object
       description: A normalized account (company) record from the connected CRM provider.
@@ -132,15 +118,36 @@ components:
         updatedAt:
           type: string
           format: date-time
-    AccountListResponse:
+    CreateAccountRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        domain:
+          type: string
+        industry:
+          type: string
+        phone:
+          type: string
+        website:
+          type: string
+          format: uri
+    Error:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Account'
-        nextCursor:
+        error:
           type: string
+        message:
+          type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     IntegratedAccountId:
       name: integrated_account_id
@@ -149,13 +156,6 @@ components:
       description: The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Authentication failed or token is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

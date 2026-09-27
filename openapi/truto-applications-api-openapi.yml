@@ -70,6 +70,15 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    ApplicationListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
+        nextCursor:
+          type: string
     Application:
       type: object
       description: A job application linking a candidate to a job with current stage information.
@@ -119,15 +128,13 @@ components:
           type: string
         message:
           type: string
-    ApplicationListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Application'
-        nextCursor:
-          type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     IntegratedAccountId:
       name: integrated_account_id
@@ -136,13 +143,6 @@ components:
       description: The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Authentication failed or token is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
