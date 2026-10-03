@@ -73,6 +73,14 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    IntegratedAccountId:
+      name: integrated_account_id
+      in: query
+      required: true
+      description: The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.
+      schema:
+        type: string
   responses:
     NotFound:
       description: Resource not found.
@@ -87,15 +95,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    CandidateListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Candidate'
-        nextCursor:
-          type: string
     Error:
       type: object
       properties:
@@ -141,14 +140,15 @@ components:
         updatedAt:
           type: string
           format: date-time
-  parameters:
-    IntegratedAccountId:
-      name: integrated_account_id
-      in: query
-      required: true
-      description: The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.
-      schema:
-        type: string
+    CandidateListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Candidate'
+        nextCursor:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -40,6 +40,15 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code.
+        message:
+          type: string
+          description: Human-readable error description.
     CreateLinkTokenRequest:
       type: object
       required:
@@ -64,15 +73,6 @@ components:
           type: object
           additionalProperties: true
           description: Additional metadata to attach to the integrated account on creation.
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code.
-        message:
-          type: string
-          description: Human-readable error description.
     LinkToken:
       type: object
       properties:

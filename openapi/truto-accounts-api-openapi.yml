@@ -71,16 +71,15 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    IntegratedAccountId:
+      name: integrated_account_id
+      in: query
+      required: true
+      description: The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.
+      schema:
+        type: string
   schemas:
-    AccountListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Account'
-        nextCursor:
-          type: string
     Account:
       type: object
       description: A normalized account (company) record from the connected CRM provider.
@@ -118,6 +117,15 @@ components:
         updatedAt:
           type: string
           format: date-time
+    AccountListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        nextCursor:
+          type: string
     CreateAccountRequest:
       type: object
       required:
@@ -148,14 +156,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    IntegratedAccountId:
-      name: integrated_account_id
-      in: query
-      required: true
-      description: The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

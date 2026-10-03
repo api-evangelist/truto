@@ -193,21 +193,15 @@ components:
         limit:
           type: integer
           description: Results per page.
-    CreateIntegratedAccountRequest:
+    Error:
       type: object
-      required:
-      - integration
       properties:
-        integration:
+        error:
           type: string
-          description: Integration name (e.g., bamboohr, salesforce).
-        name:
+          description: Error code.
+        message:
           type: string
-          description: Display name for this integrated account.
-        credentials:
-          type: object
-          additionalProperties: true
-          description: Authentication credentials for the integration (e.g., api_key, access_token).
+          description: Human-readable error description.
     IntegratedAccount:
       type: object
       description: An integrated account representing a connection to a customer's third-party app.
@@ -240,15 +234,21 @@ components:
           type: string
           format: date-time
           description: Timestamp when the account was last updated.
-    Error:
+    CreateIntegratedAccountRequest:
       type: object
+      required:
+      - integration
       properties:
-        error:
+        integration:
           type: string
-          description: Error code.
-        message:
+          description: Integration name (e.g., bamboohr, salesforce).
+        name:
           type: string
-          description: Human-readable error description.
+          description: Display name for this integrated account.
+        credentials:
+          type: object
+          additionalProperties: true
+          description: Authentication credentials for the integration (e.g., api_key, access_token).
   securitySchemes:
     bearerAuth:
       type: http

@@ -93,16 +93,33 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    IntegratedAccountId:
+      name: integrated_account_id
+      in: query
+      required: true
+      description: The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.
+      schema:
+        type: string
   schemas:
-    OpportunityListResponse:
+    CreateOpportunityRequest:
       type: object
+      required:
+      - name
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Opportunity'
-        nextCursor:
+        name:
           type: string
+        accountId:
+          type: string
+        stageId:
+          type: string
+        amount:
+          type: number
+        currency:
+          type: string
+        closeDate:
+          type: string
+          format: date
     Error:
       type: object
       properties:
@@ -155,24 +172,15 @@ components:
         updatedAt:
           type: string
           format: date-time
-    CreateOpportunityRequest:
+    OpportunityListResponse:
       type: object
-      required:
-      - name
       properties:
-        name:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Opportunity'
+        nextCursor:
           type: string
-        accountId:
-          type: string
-        stageId:
-          type: string
-        amount:
-          type: number
-        currency:
-          type: string
-        closeDate:
-          type: string
-          format: date
   responses:
     Unauthorized:
       description: Authentication failed or token is invalid.
@@ -180,14 +188,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    IntegratedAccountId:
-      name: integrated_account_id
-      in: query
-      required: true
-      description: The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

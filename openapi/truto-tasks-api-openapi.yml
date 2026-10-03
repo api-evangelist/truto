@@ -59,13 +59,14 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed or token is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    IntegratedAccountId:
+      name: integrated_account_id
+      in: query
+      required: true
+      description: The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.
+      schema:
+        type: string
   schemas:
     TaskListResponse:
       type: object
@@ -118,14 +119,13 @@ components:
         updatedAt:
           type: string
           format: date-time
-  parameters:
-    IntegratedAccountId:
-      name: integrated_account_id
-      in: query
-      required: true
-      description: The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.
-      schema:
-        type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

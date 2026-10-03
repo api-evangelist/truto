@@ -69,15 +69,21 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    IntegratedAccountId:
+      name: integrated_account_id
+      in: query
+      required: true
+      description: The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.
+      schema:
+        type: string
   schemas:
-    ApplicationListResponse:
+    Error:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Application'
-        nextCursor:
+        error:
+          type: string
+        message:
           type: string
     Application:
       type: object
@@ -121,12 +127,14 @@ components:
         updatedAt:
           type: string
           format: date-time
-    Error:
+    ApplicationListResponse:
       type: object
       properties:
-        error:
-          type: string
-        message:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
+        nextCursor:
           type: string
   responses:
     Unauthorized:
@@ -135,14 +143,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    IntegratedAccountId:
-      name: integrated_account_id
-      in: query
-      required: true
-      description: The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

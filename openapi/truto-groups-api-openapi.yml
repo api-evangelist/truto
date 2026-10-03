@@ -52,7 +52,24 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    IntegratedAccountId:
+      name: integrated_account_id
+      in: query
+      required: true
+      description: The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests.
+      schema:
+        type: string
   schemas:
+    GroupListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        nextCursor:
+          type: string
     Group:
       type: object
       description: A group (department, team, or cost center) from the HRIS provider.
@@ -91,15 +108,6 @@ components:
           type: string
         message:
           type: string
-    GroupListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Group'
-        nextCursor:
-          type: string
   responses:
     Unauthorized:
       description: Authentication failed or token is invalid.
@@ -107,14 +115,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    IntegratedAccountId:
-      name: integrated_account_id
-      in: query
-      required: true
-      description: The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

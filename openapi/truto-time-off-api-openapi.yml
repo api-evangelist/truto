@@ -63,7 +63,22 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    IntegratedAccountId:
+      name: integrated_account_id
+      in: query
+      required: true
+      description: The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests.
+      schema:
+        type: string
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     TimeoffRequestListResponse:
       type: object
       properties:
@@ -72,13 +87,6 @@ components:
           items:
             $ref: '#/components/schemas/TimeoffRequest'
         nextCursor:
-          type: string
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
           type: string
     TimeoffRequest:
       type: object
@@ -132,14 +140,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    IntegratedAccountId:
-      name: integrated_account_id
-      in: query
-      required: true
-      description: The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http
