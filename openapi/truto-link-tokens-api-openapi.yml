@@ -40,15 +40,20 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
+    LinkToken:
       type: object
       properties:
-        error:
+        token:
           type: string
-          description: Error code.
-        message:
+          description: Short-lived link token for initiating the connection flow.
+        linkUrl:
           type: string
-          description: Human-readable error description.
+          format: uri
+          description: Full URL to redirect the user to for the connection flow.
+        expiresAt:
+          type: string
+          format: date-time
+          description: Expiration timestamp for the link token.
     CreateLinkTokenRequest:
       type: object
       required:
@@ -73,20 +78,15 @@ components:
           type: object
           additionalProperties: true
           description: Additional metadata to attach to the integrated account on creation.
-    LinkToken:
+    Error:
       type: object
       properties:
-        token:
+        error:
           type: string
-          description: Short-lived link token for initiating the connection flow.
-        linkUrl:
+          description: Error code.
+        message:
           type: string
-          format: uri
-          description: Full URL to redirect the user to for the connection flow.
-        expiresAt:
-          type: string
-          format: date-time
-          description: Expiration timestamp for the link token.
+          description: Human-readable error description.
   responses:
     Unauthorized:
       description: Authentication failed or token is invalid.

@@ -49,14 +49,14 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    NotFound:
-      description: Resource not found.
+    Unauthorized:
+      description: Authentication failed or token is invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or token is invalid.
+    NotFound:
+      description: Resource not found.
       content:
         application/json:
           schema:
@@ -73,15 +73,6 @@ components:
         requireAdditionalAuth:
           type: boolean
           description: Whether to require an additional API token for MCP server access.
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error code.
-        message:
-          type: string
-          description: Human-readable error description.
     McpServer:
       type: object
       properties:
@@ -105,6 +96,15 @@ components:
           type: string
           format: date-time
           description: Timestamp when the MCP server was provisioned.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code.
+        message:
+          type: string
+          description: Human-readable error description.
   securitySchemes:
     bearerAuth:
       type: http

@@ -64,15 +64,23 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    IntegratedAccountId:
-      name: integrated_account_id
-      in: query
-      required: true
-      description: The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.
-      schema:
-        type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    OfferListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer'
+        nextCursor:
+          type: string
     Offer:
       type: object
       description: A job offer extended to a candidate.
@@ -112,22 +120,14 @@ components:
           type: string
         message:
           type: string
-    OfferListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Offer'
-        nextCursor:
-          type: string
-  responses:
-    Unauthorized:
-      description: Authentication failed or token is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    IntegratedAccountId:
+      name: integrated_account_id
+      in: query
+      required: true
+      description: The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -93,35 +93,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    IntegratedAccountId:
-      name: integrated_account_id
-      in: query
-      required: true
-      description: The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests.
-      schema:
-        type: string
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or token is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
     EmployeeListResponse:
       type: object
       properties:
@@ -132,6 +104,13 @@ components:
         nextCursor:
           type: string
           description: Cursor for fetching the next page of results.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     Employee:
       type: object
       description: A normalized employee record from the connected HRIS provider.
@@ -208,6 +187,27 @@ components:
         updatedAt:
           type: string
           format: date-time
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    IntegratedAccountId:
+      name: integrated_account_id
+      in: query
+      required: true
+      description: The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

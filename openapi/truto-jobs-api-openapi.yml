@@ -100,13 +100,6 @@ components:
             $ref: '#/components/schemas/Job'
         nextCursor:
           type: string
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
     Job:
       type: object
       description: A normalized job posting from the connected ATS provider.
@@ -165,6 +158,26 @@ components:
         updatedAt:
           type: string
           format: date-time
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed or token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     IntegratedAccountId:
       name: integrated_account_id
@@ -173,19 +186,6 @@ components:
       description: The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.
       schema:
         type: string
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or token is invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
