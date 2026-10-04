@@ -1,0 +1,125 @@
+slug: truto
+provider: Truto
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 11
+edges:
+- tag: Candidates
+  spec_file: truto-candidates-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.9
+  evidence: '''Unified ATS API ... across 27 ATS providers including Greenhouse, Lever, Workable''; GET
+    /candidates ''List candidates'''
+  reason: Candidate records in applicant tracking systems are core recruiting data, realising Talent Acquisition
+    Management regardless of who buys the unified API.
+- tag: Jobs
+  spec_file: truto-jobs-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.9
+  evidence: Truto Unified ATS API provides a single normalized interface for reading and writing applicant
+    tracking system data ... Covers the full recruiting lifecycle
+  reason: Jobs here are ATS job requisitions; listing/getting jobs supports recruiting, i.e. Talent Acquisition
+    Management.
+- tag: Opportunities
+  spec_file: truto-opportunities-api-openapi.yml
+  capability_id: BC-410.30
+  capability_id_l1: BC-410
+  capability_name: Opportunity & Pipeline Management
+  confidence: 0.9
+  evidence: GET /opportunities listOpportunities ... Unified CRM API ... across 27 CRM providers including
+    Salesforce, HubSpot, Pipedrive
+  reason: CRM opportunity records are the deal/pipeline object; maps to Opportunity & Pipeline Management.
+- tag: Applications
+  spec_file: truto-applications-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.85
+  evidence: '''Unified ATS API ... applicant tracking system data ... Covers the full recruiting lifecycle'';
+    GET /applications ''List applications'''
+  reason: Applications here are job applications in applicant tracking systems, squarely within Talent
+    Acquisition Management. The ATS description removes the homograph risk of 'applications' meaning software
+    apps.
+- tag: Employees
+  spec_file: truto-employees-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.85
+  evidence: '''Unified HRIS API ... reading and writing HR data across 41 HRIS providers including BambooHR,
+    Workday, Rippling, Gusto''; GET /employees ''List employees'', GET /employees/{id} ''Get employee'''
+  reason: Reading employee master records from HRIS systems is HR Operations Management (employee records),
+    the clearest sub-capability for this surface.
+- tag: Offers
+  spec_file: truto-offers-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.85
+  evidence: GET /offers listOffers ... Unified ATS API ... Covers the full recruiting lifecycle with 17
+    unified resources
+  reason: Offers are candidate job offers in an applicant tracking system — part of hiring/talent acquisition.
+- tag: Time Off
+  spec_file: truto-time-off-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.85
+  evidence: GET /timeoff-requests listTimeoffRequests List time off requests ... Unified HRIS API ...
+    across 41 HRIS providers
+  reason: Time off requests from HRIS systems are core HR operations/employee records administration.
+- tag: Contacts
+  spec_file: truto-contacts-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.75
+  evidence: '''Unified CRM API ... across 27 CRM providers including Salesforce, HubSpot, Pipedrive'';
+    GET/POST/PATCH /contacts with Contact, CreateContactRequest schemas'
+  reason: Full CRUD over CRM contact records through a normalising interface is customer/contact master
+    data management. Clear CRM context, mild ambiguity about which CRM sub-capability.
+- tag: Accounts
+  spec_file: truto-accounts-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.7
+  evidence: '''The Truto Unified CRM API provides a single normalized interface for reading and writing
+    CRM data''; GET /accounts ''List accounts'', POST /accounts ''Create account'''
+  reason: CRM account records being read and written through a normalising layer is customer master/company
+    record management. Some ambiguity with Sales Account Management, but the operations are plain CRUD
+    over customer data, so Customer Data Management is the better fit.
+- tag: Employments
+  spec_file: truto-employments-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.7
+  evidence: '''Unified HRIS API ... Includes 20 unified resources''; GET /employments ''List employments''
+    with Employment schema'
+  reason: Employment records (job/role/pay history entries attached to employees in HRIS) are employee-record
+    data maintained by HR operations. Only a list endpoint is exposed, so confidence is moderate on the
+    sub-capability.
+- tag: Stages
+  spec_file: truto-stages-api-openapi.yml
+  capability_id: BC-410.30
+  capability_id_l1: BC-410
+  capability_name: Opportunity & Pipeline Management
+  confidence: 0.7
+  evidence: GET /stages listStages ... Unified CRM API ... 17 unified resources covering the full CRM
+    data model
+  reason: Stages in a CRM data model are deal pipeline stages, supporting opportunity/pipeline management;
+    evidence is thin beyond the CRM context.

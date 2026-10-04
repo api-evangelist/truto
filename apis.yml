@@ -509,6 +509,9 @@ apis:
   - type: Documentation
     url: https://truto.one/unified-apis/crm/
 common:
+  - type: CapabilityMap
+    url: capabilities/truto-capability-edges.yml
+    name: Truto Business Capability Map
   - type: AgenticAccess
     url: agentic-access/truto-agentic-access.yml
   - type: TrustCenter
