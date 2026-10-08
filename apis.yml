@@ -509,6 +509,12 @@ apis:
   - type: Documentation
     url: https://truto.one/unified-apis/crm/
 common:
+  - type: Plans
+    url: plans/truto-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/truto-rate-limits.yml
+  - type: FinOps
+    url: finops/truto-finops.yml
   - type: CapabilityMap
     url: capabilities/truto-capability-edges.yml
     name: Truto Business Capability Map
