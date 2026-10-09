@@ -1,0 +1,39 @@
+# Front Door AI Index — truto — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: truto
+  lexicon_version: '1.0'
+  probed_at: '2026-09-25'
+  host: truto.one
+  final_host: truto.one
+  ownership: own
+  owner: truto
+  shares_host_with: null
+  inherited_from: null
+  alias_of: null
+  verdict: scored
+  score: 20
+  band: 5
+  band_label: prominent
+  host_score: 20
+  density: 8.94
+  words: 2238
+  tiers:
+    agentic: 7
+    core: 7
+    model: 6
+  ambiguous: 7
+  top_terms:
+    AI: 6
+    MCP: 5
+    intelligence: 4
+    AI agent: 2
+    OpenAI: 2
+    agent: 2
+    Anthropic: 1
+    ChatGPT: 1
+    Claude: 1
+    Gemini: 1
+    artificial intelligence: 1
+    automation: 1
