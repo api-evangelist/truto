@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/truto/integrations
 - https://n8n.io/integrations/truto/
@@ -7,10 +7,26 @@ source:
 - https://monid.ai/tools/truto
 checked:
 - https://composio.dev/toolkits/truto
+- https://github.com/marketplace?type=apps
 - https://monid.ai/tools/truto
 - https://n8n.io/integrations/truto/
 - https://zapier.com/apps/truto/integrations
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: GitHub Marketplace (apps)
+  partner: github
+  partner_match: aggregator
+  type: marketplace
+  marketplace: github-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://github.com/marketplace/truto-unified-api
+  listing_count: 1
+  apps:
+  - Truto Unified API
+  publisher_name: Truto
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
 templates: []
