@@ -15,6 +15,18 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: truto-gorgias-own
+  label: Gorgias (own)
+  partner: gorgias
+  partner_name: Gorgias (own)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.gorgias.com/apps/truto
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
 - slug: truto-zoom-own
   label: Zoom (own)
   partner: zoom

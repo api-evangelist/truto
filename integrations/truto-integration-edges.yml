@@ -6,6 +6,7 @@ source:
 - https://composio.dev/toolkits/truto
 - https://monid.ai/tools/truto
 checked:
+- gorgias/integrations/gorgias-integration-edges.yml
 - https://composio.dev/toolkits/truto
 - https://github.com/marketplace?type=apps
 - https://monid.ai/tools/truto
@@ -30,6 +31,22 @@ edges:
   publisher_name: Truto
   detected_by: sweep-devtools.py
   detected: '2026-10-14'
+- partner_name: Gorgias (own)
+  partner: gorgias
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.gorgias.com/apps/truto
+  mirror_of: gorgias/integrations/gorgias-integration-edges.yml
+  apps:
+  - Truto
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
 - partner_name: Zoom (own)
   partner: zoom
   partner_match: mirror
