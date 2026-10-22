@@ -13,6 +13,7 @@ checked:
 - https://n8n.io/integrations/truto/
 - https://zapier.com/apps/truto/integrations
 - zoom/integrations/zoom-integration-edges.yml
+- miro/integrations/miro-integration-edges.yml
 summary: null
 marketplace_apps: []
 edges:
@@ -64,4 +65,21 @@ edges:
   detected: '2026-10-18'
   detected_by: mirror-platform-listings.py
   category: Zoom app
+- partner_name: Miro (own)
+  partner: miro
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://miro.com/marketplace/truto/
+  mirror_of: miro/integrations/miro-integration-edges.yml
+  apps:
+  - Truto
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Miro app
 templates: []
