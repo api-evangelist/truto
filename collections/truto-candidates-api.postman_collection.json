@@ -1,80 +1,327 @@
 {
+  "info": {
+    "_postman_id": "e8134fb8-9f28-405f-9593-e92a1d1db229",
+    "name": "Truto Unified ATS Candidates API",
+    "description": "The Truto Unified ATS API provides a single normalized interface for reading and writing applicant tracking system data across 27 ATS providers including Greenhouse, Lever, Workable, SmartRecruiters, Ashby, Teamtailor, BambooHR, Jobvite, and more. Covers the full recruiting lifecycle with 17 unified resources. All data is accessed in real-time via pass-through to the underlying ATS. Schema can be customized using JSONata mappings.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:08:41.000Z",
+    "updatedAt": "2026-10-22T03:08:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e8134fb8-9f28-405f-9593-e92a1d1db229"
+  },
   "item": [
     {
-      "id": "ca9aad8a-b6f4-43fd-9a68-b2411ad32f26",
-      "name": "Candidates",
-      "description": {
-        "content": "Candidate profiles and contact information",
-        "type": "text/plain"
-      },
+      "name": "candidates",
       "item": [
         {
-          "id": "0f55a6ec-b0a7-4958-b526-f0ff4c234acc",
-          "name": "List candidates",
-          "request": {
-            "name": "List candidates",
-            "description": {
-              "content": "List candidate profiles from the connected ATS provider.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "candidates"
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Get candidate",
+              "id": "1d662bed-549a-48e2-a9dc-2b6d267c196f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/candidates/:id?integrated_account_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "candidates",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.",
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "a00fab8b-518e-4032-a688-39f33e339b94",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Retrieve a single candidate by ID."
+              },
+              "response": [
+                {
+                  "id": "1cadc8b7-a269-4477-b647-06a572466791",
+                  "name": "Candidate profile.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/candidates/:id?integrated_account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidates",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.",
+                          "key": "integrated_account_id",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"remoteId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"location\": \"<string>\",\n  \"source\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-10-22T03:08:41.000Z",
+                  "updatedAt": "2026-10-22T03:08:41.000Z",
+                  "uid": "35240-1cadc8b7-a269-4477-b647-06a572466791"
+                },
+                {
+                  "id": "89ed0ffb-df42-49d6-a723-3362a6a57c01",
+                  "name": "Authentication failed or token is invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/candidates/:id?integrated_account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidates",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.",
+                          "key": "integrated_account_id",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:08:41.000Z",
+                  "updatedAt": "2026-10-22T03:08:41.000Z",
+                  "uid": "35240-89ed0ffb-df42-49d6-a723-3362a6a57c01"
+                },
+                {
+                  "id": "4c9220f5-c207-47f0-9163-378ad2f494c8",
+                  "name": "Resource not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/candidates/:id?integrated_account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "candidates",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.",
+                          "key": "integrated_account_id",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:08:41.000Z",
+                  "updatedAt": "2026-10-22T03:08:41.000Z",
+                  "uid": "35240-4c9220f5-c207-47f0-9163-378ad2f494c8"
+                }
               ],
+              "createdAt": "2026-10-22T03:08:41.000Z",
+              "updatedAt": "2026-10-22T03:08:41.000Z",
+              "uid": "35240-1d662bed-549a-48e2-a9dc-2b6d267c196f"
+            }
+          ],
+          "id": "6a9afad4-d24b-4dd7-8bfd-8a524d76b3f6",
+          "createdAt": "2026-10-22T03:08:41.000Z",
+          "updatedAt": "2026-10-22T03:08:41.000Z",
+          "uid": "35240-6a9afad4-d24b-4dd7-8bfd-8a524d76b3f6"
+        },
+        {
+          "name": "List candidates",
+          "id": "7d343298-f6c8-4fa1-95b8-0cd9b9884993",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/candidates?integrated_account_id=<string>&cursor=<string>&limit=20",
               "host": [
                 "{{baseUrl}}"
               ],
+              "path": [
+                "candidates"
+              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "(Required) The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.",
                   "key": "integrated_account_id",
-                  "value": "<string>",
-                  "description": "(Required) The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests."
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
                   "key": "cursor",
                   "value": "<string>"
                 },
                 {
-                  "disabled": false,
                   "key": "limit",
                   "value": "20"
                 }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
               ]
-            }
+            },
+            "description": "List candidate profiles from the connected ATS provider."
           },
           "response": [
             {
-              "id": "e8d0a20d-dfe3-4e56-b78a-2934af5903d1",
+              "id": "317f0a6e-af9f-47fd-84b3-e48a3629012e",
               "name": "List of candidates.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "candidates"
-                  ],
+                  "raw": "{{baseUrl}}/candidates?integrated_account_id=<string>&cursor=<string>&limit=20",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "candidates"
+                  ],
                   "query": [
                     {
+                      "description": "(Required) The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.",
                       "key": "integrated_account_id",
                       "value": "<string>"
                     },
@@ -86,51 +333,52 @@
                       "key": "limit",
                       "value": "20"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"remoteId\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"jpym81@ucueUrqAkFydpzVcYzj.jap\",\n      \"phone\": \"string\",\n      \"location\": \"string\",\n      \"source\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"createdAt\": \"1964-04-05T01:54:12.843Z\",\n      \"updatedAt\": \"2026-02-20T05:52:39.625Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"remoteId\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"gzF@DNjMZLpGgTywINieGDEsKaTNyJXxmOb.zsqj\",\n      \"phone\": \"string\",\n      \"location\": \"string\",\n      \"source\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"createdAt\": \"2000-07-13T12:43:13.326Z\",\n      \"updatedAt\": \"1978-09-25T10:44:42.331Z\"\n    }\n  ],\n  \"nextCursor\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"remoteId\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"location\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"remoteId\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"location\": \"<string>\",\n      \"source\": \"<string>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ],\n  \"nextCursor\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:08:41.000Z",
+              "updatedAt": "2026-10-22T03:08:41.000Z",
+              "uid": "35240-317f0a6e-af9f-47fd-84b3-e48a3629012e"
             },
             {
-              "id": "e79ec43a-f3db-4e7c-9cc2-603dcb21679b",
+              "id": "8108e2d1-c279-4233-9cef-51f7d0b7775b",
               "name": "Authentication failed or token is invalid.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "candidates"
-                  ],
+                  "raw": "{{baseUrl}}/candidates?integrated_account_id=<string>&cursor=<string>&limit=20",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "candidates"
+                  ],
                   "query": [
                     {
+                      "description": "(Required) The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests.",
                       "key": "integrated_account_id",
                       "value": "<string>"
                     },
@@ -142,284 +390,35 @@
                       "key": "limit",
                       "value": "20"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:08:41.000Z",
+              "updatedAt": "2026-10-22T03:08:41.000Z",
+              "uid": "35240-8108e2d1-c279-4233-9cef-51f7d0b7775b"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ba2be72b-c166-48a2-89c5-868af08731e4",
-          "name": "Get candidate",
-          "request": {
-            "name": "Get candidate",
-            "description": {
-              "content": "Retrieve a single candidate by ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "candidates",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "integrated_account_id",
-                  "value": "<string>",
-                  "description": "(Required) The ID of the integrated account (connected ATS provider instance) to query. Required for all Unified API requests."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "c28e9224-39a7-4a8a-924c-1aecd0ff9fe3",
-              "name": "Candidate profile.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "candidates",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "integrated_account_id",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"remoteId\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"Lx8@VphNuyOfqEKPtIHbZF.wcfl\",\n  \"phone\": \"string\",\n  \"location\": \"string\",\n  \"source\": \"string\",\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"1952-01-29T16:10:45.296Z\",\n  \"updatedAt\": \"1958-10-27T22:23:06.519Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8a534644-1953-403d-ac0d-2fc99d715528",
-              "name": "Authentication failed or token is invalid.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "candidates",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "integrated_account_id",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "537b203f-a919-4505-93ac-ba56e0d171cc",
-              "name": "Resource not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "candidates",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "integrated_account_id",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T03:08:41.000Z",
+          "updatedAt": "2026-10-22T03:08:41.000Z",
+          "uid": "35240-7d343298-f6c8-4fa1-95b8-0cd9b9884993"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.truto.one",
-      "key": "baseUrl"
+      "id": "8d08e1c1-6246-4200-b149-70b1b735d8c9",
+      "createdAt": "2026-10-22T03:08:41.000Z",
+      "updatedAt": "2026-10-22T03:08:41.000Z",
+      "uid": "35240-8d08e1c1-6246-4200-b149-70b1b735d8c9"
     }
   ],
   "auth": {
@@ -427,17 +426,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "fdb0459e-1218-4d3a-bc42-3bff381694a9",
-    "name": "Truto Admin Accounts Candidates API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.truto.one/unified/ats"
     }
-  }
+  ]
 }

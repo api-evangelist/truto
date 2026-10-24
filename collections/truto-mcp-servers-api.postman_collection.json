@@ -1,272 +1,295 @@
 {
+  "info": {
+    "_postman_id": "1677b24f-95e3-4c1c-8004-2377a9eedd1e",
+    "name": "Truto Admin MCP Servers API",
+    "description": "The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:09:38.000Z",
+    "updatedAt": "2026-10-22T03:09:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1677b24f-95e3-4c1c-8004-2377a9eedd1e"
+  },
   "item": [
     {
-      "id": "462f55f2-4d9f-4a4a-9fbc-7385975f1301",
-      "name": "MCP Servers",
-      "description": {
-        "content": "Provision Model Context Protocol servers for AI agent access",
-        "type": "text/plain"
-      },
+      "name": "integrated-accounts",
       "item": [
         {
-          "id": "fa0dcdaa-91d8-408c-a034-e31fba01267b",
-          "name": "Create MCP server for integrated account",
-          "request": {
-            "name": "Create MCP server for integrated account",
-            "description": {
-              "content": "Provision a Model Context Protocol (MCP) server for an integrated account. Returns a secure tokenized URL that AI agents (Claude, ChatGPT, custom LLM frameworks) can use to invoke the integration's tools. The URL itself serves as the auth token. Optionally filter which methods are exposed or require additional API token authentication for enterprise security.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "integrated-accounts",
-                ":id",
-                "mcp"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Integrated account identifier."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"allowedMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"requireAdditionalAuth\": \"<boolean>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "{id}",
+          "item": [
             {
-              "id": "a1d92574-4bb1-4c2b-b872-fb340f755cba",
-              "name": "MCP server provisioned successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "integrated-accounts",
-                    ":id",
-                    "mcp"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Integrated account identifier."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"allowedMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"requireAdditionalAuth\": \"<boolean>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
+              "name": "mcp",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Create MCP server for integrated account",
+                  "id": "a300f9a8-f460-4c5e-94b3-18bccd301d54",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"allowedMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"requireAdditionalAuth\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/integrated-accounts/:id/mcp",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrated-accounts",
+                        ":id",
+                        "mcp"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ba9bff6f-a80d-4eba-95f2-33bf441a27dd",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Integrated account identifier."
+                        }
+                      ]
+                    },
+                    "description": "Provision a Model Context Protocol (MCP) server for an integrated account. Returns a secure tokenized URL that AI agents (Claude, ChatGPT, custom LLM frameworks) can use to invoke the integration's tools. The URL itself serves as the auth token. Optionally filter which methods are exposed or require additional API token authentication for enterprise security."
+                  },
+                  "response": [
+                    {
+                      "id": "5b434f93-8de0-4c78-a92d-14b769a1e42d",
+                      "name": "MCP server provisioned successfully.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"allowedMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"requireAdditionalAuth\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/integrated-accounts/:id/mcp",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integrated-accounts",
+                            ":id",
+                            "mcp"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"mcpUrl\": \"<uri>\",\n  \"transport\": \"stdio\",\n  \"integratedAccountId\": \"<string>\",\n  \"createdAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-10-22T03:09:39.000Z",
+                      "updatedAt": "2026-10-22T03:09:39.000Z",
+                      "uid": "35240-5b434f93-8de0-4c78-a92d-14b769a1e42d"
+                    },
+                    {
+                      "id": "d23f1671-2a8c-4830-8d2b-87d01f39c644",
+                      "name": "Authentication failed or token is invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"allowedMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"requireAdditionalAuth\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/integrated-accounts/:id/mcp",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integrated-accounts",
+                            ":id",
+                            "mcp"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T03:09:39.000Z",
+                      "updatedAt": "2026-10-22T03:09:39.000Z",
+                      "uid": "35240-d23f1671-2a8c-4830-8d2b-87d01f39c644"
+                    },
+                    {
+                      "id": "bcdf6521-e69a-463e-9806-1fcf617f0ec3",
+                      "name": "Resource not found.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"allowedMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"requireAdditionalAuth\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/integrated-accounts/:id/mcp",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integrated-accounts",
+                            ":id",
+                            "mcp"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T03:09:39.000Z",
+                      "updatedAt": "2026-10-22T03:09:39.000Z",
+                      "uid": "35240-bcdf6521-e69a-463e-9806-1fcf617f0ec3"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:09:39.000Z",
+                  "updatedAt": "2026-10-22T03:09:39.000Z",
+                  "uid": "35240-a300f9a8-f460-4c5e-94b3-18bccd301d54"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"mcpUrl\": \"http://jOAOS.uptcQduY1,OCmelyyE.JjRtpIFJZzTCPQqV1pbaFi2PNNYiUVKkOtZqK\",\n  \"transport\": \"stdio\",\n  \"integratedAccountId\": \"string\",\n  \"createdAt\": \"2026-03-12T12:56:25.069Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "95408d14-c868-45b7-bba5-61dbffb735ff",
-              "name": "Authentication failed or token is invalid.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "integrated-accounts",
-                    ":id",
-                    "mcp"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Integrated account identifier."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"allowedMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"requireAdditionalAuth\": \"<boolean>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "55e0e505-df38-4523-86ce-9e058596cbe8",
-              "name": "Resource not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "integrated-accounts",
-                    ":id",
-                    "mcp"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Integrated account identifier."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"allowedMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"requireAdditionalAuth\": \"<boolean>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "8e734889-94be-473e-8e3f-2aa65b21f5f5",
+              "createdAt": "2026-10-22T03:09:39.000Z",
+              "updatedAt": "2026-10-22T03:09:39.000Z",
+              "uid": "35240-8e734889-94be-473e-8e3f-2aa65b21f5f5"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "a3136200-a66e-4be0-aca1-e2207d831ba2",
+          "createdAt": "2026-10-22T03:09:39.000Z",
+          "updatedAt": "2026-10-22T03:09:39.000Z",
+          "uid": "35240-a3136200-a66e-4be0-aca1-e2207d831ba2"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.truto.one",
-      "key": "baseUrl"
+      "id": "6831740e-27a8-4173-92b8-6c3d3b20a797",
+      "createdAt": "2026-10-22T03:09:39.000Z",
+      "updatedAt": "2026-10-22T03:09:39.000Z",
+      "uid": "35240-6831740e-27a8-4173-92b8-6c3d3b20a797"
     }
   ],
   "auth": {
@@ -274,17 +297,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "b0cd5903-2bdf-4c44-9c7d-224dbfcb0ac4",
-    "name": "Truto Admin Accounts MCP Servers API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.truto.one"
     }
-  }
+  ]
 }

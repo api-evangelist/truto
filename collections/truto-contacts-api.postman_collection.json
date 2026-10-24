@@ -1,227 +1,736 @@
 {
+  "info": {
+    "_postman_id": "3a8a5050-29e6-4b88-8f4f-551590284b51",
+    "name": "Truto Unified CRM Contacts API",
+    "description": "The Truto Unified CRM API provides a single normalized interface for reading and writing CRM data across 27 CRM providers including Salesforce, HubSpot, Pipedrive, Attio, Outreach, Wealthbox, Teamleader, and more. Offers 17 unified resources covering the full CRM data model. Data is accessed in real-time via pass-through. Schema can be extended using JSONata mappings without code deploys.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:08:52.000Z",
+    "updatedAt": "2026-10-22T03:08:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3a8a5050-29e6-4b88-8f4f-551590284b51"
+  },
   "item": [
     {
-      "id": "95e37345-f508-41c6-bc92-a07e33cfdf03",
-      "name": "Contacts",
-      "description": {
-        "content": "Contact records representing individuals at companies",
-        "type": "text/plain"
-      },
+      "name": "contacts",
       "item": [
         {
-          "id": "dfcee8ba-c604-4a99-ba85-f7db77160cf2",
-          "name": "List contacts",
-          "request": {
-            "name": "List contacts",
-            "description": {
-              "content": "List contact records from the connected CRM provider. Returns normalized contact data including name, email, phone, company, and associated account information.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "contacts"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Get contact",
+              "id": "6b8e0be0-0c52-46f5-96d7-1b030a3cce15",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contacts/:id?integrated_account_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "8f0f0e20-d0bc-44a8-be41-b10cede8494d",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Retrieve a single contact by ID."
+              },
+              "response": [
                 {
-                  "disabled": false,
-                  "key": "integrated_account_id",
-                  "value": "<string>",
-                  "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests."
+                  "id": "50a7c382-325d-4b2b-8627-ac9a7d9daddf",
+                  "name": "Contact record.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:id?integrated_account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                          "key": "integrated_account_id",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"remoteId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"ownerId\": \"<string>\",\n  \"leadSource\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-10-22T03:08:52.000Z",
+                  "updatedAt": "2026-10-22T03:08:52.000Z",
+                  "uid": "35240-50a7c382-325d-4b2b-8627-ac9a7d9daddf"
                 },
                 {
-                  "disabled": false,
-                  "key": "account_id",
-                  "value": "<string>",
-                  "description": "Filter contacts by account ID."
+                  "id": "3160c6ef-ed59-4c87-8f07-1ad1a3752dc5",
+                  "name": "Authentication failed or token is invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:id?integrated_account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                          "key": "integrated_account_id",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:08:52.000Z",
+                  "updatedAt": "2026-10-22T03:08:52.000Z",
+                  "uid": "35240-3160c6ef-ed59-4c87-8f07-1ad1a3752dc5"
                 },
                 {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Cursor for pagination."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "20",
-                  "description": "Number of results per page (max 100)."
+                  "id": "c42e9818-0e0e-4ffd-ae53-7f1c43e2765e",
+                  "name": "Resource not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:id?integrated_account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                          "key": "integrated_account_id",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:08:52.000Z",
+                  "updatedAt": "2026-10-22T03:08:52.000Z",
+                  "uid": "35240-c42e9818-0e0e-4ffd-ae53-7f1c43e2765e"
                 }
               ],
-              "variable": []
+              "createdAt": "2026-10-22T03:08:52.000Z",
+              "updatedAt": "2026-10-22T03:08:52.000Z",
+              "uid": "35240-6b8e0be0-0c52-46f5-96d7-1b030a3cce15"
             },
+            {
+              "name": "Update contact",
+              "id": "7d0ab896-39b6-415b-b084-de9b3e3c2b3d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"accountId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contacts/:id?integrated_account_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "49990e78-c222-4acb-8ef0-a6b832d25ef7",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Update a contact record in the connected CRM provider."
+              },
+              "response": [
+                {
+                  "id": "349f6907-245a-4f20-b10c-76c7719a1f59",
+                  "name": "Updated contact record.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"accountId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:id?integrated_account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                          "key": "integrated_account_id",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"remoteId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"ownerId\": \"<string>\",\n  \"leadSource\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-10-22T03:08:52.000Z",
+                  "updatedAt": "2026-10-22T03:08:52.000Z",
+                  "uid": "35240-349f6907-245a-4f20-b10c-76c7719a1f59"
+                },
+                {
+                  "id": "7d89a9b6-da45-4bd3-95e7-9a67f210c648",
+                  "name": "Authentication failed or token is invalid.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"accountId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:id?integrated_account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                          "key": "integrated_account_id",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:08:52.000Z",
+                  "updatedAt": "2026-10-22T03:08:52.000Z",
+                  "uid": "35240-7d89a9b6-da45-4bd3-95e7-9a67f210c648"
+                },
+                {
+                  "id": "1baa9e95-b504-433e-9e46-c563b0168aa2",
+                  "name": "Resource not found.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"accountId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contacts/:id?integrated_account_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contacts",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                          "key": "integrated_account_id",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:08:52.000Z",
+                  "updatedAt": "2026-10-22T03:08:52.000Z",
+                  "uid": "35240-1baa9e95-b504-433e-9e46-c563b0168aa2"
+                }
+              ],
+              "createdAt": "2026-10-22T03:08:52.000Z",
+              "updatedAt": "2026-10-22T03:08:52.000Z",
+              "uid": "35240-7d0ab896-39b6-415b-b084-de9b3e3c2b3d"
+            }
+          ],
+          "id": "2fa68d56-32e0-42ce-9430-94518926880a",
+          "createdAt": "2026-10-22T03:08:52.000Z",
+          "updatedAt": "2026-10-22T03:08:52.000Z",
+          "uid": "35240-2fa68d56-32e0-42ce-9430-94518926880a"
+        },
+        {
+          "name": "List contacts",
+          "id": "1146b2e4-b76c-4516-9ee5-f23771cfecfc",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/contacts?integrated_account_id=<string>&account_id=<string>&cursor=<string>&limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contacts"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                  "key": "integrated_account_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter contacts by account ID.",
+                  "key": "account_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Cursor for pagination.",
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Number of results per page (max 100).",
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "List contact records from the connected CRM provider. Returns normalized contact data including name, email, phone, company, and associated account information."
+          },
+          "response": [
+            {
+              "id": "43e64308-8c4f-452c-8c09-6b770a6188c6",
+              "name": "List of contacts.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contacts?integrated_account_id=<string>&account_id=<string>&cursor=<string>&limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter contacts by account ID.",
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor for pagination.",
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of results per page (max 100).",
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"remoteId\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"title\": \"<string>\",\n      \"accountId\": \"<string>\",\n      \"ownerId\": \"<string>\",\n      \"leadSource\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"remoteId\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"title\": \"<string>\",\n      \"accountId\": \"<string>\",\n      \"ownerId\": \"<string>\",\n      \"leadSource\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ],\n  \"nextCursor\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:08:52.000Z",
+              "updatedAt": "2026-10-22T03:08:52.000Z",
+              "uid": "35240-43e64308-8c4f-452c-8c09-6b770a6188c6"
+            },
+            {
+              "id": "b7a3ce10-8298-4fa9-897c-a22ac10aae14",
+              "name": "Authentication failed or token is invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/contacts?integrated_account_id=<string>&account_id=<string>&cursor=<string>&limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter contacts by account ID.",
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor for pagination.",
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of results per page (max 100).",
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:08:52.000Z",
+              "updatedAt": "2026-10-22T03:08:52.000Z",
+              "uid": "35240-b7a3ce10-8298-4fa9-897c-a22ac10aae14"
+            }
+          ],
+          "createdAt": "2026-10-22T03:08:52.000Z",
+          "updatedAt": "2026-10-22T03:08:52.000Z",
+          "uid": "35240-1146b2e4-b76c-4516-9ee5-f23771cfecfc"
+        },
+        {
+          "name": "Create contact",
+          "id": "541e3fa6-7186-4573-95fc-4ed892e52e87",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
             "auth": {
               "type": "bearer",
               "bearer": [
                 {
                   "key": "token",
-                  "value": "{{bearerToken}}"
+                  "value": "{{bearerToken}}",
+                  "type": "string"
                 }
               ]
-            }
-          },
-          "response": [
-            {
-              "id": "8262806c-3a01-406b-811a-1c90c4acd8de",
-              "name": "List of contacts.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "contacts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "integrated_account_id",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "account_id",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "20"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"remoteId\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"GeWPWlqJddODhs@BnXVtlUpameFhCDoNfefTk.mex\",\n      \"phone\": \"string\",\n      \"title\": \"string\",\n      \"accountId\": \"string\",\n      \"ownerId\": \"string\",\n      \"leadSource\": \"string\",\n      \"createdAt\": \"1949-02-15T06:14:34.214Z\",\n      \"updatedAt\": \"1971-07-29T12:19:49.505Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"remoteId\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"mcq70VU26i@RSTTZulvoheyHCLhJCggfRagIDnE.qghq\",\n      \"phone\": \"string\",\n      \"title\": \"string\",\n      \"accountId\": \"string\",\n      \"ownerId\": \"string\",\n      \"leadSource\": \"string\",\n      \"createdAt\": \"2011-11-08T15:50:18.805Z\",\n      \"updatedAt\": \"2002-07-12T08:44:51.758Z\"\n    }\n  ],\n  \"nextCursor\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
             },
-            {
-              "id": "67336942-79d0-43b4-94bf-58aff06d6074",
-              "name": "Authentication failed or token is invalid.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "contacts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "integrated_account_id",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "account_id",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "20"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e720c6fa-894c-476a-82f7-8b339e3c02f6",
-          "name": "Create contact",
-          "request": {
-            "name": "Create contact",
-            "description": {
-              "content": "Create a new contact in the connected CRM provider.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "contacts"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "integrated_account_id",
-                  "value": "<string>",
-                  "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests."
-                }
-              ],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -232,652 +741,171 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            },
             "body": {
               "mode": "raw",
               "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"accountId\": \"<string>\"\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/contacts?integrated_account_id=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contacts"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                  "key": "integrated_account_id",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Create a new contact in the connected CRM provider."
           },
           "response": [
             {
-              "id": "af8447b1-9209-49b8-b95a-647c9f2713a6",
+              "id": "ad8f3349-e6cb-4615-b687-ef6ebc8a224f",
               "name": "Contact created.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "contacts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "integrated_account_id",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"accountId\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contacts?integrated_account_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    }
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"remoteId\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"BzE@YxAHUWTgtolDSAVbxfctfztLCLijkWa.tj\",\n  \"phone\": \"string\",\n  \"title\": \"string\",\n  \"accountId\": \"string\",\n  \"ownerId\": \"string\",\n  \"leadSource\": \"string\",\n  \"createdAt\": \"2014-02-13T03:51:15.474Z\",\n  \"updatedAt\": \"1982-03-08T20:49:57.343Z\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"remoteId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"ownerId\": \"<string>\",\n  \"leadSource\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+              "createdAt": "2026-10-22T03:08:52.000Z",
+              "updatedAt": "2026-10-22T03:08:52.000Z",
+              "uid": "35240-ad8f3349-e6cb-4615-b687-ef6ebc8a224f"
             },
             {
-              "id": "ccdd25ca-1884-487f-a476-af49484707cb",
+              "id": "ce7d1ed9-e89b-4811-811a-8550e19a9f8e",
               "name": "Authentication failed or token is invalid.",
               "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"accountId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/contacts?integrated_account_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "contacts"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
                       "key": "integrated_account_id",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"accountId\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
+                  ]
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:08:52.000Z",
+              "updatedAt": "2026-10-22T03:08:52.000Z",
+              "uid": "35240-ce7d1ed9-e89b-4811-811a-8550e19a9f8e"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "286f7a04-031e-496d-aa91-c849f2987dbf",
-          "name": "Get contact",
-          "request": {
-            "name": "Get contact",
-            "description": {
-              "content": "Retrieve a single contact by ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "contacts",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "integrated_account_id",
-                  "value": "<string>",
-                  "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "42e50060-2bbe-438e-ac1e-9ad7f3ff0766",
-              "name": "Contact record.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "integrated_account_id",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"remoteId\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"BzE@YxAHUWTgtolDSAVbxfctfztLCLijkWa.tj\",\n  \"phone\": \"string\",\n  \"title\": \"string\",\n  \"accountId\": \"string\",\n  \"ownerId\": \"string\",\n  \"leadSource\": \"string\",\n  \"createdAt\": \"2014-02-13T03:51:15.474Z\",\n  \"updatedAt\": \"1982-03-08T20:49:57.343Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "745c8a35-100b-4b9a-832d-119afd609e4c",
-              "name": "Authentication failed or token is invalid.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "integrated_account_id",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2a59e5c3-1f13-40ae-b24a-9ab107e7da3c",
-              "name": "Resource not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "integrated_account_id",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "d293131b-134e-45c8-b4a9-72bab5123263",
-          "name": "Update contact",
-          "request": {
-            "name": "Update contact",
-            "description": {
-              "content": "Update a contact record in the connected CRM provider.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "contacts",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "integrated_account_id",
-                  "value": "<string>",
-                  "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"accountId\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "9eb86a2d-4245-4179-be62-83aa49fe9667",
-              "name": "Updated contact record.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "integrated_account_id",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"accountId\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"remoteId\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"email\": \"BzE@YxAHUWTgtolDSAVbxfctfztLCLijkWa.tj\",\n  \"phone\": \"string\",\n  \"title\": \"string\",\n  \"accountId\": \"string\",\n  \"ownerId\": \"string\",\n  \"leadSource\": \"string\",\n  \"createdAt\": \"2014-02-13T03:51:15.474Z\",\n  \"updatedAt\": \"1982-03-08T20:49:57.343Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a52a3d41-5fec-4793-bd58-446111034824",
-              "name": "Authentication failed or token is invalid.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "integrated_account_id",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"accountId\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "fb25116c-848f-4c98-8c05-e2c2bdad9893",
-              "name": "Resource not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "integrated_account_id",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"title\": \"<string>\",\n  \"accountId\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T03:08:52.000Z",
+          "updatedAt": "2026-10-22T03:08:52.000Z",
+          "uid": "35240-541e3fa6-7186-4573-95fc-4ed892e52e87"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.truto.one",
-      "key": "baseUrl"
+      "id": "ce23416a-7c5e-4d21-9901-eb2d8b8e2f42",
+      "createdAt": "2026-10-22T03:08:52.000Z",
+      "updatedAt": "2026-10-22T03:08:52.000Z",
+      "uid": "35240-ce23416a-7c5e-4d21-9901-eb2d8b8e2f42"
     }
   ],
   "auth": {
@@ -885,17 +913,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "70011ee7-228c-4f5e-85ac-4af8d4f0de1b",
-    "name": "Truto Admin Accounts Contacts API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.truto.one/unified/crm"
     }
-  }
+  ]
 }

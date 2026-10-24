@@ -1,253 +1,251 @@
 {
+  "info": {
+    "_postman_id": "77e2fd4c-766c-4691-82d7-a5223f8ec20f",
+    "name": "Truto Unified CRM Opportunities API",
+    "description": "The Truto Unified CRM API provides a single normalized interface for reading and writing CRM data across 27 CRM providers including Salesforce, HubSpot, Pipedrive, Attio, Outreach, Wealthbox, Teamleader, and more. Offers 17 unified resources covering the full CRM data model. Data is accessed in real-time via pass-through. Schema can be extended using JSONata mappings without code deploys.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:09:47.000Z",
+    "updatedAt": "2026-10-22T03:09:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-77e2fd4c-766c-4691-82d7-a5223f8ec20f"
+  },
   "item": [
     {
-      "id": "206547b1-c705-4520-bd02-211a3a558c66",
-      "name": "Opportunities",
-      "description": {
-        "content": "Sales opportunities and deals",
-        "type": "text/plain"
-      },
+      "name": "opportunities",
       "item": [
         {
-          "id": "c8f7d390-0949-40eb-9232-ff9c4773934e",
           "name": "List opportunities",
+          "id": "5b0e737d-3e2e-4984-a9b4-cdf112032855",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "List opportunities",
-            "description": {
-              "content": "List sales opportunities from the connected CRM provider.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "opportunities"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "disabled": false,
-                  "key": "integrated_account_id",
-                  "value": "<string>",
-                  "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests."
-                },
-                {
-                  "disabled": false,
-                  "key": "account_id",
-                  "value": "<string>",
-                  "description": "Filter by account ID."
-                },
-                {
-                  "disabled": false,
-                  "key": "stage_id",
-                  "value": "<string>",
-                  "description": "Filter by pipeline stage ID."
-                },
-                {
-                  "disabled": false,
-                  "key": "status",
-                  "value": "<string>",
-                  "description": "Filter by opportunity status."
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>"
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "20"
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
                 }
-              ],
-              "variable": []
+              ]
             },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/opportunities?integrated_account_id=<string>&account_id=<string>&stage_id=<string>&status=lost&cursor=<string>&limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "opportunities"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                  "key": "integrated_account_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by account ID.",
+                  "key": "account_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by pipeline stage ID.",
+                  "key": "stage_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by opportunity status.",
+                  "key": "status",
+                  "value": "lost"
+                },
+                {
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "List sales opportunities from the connected CRM provider."
+          },
+          "response": [
+            {
+              "id": "455f878e-d710-483b-bae0-da80b00e835c",
+              "name": "List of opportunities.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/opportunities?integrated_account_id=<string>&account_id=<string>&stage_id=<string>&status=lost&cursor=<string>&limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "opportunities"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by account ID.",
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by pipeline stage ID.",
+                      "key": "stage_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by opportunity status.",
+                      "key": "status",
+                      "value": "lost"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"remoteId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"lost\",\n      \"stageId\": \"<string>\",\n      \"accountId\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"probability\": \"<integer>\",\n      \"closeDate\": \"<date>\",\n      \"ownerId\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"remoteId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"won\",\n      \"stageId\": \"<string>\",\n      \"accountId\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"probability\": \"<integer>\",\n      \"closeDate\": \"<date>\",\n      \"ownerId\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ],\n  \"nextCursor\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:09:48.000Z",
+              "updatedAt": "2026-10-22T03:09:48.000Z",
+              "uid": "35240-455f878e-d710-483b-bae0-da80b00e835c"
+            },
+            {
+              "id": "4d89cef5-5ac5-4192-ae2b-a75b2999e1ba",
+              "name": "Authentication failed or token is invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/opportunities?integrated_account_id=<string>&account_id=<string>&stage_id=<string>&status=lost&cursor=<string>&limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "opportunities"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by account ID.",
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by pipeline stage ID.",
+                      "key": "stage_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by opportunity status.",
+                      "key": "status",
+                      "value": "lost"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:09:48.000Z",
+              "updatedAt": "2026-10-22T03:09:48.000Z",
+              "uid": "35240-4d89cef5-5ac5-4192-ae2b-a75b2999e1ba"
+            }
+          ],
+          "createdAt": "2026-10-22T03:09:48.000Z",
+          "updatedAt": "2026-10-22T03:09:48.000Z",
+          "uid": "35240-5b0e737d-3e2e-4984-a9b4-cdf112032855"
+        },
+        {
+          "name": "Create opportunity",
+          "id": "94b738ed-a58e-41a0-9f45-f663d0c4ccbd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
             "auth": {
               "type": "bearer",
               "bearer": [
                 {
                   "key": "token",
-                  "value": "{{bearerToken}}"
+                  "value": "{{bearerToken}}",
+                  "type": "string"
                 }
               ]
-            }
-          },
-          "response": [
-            {
-              "id": "248745b4-1bc6-40c0-9681-1d89ec66bc70",
-              "name": "List of opportunities.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "opportunities"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "integrated_account_id",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "account_id",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "stage_id",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "status",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "20"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"remoteId\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"lost\",\n      \"stageId\": \"string\",\n      \"accountId\": \"string\",\n      \"amount\": 7662.791724169544,\n      \"currency\": \"string\",\n      \"probability\": 7532,\n      \"closeDate\": \"1990-04-25\",\n      \"ownerId\": \"string\",\n      \"createdAt\": \"2021-07-04T23:04:00.094Z\",\n      \"updatedAt\": \"2012-10-10T21:16:55.920Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"remoteId\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"open\",\n      \"stageId\": \"string\",\n      \"accountId\": \"string\",\n      \"amount\": 5481.469670282178,\n      \"currency\": \"string\",\n      \"probability\": 7916,\n      \"closeDate\": \"2025-02-18\",\n      \"ownerId\": \"string\",\n      \"createdAt\": \"1959-08-06T14:37:50.916Z\",\n      \"updatedAt\": \"1950-10-26T00:17:55.531Z\"\n    }\n  ],\n  \"nextCursor\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
             },
-            {
-              "id": "15059c50-5b9d-4cc7-be96-3c98b4c40701",
-              "name": "Authentication failed or token is invalid.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "opportunities"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "integrated_account_id",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "account_id",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "stage_id",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "status",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "20"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "d352b76f-bf33-4a2b-967d-800876e8a141",
-          "name": "Create opportunity",
-          "request": {
-            "name": "Create opportunity",
-            "description": {
-              "content": "Create a new opportunity in the connected CRM provider.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "opportunities"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "integrated_account_id",
-                  "value": "<string>",
-                  "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests."
-                }
-              ],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -258,155 +256,171 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            },
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"stageId\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"closeDate\": \"<date>\"\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/opportunities?integrated_account_id=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "opportunities"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                  "key": "integrated_account_id",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Create a new opportunity in the connected CRM provider."
           },
           "response": [
             {
-              "id": "3b1d1544-b8f5-43c9-b510-0d8dd5de6a0a",
+              "id": "67ebb145-b758-48ec-bc56-23c98acd2c8b",
               "name": "Opportunity created.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "opportunities"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "integrated_account_id",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"name\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"stageId\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"closeDate\": \"<date>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/opportunities?integrated_account_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "opportunities"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    }
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"remoteId\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"lost\",\n  \"stageId\": \"string\",\n  \"accountId\": \"string\",\n  \"amount\": 8666.728519918119,\n  \"currency\": \"string\",\n  \"probability\": 6146,\n  \"closeDate\": \"2007-04-09\",\n  \"ownerId\": \"string\",\n  \"createdAt\": \"2023-01-11T09:28:47.992Z\",\n  \"updatedAt\": \"1953-10-18T05:17:12.901Z\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"remoteId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"open\",\n  \"stageId\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"probability\": \"<integer>\",\n  \"closeDate\": \"<date>\",\n  \"ownerId\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+              "createdAt": "2026-10-22T03:09:48.000Z",
+              "updatedAt": "2026-10-22T03:09:48.000Z",
+              "uid": "35240-67ebb145-b758-48ec-bc56-23c98acd2c8b"
             },
             {
-              "id": "1868804c-4554-40c9-8a24-047de914d8b1",
+              "id": "68c4108e-de8c-4631-a806-ccb658c40b5c",
               "name": "Authentication failed or token is invalid.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "opportunities"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "integrated_account_id",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"name\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"stageId\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"closeDate\": \"<date>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/opportunities?integrated_account_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "opportunities"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    }
+                  ]
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:09:48.000Z",
+              "updatedAt": "2026-10-22T03:09:48.000Z",
+              "uid": "35240-68c4108e-de8c-4631-a806-ccb658c40b5c"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T03:09:48.000Z",
+          "updatedAt": "2026-10-22T03:09:48.000Z",
+          "uid": "35240-94b738ed-a58e-41a0-9f45-f663d0c4ccbd"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.truto.one",
-      "key": "baseUrl"
+      "id": "c84e65be-de6d-4295-85fb-4dfa009a5977",
+      "createdAt": "2026-10-22T03:09:48.000Z",
+      "updatedAt": "2026-10-22T03:09:48.000Z",
+      "uid": "35240-c84e65be-de6d-4295-85fb-4dfa009a5977"
     }
   ],
   "auth": {
@@ -414,17 +428,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "241d767b-54a2-4049-8e7a-d63bd5dea3ba",
-    "name": "Truto Admin Accounts Opportunities API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.truto.one/unified/crm"
     }
-  }
+  ]
 }

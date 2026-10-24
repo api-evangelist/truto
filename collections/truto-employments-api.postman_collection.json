@@ -1,211 +1,214 @@
 {
+  "info": {
+    "_postman_id": "bd41f5e9-991f-44d7-9d11-313411a5fb7b",
+    "name": "Truto Unified HRIS Employments API",
+    "description": "The Truto Unified HRIS API provides a single normalized interface for reading and writing HR data across 41 HRIS providers including BambooHR, Workday, Rippling, Gusto, HiBob, Personio, Oracle Fusion Cloud HCM, and more. All data is accessed in real-time with no caching. Includes 20 unified resources. Schema can be extended using JSONata mappings.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:09:07.000Z",
+    "updatedAt": "2026-10-22T03:09:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-bd41f5e9-991f-44d7-9d11-313411a5fb7b"
+  },
   "item": [
     {
-      "id": "7b9a0cf2-b096-4cf7-adaf-8a2c0544e053",
-      "name": "Employments",
-      "description": {
-        "content": "Employment terms, positions, and job history",
-        "type": "text/plain"
-      },
+      "name": "employments",
       "item": [
         {
-          "id": "87f6dfcd-a87a-4086-8872-dd16c10cec2a",
           "name": "List employments",
+          "id": "cc195548-fe05-4759-b75c-2c9909a85fc6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "List employments",
-            "description": {
-              "content": "List employment records including job titles, pay rates, pay periods, and employment type from the connected HRIS provider.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "employments"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "disabled": false,
-                  "key": "integrated_account_id",
-                  "value": "<string>",
-                  "description": "(Required) The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests."
-                },
-                {
-                  "disabled": false,
-                  "key": "employee_id",
-                  "value": "<string>",
-                  "description": "Filter employments by employee ID."
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Cursor for pagination."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "20",
-                  "description": "Number of results per page."
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
                 }
-              ],
-              "variable": []
+              ]
             },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
+            "url": {
+              "raw": "{{baseUrl}}/employments?integrated_account_id=<string>&employee_id=<string>&cursor=<string>&limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "employments"
+              ],
+              "query": [
                 {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
+                  "description": "(Required) The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests.",
+                  "key": "integrated_account_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter employments by employee ID.",
+                  "key": "employee_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Cursor for pagination.",
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Number of results per page.",
+                  "key": "limit",
+                  "value": "20"
                 }
               ]
-            }
+            },
+            "description": "List employment records including job titles, pay rates, pay periods, and employment type from the connected HRIS provider."
           },
           "response": [
             {
-              "id": "6a9f6f45-29ff-4492-b2f0-5258a295fc2b",
+              "id": "aca1e002-0130-4a1f-8d23-9632b93521a5",
               "name": "List of employment records.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "employments"
-                  ],
+                  "raw": "{{baseUrl}}/employments?integrated_account_id=<string>&employee_id=<string>&cursor=<string>&limit=20",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "employments"
+                  ],
                   "query": [
                     {
+                      "description": "(Required) The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests.",
                       "key": "integrated_account_id",
                       "value": "<string>"
                     },
                     {
+                      "description": "Filter employments by employee ID.",
                       "key": "employee_id",
                       "value": "<string>"
                     },
                     {
+                      "description": "Cursor for pagination.",
                       "key": "cursor",
                       "value": "<string>"
                     },
                     {
+                      "description": "Number of results per page.",
                       "key": "limit",
                       "value": "20"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"remoteId\": \"string\",\n      \"employeeId\": \"string\",\n      \"jobTitle\": \"string\",\n      \"payRate\": 4751.504939472307,\n      \"payPeriod\": \"monthly\",\n      \"payCurrency\": \"string\",\n      \"employmentType\": \"intern\",\n      \"effectiveDate\": \"1978-01-14\",\n      \"createdAt\": \"2021-07-13T21:02:01.977Z\",\n      \"updatedAt\": \"1990-05-03T08:23:17.944Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"remoteId\": \"string\",\n      \"employeeId\": \"string\",\n      \"jobTitle\": \"string\",\n      \"payRate\": 9179.625044729575,\n      \"payPeriod\": \"semimonthly\",\n      \"payCurrency\": \"string\",\n      \"employmentType\": \"contractor\",\n      \"effectiveDate\": \"1968-01-19\",\n      \"createdAt\": \"1968-05-15T03:16:22.631Z\",\n      \"updatedAt\": \"1971-06-01T22:39:37.774Z\"\n    }\n  ],\n  \"nextCursor\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"remoteId\": \"<string>\",\n      \"employeeId\": \"<string>\",\n      \"jobTitle\": \"<string>\",\n      \"payRate\": \"<number>\",\n      \"payPeriod\": \"biweekly\",\n      \"payCurrency\": \"<string>\",\n      \"employmentType\": \"full_time\",\n      \"effectiveDate\": \"<date>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"remoteId\": \"<string>\",\n      \"employeeId\": \"<string>\",\n      \"jobTitle\": \"<string>\",\n      \"payRate\": \"<number>\",\n      \"payPeriod\": \"monthly\",\n      \"payCurrency\": \"<string>\",\n      \"employmentType\": \"contractor\",\n      \"effectiveDate\": \"<date>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ],\n  \"nextCursor\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:09:08.000Z",
+              "updatedAt": "2026-10-22T03:09:08.000Z",
+              "uid": "35240-aca1e002-0130-4a1f-8d23-9632b93521a5"
             },
             {
-              "id": "ffe7e818-0151-4824-8512-30f9b2d557d2",
+              "id": "45f4b101-a285-4f7c-a270-bd79301a703f",
               "name": "Authentication failed or token is invalid.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "employments"
-                  ],
+                  "raw": "{{baseUrl}}/employments?integrated_account_id=<string>&employee_id=<string>&cursor=<string>&limit=20",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "employments"
+                  ],
                   "query": [
                     {
+                      "description": "(Required) The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests.",
                       "key": "integrated_account_id",
                       "value": "<string>"
                     },
                     {
+                      "description": "Filter employments by employee ID.",
                       "key": "employee_id",
                       "value": "<string>"
                     },
                     {
+                      "description": "Cursor for pagination.",
                       "key": "cursor",
                       "value": "<string>"
                     },
                     {
+                      "description": "Number of results per page.",
                       "key": "limit",
                       "value": "20"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:09:08.000Z",
+              "updatedAt": "2026-10-22T03:09:08.000Z",
+              "uid": "35240-45f4b101-a285-4f7c-a270-bd79301a703f"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T03:09:08.000Z",
+          "updatedAt": "2026-10-22T03:09:08.000Z",
+          "uid": "35240-cc195548-fe05-4759-b75c-2c9909a85fc6"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.truto.one",
-      "key": "baseUrl"
+      "id": "bccc7c87-6c9e-401f-9af5-7a22cd05980d",
+      "createdAt": "2026-10-22T03:09:08.000Z",
+      "updatedAt": "2026-10-22T03:09:08.000Z",
+      "uid": "35240-bccc7c87-6c9e-401f-9af5-7a22cd05980d"
     }
   ],
   "auth": {
@@ -213,17 +216,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "a50091de-eb63-421d-81db-74d26bb38db9",
-    "name": "Truto Admin Accounts Employments API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.truto.one/unified/hris"
     }
-  }
+  ]
 }

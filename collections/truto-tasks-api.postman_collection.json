@@ -1,90 +1,104 @@
 {
+  "info": {
+    "_postman_id": "4c89fd05-0d47-4c17-a80a-61d48415b1b4",
+    "name": "Truto Unified CRM Tasks API",
+    "description": "The Truto Unified CRM API provides a single normalized interface for reading and writing CRM data across 27 CRM providers including Salesforce, HubSpot, Pipedrive, Attio, Outreach, Wealthbox, Teamleader, and more. Offers 17 unified resources covering the full CRM data model. Data is accessed in real-time via pass-through. Schema can be extended using JSONata mappings without code deploys.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:09:59.000Z",
+    "updatedAt": "2026-10-22T03:10:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4c89fd05-0d47-4c17-a80a-61d48415b1b4"
+  },
   "item": [
     {
-      "id": "d7869f0f-9848-4001-b26b-ae0e0f0350a9",
-      "name": "Tasks",
-      "description": {
-        "content": "Tasks and follow-up actions",
-        "type": "text/plain"
-      },
+      "name": "tasks",
       "item": [
         {
-          "id": "76f8478f-828d-48d5-bb86-ae28a40e225d",
           "name": "List tasks",
+          "id": "2c517d3d-b4e3-402a-9f41-6283983db2a6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "List tasks",
-            "description": {
-              "content": "List tasks from the connected CRM provider.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "tasks"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "disabled": false,
-                  "key": "integrated_account_id",
-                  "value": "<string>",
-                  "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests."
-                },
-                {
-                  "disabled": false,
-                  "key": "contact_id",
-                  "value": "<string>"
-                },
-                {
-                  "disabled": false,
-                  "key": "status",
-                  "value": "<string>"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>"
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "20"
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
                 }
-              ],
-              "variable": []
+              ]
             },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
+            "url": {
+              "raw": "{{baseUrl}}/tasks?integrated_account_id=<string>&contact_id=<string>&status=completed&cursor=<string>&limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tasks"
+              ],
+              "query": [
                 {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
+                  "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
+                  "key": "integrated_account_id",
+                  "value": "<string>"
+                },
+                {
+                  "key": "contact_id",
+                  "value": "<string>"
+                },
+                {
+                  "key": "status",
+                  "value": "completed"
+                },
+                {
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
                 }
               ]
-            }
+            },
+            "description": "List tasks from the connected CRM provider."
           },
           "response": [
             {
-              "id": "5b18ef63-2323-4ea5-9e2d-19175cc83ae0",
+              "id": "cc5166f5-f425-45d7-8c43-63bacb984abd",
               "name": "List of tasks.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "tasks"
-                  ],
+                  "raw": "{{baseUrl}}/tasks?integrated_account_id=<string>&contact_id=<string>&status=completed&cursor=<string>&limit=20",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "tasks"
+                  ],
                   "query": [
                     {
+                      "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
                       "key": "integrated_account_id",
                       "value": "<string>"
                     },
@@ -94,7 +108,7 @@
                     },
                     {
                       "key": "status",
-                      "value": "<string>"
+                      "value": "completed"
                     },
                     {
                       "key": "cursor",
@@ -104,51 +118,52 @@
                       "key": "limit",
                       "value": "20"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"remoteId\": \"string\",\n      \"title\": \"string\",\n      \"status\": \"completed\",\n      \"dueDate\": \"2004-11-15T18:16:57.316Z\",\n      \"contactId\": \"string\",\n      \"accountId\": \"string\",\n      \"opportunityId\": \"string\",\n      \"assigneeId\": \"string\",\n      \"completedAt\": \"1991-04-13T01:32:40.068Z\",\n      \"createdAt\": \"1962-09-29T13:46:14.377Z\",\n      \"updatedAt\": \"1952-02-17T11:28:11.912Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"remoteId\": \"string\",\n      \"title\": \"string\",\n      \"status\": \"completed\",\n      \"dueDate\": \"2008-11-12T10:28:11.883Z\",\n      \"contactId\": \"string\",\n      \"accountId\": \"string\",\n      \"opportunityId\": \"string\",\n      \"assigneeId\": \"string\",\n      \"completedAt\": \"2020-05-19T18:52:12.536Z\",\n      \"createdAt\": \"1963-08-18T07:34:14.874Z\",\n      \"updatedAt\": \"1985-04-26T16:40:25.200Z\"\n    }\n  ],\n  \"nextCursor\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"remoteId\": \"<string>\",\n      \"title\": \"<string>\",\n      \"status\": \"open\",\n      \"dueDate\": \"<dateTime>\",\n      \"contactId\": \"<string>\",\n      \"accountId\": \"<string>\",\n      \"opportunityId\": \"<string>\",\n      \"assigneeId\": \"<string>\",\n      \"completedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"remoteId\": \"<string>\",\n      \"title\": \"<string>\",\n      \"status\": \"completed\",\n      \"dueDate\": \"<dateTime>\",\n      \"contactId\": \"<string>\",\n      \"accountId\": \"<string>\",\n      \"opportunityId\": \"<string>\",\n      \"assigneeId\": \"<string>\",\n      \"completedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ],\n  \"nextCursor\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:10:00.000Z",
+              "updatedAt": "2026-10-22T03:10:00.000Z",
+              "uid": "35240-cc5166f5-f425-45d7-8c43-63bacb984abd"
             },
             {
-              "id": "40082293-4cf6-480b-b552-2448a519103e",
+              "id": "9f9aaca4-b178-4d38-9e74-9c92740e92c5",
               "name": "Authentication failed or token is invalid.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "tasks"
-                  ],
+                  "raw": "{{baseUrl}}/tasks?integrated_account_id=<string>&contact_id=<string>&status=completed&cursor=<string>&limit=20",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "tasks"
+                  ],
                   "query": [
                     {
+                      "description": "(Required) The ID of the integrated account (connected CRM provider instance) to query. Required for all Unified API requests.",
                       "key": "integrated_account_id",
                       "value": "<string>"
                     },
@@ -158,7 +173,7 @@
                     },
                     {
                       "key": "status",
-                      "value": "<string>"
+                      "value": "completed"
                     },
                     {
                       "key": "cursor",
@@ -168,54 +183,35 @@
                       "key": "limit",
                       "value": "20"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:10:00.000Z",
+              "updatedAt": "2026-10-22T03:10:00.000Z",
+              "uid": "35240-9f9aaca4-b178-4d38-9e74-9c92740e92c5"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T03:10:00.000Z",
+          "updatedAt": "2026-10-22T03:10:00.000Z",
+          "uid": "35240-2c517d3d-b4e3-402a-9f41-6283983db2a6"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.truto.one",
-      "key": "baseUrl"
+      "id": "d9305f98-3d1e-439e-acf2-8db2af49b48b",
+      "createdAt": "2026-10-22T03:10:00.000Z",
+      "updatedAt": "2026-10-22T03:10:00.000Z",
+      "uid": "35240-d9305f98-3d1e-439e-acf2-8db2af49b48b"
     }
   ],
   "auth": {
@@ -223,17 +219,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "11fbae05-788f-4df6-aa63-503304168832",
-    "name": "Truto Admin Accounts Tasks API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.truto.one/unified/crm"
     }
-  }
+  ]
 }

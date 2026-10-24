@@ -1,220 +1,822 @@
 {
+  "info": {
+    "_postman_id": "c281693b-86c4-45d3-ba93-1939ada8d5f6",
+    "name": "Truto Admin Integrated Accounts API",
+    "description": "The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:09:25.000Z",
+    "updatedAt": "2026-10-22T03:09:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c281693b-86c4-45d3-ba93-1939ada8d5f6"
+  },
   "item": [
     {
-      "id": "585b3968-f0d3-43f5-9976-26289e2a72b0",
-      "name": "Integrated Accounts",
-      "description": {
-        "content": "Manage connected third-party accounts",
-        "type": "text/plain"
-      },
+      "name": "integrated-accounts",
       "item": [
         {
-          "id": "dd7a3e72-d366-4666-b851-1135ece4318e",
-          "name": "List integrated accounts",
-          "request": {
-            "name": "List integrated accounts",
-            "description": {
-              "content": "List all integrated accounts in the tenant. Integrated accounts represent connections between your Truto tenant and a customer's connected third-party app.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "integrated-accounts"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
+          "name": "{id}",
+          "item": [
+            {
+              "name": "run-post-install-actions",
+              "item": [
                 {
-                  "disabled": false,
-                  "key": "integration",
-                  "value": "<string>",
-                  "description": "Filter by integration name (e.g., bamboohr, greenhouse, salesforce)."
-                },
-                {
-                  "disabled": false,
-                  "key": "status",
-                  "value": "<string>",
-                  "description": "Filter by account status."
-                },
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "1",
-                  "description": "Page number for pagination."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "20",
-                  "description": "Number of results per page."
+                  "name": "Run post-install actions",
+                  "id": "ba013c9b-b558-4e9e-9853-d9e88c6705c6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integrated-accounts/:id/run-post-install-actions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrated-accounts",
+                        ":id",
+                        "run-post-install-actions"
+                      ],
+                      "variable": [
+                        {
+                          "id": "eea8e8fd-1ee5-4b0f-8988-2afb4807fda2",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Integrated account identifier."
+                        }
+                      ]
+                    },
+                    "description": "Manually run post-install actions for an integrated account. Post-install actions are configured per integration and typically fetch metadata from the underlying API to store in the integrated account context (e.g., tenant ID, region, base URL). These run automatically on connection but can be re-run manually if needed."
+                  },
+                  "response": [
+                    {
+                      "id": "ade33350-1429-442e-b7a1-e8e6202db811",
+                      "name": "Post-install actions completed successfully.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/integrated-accounts/:id/run-post-install-actions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integrated-accounts",
+                            ":id",
+                            "run-post-install-actions"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"integration\": \"<string>\",\n  \"status\": \"error\",\n  \"name\": \"<string>\",\n  \"context\": {\n    \"sint_1\": -31993166.786970258,\n    \"voluptate_cb\": 81607296.94438297,\n    \"anim_27\": -52040332\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-10-22T03:09:26.000Z",
+                      "updatedAt": "2026-10-22T03:09:26.000Z",
+                      "uid": "35240-ade33350-1429-442e-b7a1-e8e6202db811"
+                    },
+                    {
+                      "id": "0c54a856-ab2c-40ac-9999-0fa80c6c7141",
+                      "name": "Authentication failed or token is invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/integrated-accounts/:id/run-post-install-actions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integrated-accounts",
+                            ":id",
+                            "run-post-install-actions"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T03:09:26.000Z",
+                      "updatedAt": "2026-10-22T03:09:26.000Z",
+                      "uid": "35240-0c54a856-ab2c-40ac-9999-0fa80c6c7141"
+                    },
+                    {
+                      "id": "4899550e-a9e9-48f2-a5fb-6d128d6973cf",
+                      "name": "Resource not found.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/integrated-accounts/:id/run-post-install-actions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integrated-accounts",
+                            ":id",
+                            "run-post-install-actions"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T03:09:26.000Z",
+                      "updatedAt": "2026-10-22T03:09:26.000Z",
+                      "uid": "35240-4899550e-a9e9-48f2-a5fb-6d128d6973cf"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:09:26.000Z",
+                  "updatedAt": "2026-10-22T03:09:26.000Z",
+                  "uid": "35240-ba013c9b-b558-4e9e-9853-d9e88c6705c6"
                 }
               ],
-              "variable": []
+              "id": "bbf84224-dd27-4e74-9dd2-10342329f40f",
+              "createdAt": "2026-10-22T03:09:26.000Z",
+              "updatedAt": "2026-10-22T03:09:26.000Z",
+              "uid": "35240-bbf84224-dd27-4e74-9dd2-10342329f40f"
             },
+            {
+              "name": "Get integrated account",
+              "id": "f9dfb599-e3d0-4801-9647-a642334f04c3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/integrated-accounts/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "integrated-accounts",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "aa5c2e4a-545c-47eb-85c5-0c1f5563d390",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Integrated account identifier."
+                    }
+                  ]
+                },
+                "description": "Retrieve a single integrated account by ID."
+              },
+              "response": [
+                {
+                  "id": "a3ac2585-787b-42f7-a8c4-d271fe9fb646",
+                  "name": "Integrated account details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integrated-accounts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrated-accounts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"integration\": \"<string>\",\n  \"status\": \"error\",\n  \"name\": \"<string>\",\n  \"context\": {\n    \"sint_1\": -31993166.786970258,\n    \"voluptate_cb\": 81607296.94438297,\n    \"anim_27\": -52040332\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-10-22T03:09:26.000Z",
+                  "updatedAt": "2026-10-22T03:09:26.000Z",
+                  "uid": "35240-a3ac2585-787b-42f7-a8c4-d271fe9fb646"
+                },
+                {
+                  "id": "8d27bec8-b8f1-4e6d-a306-7be7c7281f52",
+                  "name": "Authentication failed or token is invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integrated-accounts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrated-accounts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:09:26.000Z",
+                  "updatedAt": "2026-10-22T03:09:26.000Z",
+                  "uid": "35240-8d27bec8-b8f1-4e6d-a306-7be7c7281f52"
+                },
+                {
+                  "id": "7f42e0d5-e04f-4df6-9c18-1bf5690ad9cd",
+                  "name": "Resource not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integrated-accounts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrated-accounts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:09:26.000Z",
+                  "updatedAt": "2026-10-22T03:09:26.000Z",
+                  "uid": "35240-7f42e0d5-e04f-4df6-9c18-1bf5690ad9cd"
+                }
+              ],
+              "createdAt": "2026-10-22T03:09:26.000Z",
+              "updatedAt": "2026-10-22T03:09:26.000Z",
+              "uid": "35240-f9dfb599-e3d0-4801-9647-a642334f04c3"
+            },
+            {
+              "name": "Delete integrated account",
+              "id": "309aca7b-c7b3-4abf-a260-cfb30dabb70b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/integrated-accounts/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "integrated-accounts",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "04206b34-9ce1-4426-a505-49f1e79d8e1f",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Integrated account identifier."
+                    }
+                  ]
+                },
+                "description": "Delete an integrated account and revoke all associated credentials."
+              },
+              "response": [
+                {
+                  "id": "d78100a3-affa-40e9-b450-c3dd709c02d2",
+                  "name": "Integrated account deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integrated-accounts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrated-accounts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T03:09:26.000Z",
+                  "updatedAt": "2026-10-22T03:09:26.000Z",
+                  "uid": "35240-d78100a3-affa-40e9-b450-c3dd709c02d2"
+                },
+                {
+                  "id": "b7b34a16-2091-4f90-8a74-c3e8dd011cb4",
+                  "name": "Authentication failed or token is invalid.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integrated-accounts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrated-accounts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:09:26.000Z",
+                  "updatedAt": "2026-10-22T03:09:26.000Z",
+                  "uid": "35240-b7b34a16-2091-4f90-8a74-c3e8dd011cb4"
+                },
+                {
+                  "id": "27af8508-e238-4bf1-bed0-4ed779afc90e",
+                  "name": "Resource not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integrated-accounts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrated-accounts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:09:26.000Z",
+                  "updatedAt": "2026-10-22T03:09:26.000Z",
+                  "uid": "35240-27af8508-e238-4bf1-bed0-4ed779afc90e"
+                }
+              ],
+              "createdAt": "2026-10-22T03:09:26.000Z",
+              "updatedAt": "2026-10-22T03:09:26.000Z",
+              "uid": "35240-309aca7b-c7b3-4abf-a260-cfb30dabb70b"
+            }
+          ],
+          "id": "a5a1deff-39b0-4ee8-89a5-f907df3bb5dc",
+          "createdAt": "2026-10-22T03:09:26.000Z",
+          "updatedAt": "2026-10-22T03:09:26.000Z",
+          "uid": "35240-a5a1deff-39b0-4ee8-89a5-f907df3bb5dc"
+        },
+        {
+          "name": "List integrated accounts",
+          "id": "22710490-aca4-4fd5-80be-af16b5884639",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/integrated-accounts?integration=<string>&status=active&page=1&limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "integrated-accounts"
+              ],
+              "query": [
+                {
+                  "description": "Filter by integration name (e.g., bamboohr, greenhouse, salesforce).",
+                  "key": "integration",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by account status.",
+                  "key": "status",
+                  "value": "active"
+                },
+                {
+                  "description": "Page number for pagination.",
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "description": "Number of results per page.",
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "List all integrated accounts in the tenant. Integrated accounts represent connections between your Truto tenant and a customer's connected third-party app."
+          },
+          "response": [
+            {
+              "id": "de44f324-d96c-4259-a9d4-31fb3823ef8c",
+              "name": "List of integrated accounts.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/integrated-accounts?integration=<string>&status=active&page=1&limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "integrated-accounts"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by integration name (e.g., bamboohr, greenhouse, salesforce).",
+                      "key": "integration",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by account status.",
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "description": "Page number for pagination.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of results per page.",
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"integration\": \"<string>\",\n      \"status\": \"error\",\n      \"name\": \"<string>\",\n      \"context\": {\n        \"sunt_fa\": -38379398.69962157,\n        \"veniame\": -14975169.398080498,\n        \"eiusmodf35\": -83074109.58027211,\n        \"dolore84f\": 38675818\n      },\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"integration\": \"<string>\",\n      \"status\": \"inactive\",\n      \"name\": \"<string>\",\n      \"context\": {\n        \"nisi2\": \"mollit in Excepteur\",\n        \"voluptate0\": \"fugiat\"\n      },\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ],\n  \"total\": \"<integer>\",\n  \"page\": \"<integer>\",\n  \"limit\": \"<integer>\"\n}",
+              "createdAt": "2026-10-22T03:09:26.000Z",
+              "updatedAt": "2026-10-22T03:09:26.000Z",
+              "uid": "35240-de44f324-d96c-4259-a9d4-31fb3823ef8c"
+            },
+            {
+              "id": "7d2a8d94-2ead-4520-a223-da049a40c5de",
+              "name": "Authentication failed or token is invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/integrated-accounts?integration=<string>&status=active&page=1&limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "integrated-accounts"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by integration name (e.g., bamboohr, greenhouse, salesforce).",
+                      "key": "integration",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by account status.",
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "description": "Page number for pagination.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of results per page.",
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:09:26.000Z",
+              "updatedAt": "2026-10-22T03:09:26.000Z",
+              "uid": "35240-7d2a8d94-2ead-4520-a223-da049a40c5de"
+            }
+          ],
+          "createdAt": "2026-10-22T03:09:26.000Z",
+          "updatedAt": "2026-10-22T03:09:26.000Z",
+          "uid": "35240-22710490-aca4-4fd5-80be-af16b5884639"
+        },
+        {
+          "name": "Create integrated account",
+          "id": "d7d5e8e2-b24b-4bfa-a548-6ea1893bd530",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
             "auth": {
               "type": "bearer",
               "bearer": [
                 {
                   "key": "token",
-                  "value": "{{bearerToken}}"
+                  "value": "{{bearerToken}}",
+                  "type": "string"
                 }
               ]
-            }
-          },
-          "response": [
-            {
-              "id": "26c34666-2477-4ffe-a42a-1eec94f547b1",
-              "name": "List of integrated accounts.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "integrated-accounts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "integration",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "status",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "page",
-                      "value": "1"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "20"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"integration\": \"string\",\n      \"status\": \"error\",\n      \"name\": \"string\",\n      \"context\": {\n        \"key_0\": 8536.039292046156,\n        \"key_1\": 7559,\n        \"key_2\": 4362.808712749319,\n        \"key_3\": true\n      },\n      \"createdAt\": \"2021-10-05T19:43:02.071Z\",\n      \"updatedAt\": \"2015-09-25T16:04:47.847Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"integration\": \"string\",\n      \"status\": \"error\",\n      \"name\": \"string\",\n      \"context\": {\n        \"key_0\": 6138.189107792226\n      },\n      \"createdAt\": \"1951-01-10T15:20:27.891Z\",\n      \"updatedAt\": \"1956-06-02T13:10:05.005Z\"\n    }\n  ],\n  \"total\": 4041,\n  \"page\": 5200,\n  \"limit\": 3638\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
             },
-            {
-              "id": "6d91373b-00a0-40e7-a2a2-925094622b06",
-              "name": "Authentication failed or token is invalid.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "integrated-accounts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "integration",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "status",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "page",
-                      "value": "1"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "20"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "748b58e1-2358-4a6c-a4aa-e686bb6d6566",
-          "name": "Create integrated account",
-          "request": {
-            "name": "Create integrated account",
-            "description": {
-              "content": "Programmatically create an integrated account. Typically used when you already have credentials (e.g., API keys) for the integration and want to register them directly without a link token flow.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "integrated-accounts"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -225,769 +827,150 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"integration\": \"<string>\",\n  \"name\": \"<string>\",\n  \"credentials\": {\n    \"key_0\": 3132,\n    \"key_1\": \"string\"\n  }\n}",
+              "raw": "{\n  \"integration\": \"<string>\",\n  \"name\": \"<string>\",\n  \"credentials\": {\n    \"ipsum5\": -28612750,\n    \"sed2\": 99448544.41492587\n  }\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/integrated-accounts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "integrated-accounts"
+              ]
+            },
+            "description": "Programmatically create an integrated account. Typically used when you already have credentials (e.g., API keys) for the integration and want to register them directly without a link token flow."
           },
           "response": [
             {
-              "id": "00cfbfee-ef92-4a82-a109-1cd6c990684a",
+              "id": "5e90bf2d-523a-4d43-bcc6-8fc37a936460",
               "name": "Integrated account created.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "integrated-accounts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"integration\": \"<string>\",\n  \"name\": \"<string>\",\n  \"credentials\": {\n    \"key_0\": true,\n    \"key_1\": false,\n    \"key_2\": 8775.468778681408\n  }\n}",
+                  "raw": "{\n  \"integration\": \"<string>\",\n  \"name\": \"<string>\",\n  \"credentials\": {\n    \"ipsum5\": -28612750,\n    \"sed2\": 99448544.41492587\n  }\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/integrated-accounts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "integrated-accounts"
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"integration\": \"string\",\n  \"status\": \"error\",\n  \"name\": \"string\",\n  \"context\": {\n    \"key_0\": true,\n    \"key_1\": \"string\",\n    \"key_2\": 3893\n  },\n  \"createdAt\": \"1952-06-02T10:59:22.549Z\",\n  \"updatedAt\": \"2019-07-12T21:00:29.154Z\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"integration\": \"<string>\",\n  \"status\": \"error\",\n  \"name\": \"<string>\",\n  \"context\": {\n    \"sint_1\": -31993166.786970258,\n    \"voluptate_cb\": 81607296.94438297,\n    \"anim_27\": -52040332\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+              "createdAt": "2026-10-22T03:09:26.000Z",
+              "updatedAt": "2026-10-22T03:09:26.000Z",
+              "uid": "35240-5e90bf2d-523a-4d43-bcc6-8fc37a936460"
             },
             {
-              "id": "e4b04810-f7e6-4cc7-ab6c-a65293fb8b1d",
+              "id": "7adebcb9-54d1-4f62-a88f-6286116ae64c",
               "name": "Authentication failed or token is invalid.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "integrated-accounts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"integration\": \"<string>\",\n  \"name\": \"<string>\",\n  \"credentials\": {\n    \"key_0\": true,\n    \"key_1\": false,\n    \"key_2\": 8775.468778681408\n  }\n}",
+                  "raw": "{\n  \"integration\": \"<string>\",\n  \"name\": \"<string>\",\n  \"credentials\": {\n    \"ipsum5\": -28612750,\n    \"sed2\": 99448544.41492587\n  }\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/integrated-accounts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "integrated-accounts"
+                  ]
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:09:26.000Z",
+              "updatedAt": "2026-10-22T03:09:26.000Z",
+              "uid": "35240-7adebcb9-54d1-4f62-a88f-6286116ae64c"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e4f44a58-f11c-4b82-9fb2-ade1570ab741",
-          "name": "Get integrated account",
-          "request": {
-            "name": "Get integrated account",
-            "description": {
-              "content": "Retrieve a single integrated account by ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "integrated-accounts",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Integrated account identifier."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "384ad664-66e2-4d77-80c5-3ecbefe44179",
-              "name": "Integrated account details.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "integrated-accounts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Integrated account identifier."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"integration\": \"string\",\n  \"status\": \"error\",\n  \"name\": \"string\",\n  \"context\": {\n    \"key_0\": true,\n    \"key_1\": \"string\",\n    \"key_2\": 3893\n  },\n  \"createdAt\": \"1952-06-02T10:59:22.549Z\",\n  \"updatedAt\": \"2019-07-12T21:00:29.154Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e8dea8cc-0f69-4625-8e54-67b07427012d",
-              "name": "Authentication failed or token is invalid.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "integrated-accounts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Integrated account identifier."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "fd660eb8-8379-44c6-b9e3-1777a84bb91b",
-              "name": "Resource not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "integrated-accounts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Integrated account identifier."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "b947d066-c388-4edd-9564-50f936a76f79",
-          "name": "Delete integrated account",
-          "request": {
-            "name": "Delete integrated account",
-            "description": {
-              "content": "Delete an integrated account and revoke all associated credentials.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "integrated-accounts",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Integrated account identifier."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "b43c994a-9f1f-4fc9-af10-9bc7f0571354",
-              "name": "Integrated account deleted successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "integrated-accounts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Integrated account identifier."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "1a3847a3-e138-4dab-8d11-50092e6b9b28",
-              "name": "Authentication failed or token is invalid.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "integrated-accounts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Integrated account identifier."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7e047c58-408d-4dd5-9522-a14bba0ddef6",
-              "name": "Resource not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "integrated-accounts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Integrated account identifier."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "953aa1b5-d2f9-42f0-a763-c77e4909f40c",
-          "name": "Run post-install actions",
-          "request": {
-            "name": "Run post-install actions",
-            "description": {
-              "content": "Manually run post-install actions for an integrated account. Post-install actions are configured per integration and typically fetch metadata from the underlying API to store in the integrated account context (e.g., tenant ID, region, base URL). These run automatically on connection but can be re-run manually if needed.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "integrated-accounts",
-                ":id",
-                "run-post-install-actions"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Integrated account identifier."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "dae97fc0-bb1e-4fb3-9ade-4c0e509064ea",
-              "name": "Post-install actions completed successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "integrated-accounts",
-                    ":id",
-                    "run-post-install-actions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Integrated account identifier."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"integration\": \"string\",\n  \"status\": \"error\",\n  \"name\": \"string\",\n  \"context\": {\n    \"key_0\": true,\n    \"key_1\": \"string\",\n    \"key_2\": 3893\n  },\n  \"createdAt\": \"1952-06-02T10:59:22.549Z\",\n  \"updatedAt\": \"2019-07-12T21:00:29.154Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "aa7cac86-c7f1-4d12-9674-10f3c7069904",
-              "name": "Authentication failed or token is invalid.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "integrated-accounts",
-                    ":id",
-                    "run-post-install-actions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Integrated account identifier."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "edab27e5-b629-435e-8356-f1471e8750c9",
-              "name": "Resource not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "integrated-accounts",
-                    ":id",
-                    "run-post-install-actions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Integrated account identifier."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T03:09:26.000Z",
+          "updatedAt": "2026-10-22T03:09:26.000Z",
+          "uid": "35240-d7d5e8e2-b24b-4bfa-a548-6ea1893bd530"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.truto.one",
-      "key": "baseUrl"
+      "id": "a67397aa-ac3e-4ecc-bd40-93b09eeca037",
+      "createdAt": "2026-10-22T03:09:26.000Z",
+      "updatedAt": "2026-10-22T03:09:26.000Z",
+      "uid": "35240-a67397aa-ac3e-4ecc-bd40-93b09eeca037"
     }
   ],
   "auth": {
@@ -995,17 +978,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "af20c00e-dcd7-4445-be93-1139374eb450",
-    "name": "Truto Admin Accounts Integrated Accounts API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Truto Admin API enables programmatic management of the Truto integration platform, including managing integrated accounts, generating link tokens for customer OAuth flows, running post-install actions, and provisioning MCP servers for AI agent access.",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.truto.one"
     }
-  }
+  ]
 }

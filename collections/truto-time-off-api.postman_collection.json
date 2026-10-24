@@ -1,0 +1,239 @@
+{
+  "info": {
+    "_postman_id": "565c72b5-e831-4d9f-b32f-9a17880cf17f",
+    "name": "Truto Unified HRIS Timeoff API",
+    "description": "The Truto Unified HRIS API provides a single normalized interface for reading and writing HR data across 41 HRIS providers including BambooHR, Workday, Rippling, Gusto, HiBob, Personio, Oracle Fusion Cloud HCM, and more. All data is accessed in real-time with no caching. Includes 20 unified resources. Schema can be extended using JSONata mappings.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:10:08.000Z",
+    "updatedAt": "2026-10-22T03:10:09.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-565c72b5-e831-4d9f-b32f-9a17880cf17f"
+  },
+  "item": [
+    {
+      "name": "timeoff-requests",
+      "item": [
+        {
+          "name": "List time off requests",
+          "id": "90b5aca7-a43b-46fe-8564-24a6545dd7d8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/timeoff-requests?integrated_account_id=<string>&employee_id=<string>&status=approved&cursor=<string>&limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "timeoff-requests"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests.",
+                  "key": "integrated_account_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter time off requests by employee ID.",
+                  "key": "employee_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by request status.",
+                  "key": "status",
+                  "value": "approved"
+                },
+                {
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "List time off requests from the connected HRIS provider."
+          },
+          "response": [
+            {
+              "id": "c580ec88-45b7-4361-8748-bd56c58d3ad2",
+              "name": "List of time off requests.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/timeoff-requests?integrated_account_id=<string>&employee_id=<string>&status=approved&cursor=<string>&limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "timeoff-requests"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests.",
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter time off requests by employee ID.",
+                      "key": "employee_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by request status.",
+                      "key": "status",
+                      "value": "approved"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"remoteId\": \"<string>\",\n      \"employeeId\": \"<string>\",\n      \"leaveType\": \"<string>\",\n      \"status\": \"pending\",\n      \"startDate\": \"<date>\",\n      \"endDate\": \"<date>\",\n      \"units\": \"hours\",\n      \"amount\": \"<number>\",\n      \"requestedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"remoteId\": \"<string>\",\n      \"employeeId\": \"<string>\",\n      \"leaveType\": \"<string>\",\n      \"status\": \"cancelled\",\n      \"startDate\": \"<date>\",\n      \"endDate\": \"<date>\",\n      \"units\": \"days\",\n      \"amount\": \"<number>\",\n      \"requestedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ],\n  \"nextCursor\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:10:09.000Z",
+              "updatedAt": "2026-10-22T03:10:09.000Z",
+              "uid": "35240-c580ec88-45b7-4361-8748-bd56c58d3ad2"
+            },
+            {
+              "id": "5a1ec588-d9f0-4eae-805a-293703789f81",
+              "name": "Authentication failed or token is invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/timeoff-requests?integrated_account_id=<string>&employee_id=<string>&status=approved&cursor=<string>&limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "timeoff-requests"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The ID of the integrated account (connected HRIS provider instance) to query. Required for all Unified API requests.",
+                      "key": "integrated_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter time off requests by employee ID.",
+                      "key": "employee_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by request status.",
+                      "key": "status",
+                      "value": "approved"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:10:09.000Z",
+              "updatedAt": "2026-10-22T03:10:09.000Z",
+              "uid": "35240-5a1ec588-d9f0-4eae-805a-293703789f81"
+            }
+          ],
+          "createdAt": "2026-10-22T03:10:09.000Z",
+          "updatedAt": "2026-10-22T03:10:09.000Z",
+          "uid": "35240-90b5aca7-a43b-46fe-8564-24a6545dd7d8"
+        }
+      ],
+      "id": "283b4cdb-38ee-4921-908f-edafd5f751fa",
+      "createdAt": "2026-10-22T03:10:09.000Z",
+      "updatedAt": "2026-10-22T03:10:09.000Z",
+      "uid": "35240-283b4cdb-38ee-4921-908f-edafd5f751fa"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.truto.one/unified/hris"
+    }
+  ]
+}
