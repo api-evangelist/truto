@@ -1,0 +1,230 @@
+# Truto (truto)
+
+<!-- API-EVANGELIST-PROVENANCE:BEGIN -->
+> ### About this repository
+>
+> **This is not our API.** This repository is an independent, third-party profile of a company's
+> **publicly available** API surface, maintained by [API Evangelist](https://apievangelist.com).
+> API Evangelist does not operate, host, resell, or support this company's APIs, and is not
+> affiliated with or endorsed by the company unless stated on the profile.
+>
+> **Where the information came from.** Everything here is assembled from material a member of the
+> public can reach with a browser and no credentials — the company's own website, developer portal
+> and documentation, the specifications it publishes for public use (OpenAPI, AsyncAPI, JSON Schema,
+> `apis.json`, `llms.txt` and similar), its public repositories, and its public status, pricing and
+> changelog pages. **Nothing here is obtained by breaching a system, defeating an access control, or
+> using credentials of any kind.**
+>
+> **The rating is an independent assessment.** The Kin Score and Agent Readiness rating are
+> independently calculated scores of a company's *public* API artifacts, produced by API Evangelist
+> against a published rubric. They are not certifications, endorsements, security assessments, or
+> audits, and they score published artifacts — not the quality, safety, or security of the software.
+>
+> **Corrections, re-scores, and removal are free.** No partnership, contract, or purchase is
+> required, and you do not need to justify the request.
+>
+> - **Something wrong?** Open an issue on this repository, or email
+>   [info@apievangelist.com](mailto:info@apievangelist.com).
+> - **Published something new?** Ask for a re-score and we will re-run the rating.
+> - **Want the listing taken down?** Say so and we will honor it. The profile is reduced to your
+>   company name, a factual description, and a link to your own site, and the company is recorded as
+>   **unrated** — never scored zero for having asked.
+>
+> **Response times.** Acknowledgement within **one business day**; removal or restriction within
+> **two business days**; corrections and re-scores within **five business days**.
+>
+> **Not from the company, and here with a question?** You are welcome here — we would rather be the
+> front line and point you the right way than have a good report go nowhere. What this repository
+> can answer is narrow, though, so it is worth knowing who you are actually looking for:
+>
+> - **A question about how the API works, an account, billing, or a bug in the service** — that is
+>   the company's own support, not us. We profile this API; we do not operate it and cannot see
+>   your account.
+> - **A bug in an open-source project we only catalog** — file it on that project's own repository.
+>   This has happened with a real and correct bug report that reached us instead of the people who
+>   could fix it, which helped nobody.
+> - **Anything about this listing itself** — the description, the tags, the rating, a missing or
+>   wrong artifact — is ours. Open an issue here.
+> - **Not sure, or something general about API Evangelist or APIs.io** — open an issue on the
+>   [APIs.io Inbox](https://github.com/api-search/inbox) and we will route it.
+>
+> **This repository contains no software, and we will never ask you to download anything.** There is
+> no build, release, installer, or binary here — only text and machine-readable API descriptions, so
+> there is nothing here that can be "corrupt" or need "repairing". Any issue, comment, or email
+> claiming otherwise and offering a download link is not from us and is hostile. Do not follow the
+> link; it is a lure. Report it to GitHub and, if you like, tell us at
+> [info@apievangelist.com](mailto:info@apievangelist.com) so we can take it down.
+>
+> **On a security or compliance team?** Email
+> [info@apievangelist.com](mailto:info@apievangelist.com) with *security* in the subject line and
+> you will get a person, not a form. We will tell you exactly which public URLs this profile was
+> built from so your team can see the same surface we did, and we will take the listing down on
+> request while you work through it.
+>
+> Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
+<!-- API-EVANGELIST-PROVENANCE:END -->
+
+Truto is a unified API and embedded integration platform that enables B2B SaaS companies to ship native integrations without writing integration-specific code. Founded in 2023, Truto uses a declarative, config-driven architecture where every connector is data, not code. The platform provides Unified APIs across four major categories — HRIS (41 providers, 20 resources), ATS (27 providers, 17 resources), CRM (27 providers, 17 resources), and an expanding set of additional categories — plus an Admin API for managing integrated accounts, generating link tokens, and programmatic MCP server provisioning. Truto supports real-time pass-through (no data stored in between), full schema customization via JSONata, and one-API-call MCP server generation for AI agent access. Authentication uses Bearer tokens. Truto supports over 250 integrations and is available as Truto Cloud or on-premise.
+
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/truto/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/truto/refs/heads/main/apis.yml)
+
+## Scope
+
+- **Type:** Index
+- **Access:** 3rd-Party
+
+## Tags
+
+- Unified API
+- Integration Platform
+- HRIS
+- ATS
+- CRM
+- Embedded Integrations
+- MCP
+- AI Agents
+- SaaS
+
+## Timestamps
+
+- **Created:** 2026-03-16
+- **Modified:** 2026-05-19
+
+## APIs
+
+### Truto Admin API
+
+The Truto Admin API enables programmatic management of the Truto platform, including creating and managing integrated accounts, generating link tokens for customer-initiated OAuth flows, running post-install actions, and provisioning MCP servers. Integrated accounts represent a connection between your Truto account and a customer's connected app. Link tokens initiate the Truto linking process from within your application. The Admin API uses Bearer token authentication with the tenant API token.
+
+- **Human URL:** [https://truto.one/docs/api-reference/admin](https://truto.one/docs/api-reference/admin)
+- **Base URL:** `https://api.truto.one`
+
+#### Tags
+
+- Administration
+- Integrated Accounts
+- Link Tokens
+- MCP
+
+#### Properties
+
+- [Documentation](https://truto.one/docs/api-reference/admin)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/truto/refs/heads/main/openapi/truto-admin-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/truto-admin.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/truto-admin.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/truto-unified-ats.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/truto-unified-ats.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/truto-unified-crm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/truto-unified-crm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/truto-unified-hris.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/truto-unified-hris.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Truto Unified HRIS API
+
+The Truto Unified HRIS API provides a single normalized interface for accessing HR data across 41 HRIS providers including BambooHR, Workday, Rippling, Gusto, HiBob, Personio, and more. Offers 20 unified resources including employees, employments, companies, groups (departments and roles), timeoff requests, and more. Data is accessed in real-time with no caching. Schema can be extended using JSONata mappings. Authentication uses Bearer token with integrated_account_id query parameter to specify the target connected account.
+
+- **Human URL:** [https://truto.one/docs/api-reference/unified-hris-api](https://truto.one/docs/api-reference/unified-hris-api)
+- **Base URL:** `https://api.truto.one/unified/hris`
+
+#### Tags
+
+- HRIS
+- Human Resources
+- Employees
+- Payroll
+- Unified API
+
+#### Properties
+
+- [Documentation](https://truto.one/docs/api-reference/unified-hris-api)
+- [Documentation](https://truto.one/unified-apis/hris/)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/truto/refs/heads/main/openapi/truto-unified-hris-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/truto-admin.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/truto-admin.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/truto-unified-ats.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/truto-unified-ats.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/truto-unified-crm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/truto-unified-crm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/truto-unified-hris.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/truto-unified-hris.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Truto Unified ATS API
+
+The Truto Unified ATS API provides a single normalized interface for accessing applicant tracking system data across 27 ATS providers including Greenhouse, Lever, Workable, SmartRecruiters, Ashby, Teamtailor, and more. Offers 17 unified resources covering the full recruiting lifecycle: jobs, candidates, applications, interview stages, interviews, scorecards, offers, EEOC data, departments, offices, reject reasons, activities, attachments, tags, and users. Authentication uses Bearer token with integrated_account_id query parameter.
+
+- **Human URL:** [https://truto.one/docs/api-reference/unified-ats-api](https://truto.one/docs/api-reference/unified-ats-api)
+- **Base URL:** `https://api.truto.one/unified/ats`
+
+#### Tags
+
+- ATS
+- Applicant Tracking
+- Recruiting
+- Jobs
+- Candidates
+- Unified API
+
+#### Properties
+
+- [Documentation](https://truto.one/docs/api-reference/unified-ats-api)
+- [Documentation](https://truto.one/unified-apis/ats/)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/truto/refs/heads/main/openapi/truto-unified-ats-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/truto-admin.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/truto-admin.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/truto-unified-ats.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/truto-unified-ats.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/truto-unified-crm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/truto-unified-crm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/truto-unified-hris.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/truto-unified-hris.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Truto Unified CRM API
+
+The Truto Unified CRM API provides a single normalized interface for accessing CRM data across 27 CRM providers including Salesforce, HubSpot, Pipedrive, Attio, Outreach, and more. Offers 17 unified resources including accounts, contacts, opportunities, tasks, users, stages, engagements, notes, fields, associations, and more. Data is accessed in real-time via pass-through to underlying CRM APIs. Authentication uses Bearer token with integrated_account_id query parameter.
+
+- **Human URL:** [https://truto.one/docs/api-reference/unified-crm-api](https://truto.one/docs/api-reference/unified-crm-api)
+- **Base URL:** `https://api.truto.one/unified/crm`
+
+#### Tags
+
+- CRM
+- Customer Relationship Management
+- Contacts
+- Opportunities
+- Unified API
+
+#### Properties
+
+- [Documentation](https://truto.one/docs/api-reference/unified-crm-api)
+- [Documentation](https://truto.one/unified-apis/crm/)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/truto/refs/heads/main/openapi/truto-unified-crm-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/truto-admin.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/truto-admin.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/truto-unified-ats.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/truto-unified-ats.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/truto-unified-crm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/truto-unified-crm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/truto-unified-hris.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/truto-unified-hris.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+## Common Properties
+
+- [LinkedIn](https://www.linkedin.com/company/gettruto)
+- [Website](https://truto.one/)
+- [Documentation](https://truto.one/docs/)
+- [Documentation](https://truto.one/docs/api-reference/overview/introduction)
+- [Getting Started](https://truto.one/docs/getting-started)
+- [Integrations](https://truto.one/integrations/)
+- [Documentation](https://truto.one/unified-apis/)
+- [Blog](https://truto.one/blog/)
+- [Git Hub](https://github.com/trutohq)
+- [Privacy Policy](https://truto.one/docs/api-reference/overview/introduction)
+- [Spectral Rules](https://raw.githubusercontent.com/api-evangelist/truto/refs/heads/main/rules/truto-rules.yml)
+- [M C P Server](https://truto.one/blog/announcing-truto-docs-mcp-stop-ai-hallucinations-in-api-integrations/)
+- [Agent Skill](https://truto.one/blog/truto-agent-skills-stop-ai-hallucinations-when-building-integrations/)
+- [L L Ms Txt](https://truto.one/llms.txt)
+
+## Maintainers
+
+**FN:** Kin Lane
+**Email:** kin@apievangelist.com
